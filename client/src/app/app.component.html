@@ -1,0 +1,24 @@
+<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/home">Home</a>
+        <a class="nav-item nav-link" routerLink="/practice">Practice</a>
+        <a class="nav-item nav-link" routerLink="/clients">Clients</a>
+        <a class="nav-item nav-link" routerLink="/resources">Resources</a>
+        <a class="nav-item nav-link" routerLink="/typo">Typo</a>
+        <a class="nav-item nav-link" routerLink="/contact">Contact</a>
+
+    </div>
+</nav>
+
+<!-- main content container -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2">
+                <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
