@@ -5,7 +5,7 @@
  */
 package com.app.law.config;
 
-import com.app.law.model.ChatMessage;
+import com.app.law.dto.chat.ChatMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

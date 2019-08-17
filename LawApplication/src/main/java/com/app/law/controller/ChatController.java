@@ -5,7 +5,7 @@
  */
 package com.app.law.controller;
 
-import com.app.law.model.ChatMessage;
+import com.app.law.dto.chat.ChatMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
