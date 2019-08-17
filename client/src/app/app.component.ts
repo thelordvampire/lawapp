@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import * as $ from 'jquery';
+
 import { AuthenticationService } from './_services';
 
 
@@ -16,25 +16,6 @@ export class AppComponent {
     ) {
         this.router.navigate(['/home']);
        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-       $("span.menu").click(function(){
-        $(" ul.navig").slideToggle("slow" , function(){
-        });
-    });
-
-    // $(function(){
-                                     
-    // });
-    // $(window).load(function(){
-    //   $('.flexslider').flexslider({
-    //     animation: "slide",
-    //     start: function(slider){
-    //       $('body').removeClass('loading');
-    //     }
-    //   });
-    // });
-
-
-
     }
 
     logout() {

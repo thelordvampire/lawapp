@@ -18,6 +18,8 @@ import { ClientsComponent } from './main-component/clients/clients.component';
 import { ResourcesComponent } from './main-component/resources/resources.component';
 import { TypoComponent } from './main-component/typo/typo.component';
 import { ContactComponent } from './main-component/contact/contact.component';
+import { HeaderComponent } from './main-component/header/header.component';
+import { FooterComponent } from './main-component/footer/footer.component';
 
 @NgModule({
     imports: [
@@ -36,7 +38,9 @@ import { ContactComponent } from './main-component/contact/contact.component';
         ClientsComponent,
         ResourcesComponent,
         TypoComponent,
-        ContactComponent
+        ContactComponent,
+        HeaderComponent,
+        FooterComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
