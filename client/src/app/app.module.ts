@@ -21,13 +21,14 @@ import { ContactComponent } from './main-component/contact/contact.component';
 import { HeaderComponent } from './main-component/header/header.component';
 import { FooterComponent } from './main-component/footer/footer.component';
 import { AdminComponent } from './admin/admin.component';
+import { AppService } from './app.service';
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        appRoutingModule
+        appRoutingModule,
     ],
     declarations: [
         AppComponent,
@@ -47,7 +48,6 @@ import { AdminComponent } from './admin/admin.component';
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
         // provider used to create fake backend
         fakeBackendProvider
     ],

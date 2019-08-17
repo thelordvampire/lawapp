@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService, AlertService } from '../_services';
+import { AppService } from '../app.service';
 
 @Component({templateUrl: 'login.component.html'})
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
     loginForm: FormGroup;
     loading = false;
     submitted = false;
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private appService: AppService
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.appService.setHeader(false);
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
@@ -33,7 +36,9 @@ export class LoginComponent implements OnInit {
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
-
+    ngOnDestroy() {
+        this.appService.setHeader(true);
+    }
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
@@ -55,6 +60,7 @@ export class LoginComponent implements OnInit {
                 data => {
                     console.log('data', data);
                     this.router.navigate(['/admin']);
+                    
                 },
                 error => {
                     this.alertService.error(error);

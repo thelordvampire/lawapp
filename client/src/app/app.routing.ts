@@ -29,4 +29,8 @@ const routes: Routes = [
     { path: '**', redirectTo: 'home' }
 ];
 
+const adminRouter: Routes = [
+    
+]
+
 export const appRoutingModule = RouterModule.forRoot(routes);

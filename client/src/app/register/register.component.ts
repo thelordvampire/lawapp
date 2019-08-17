@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { UserService, AuthenticationService, AlertService } from '../_services';
+import { AppService } from '../app.service';
 
 @Component({ templateUrl: 'register.component.html' })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService,
         private userService: UserService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private appService: AppService
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
@@ -25,6 +27,7 @@ export class RegisterComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.appService.setHeader(false);
         this.registerForm = this.formBuilder.group({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
@@ -32,7 +35,9 @@ export class RegisterComponent implements OnInit {
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
     }
-
+    ngOnDestroy() {
+        this.appService.setHeader(true);
+    }
     // convenience getter for easy access to form fields
     get f() { return this.registerForm.controls; }
 

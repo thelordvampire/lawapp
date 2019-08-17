@@ -22,14 +22,16 @@ export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
       
     }
      ngAfterViewInit() {
-        $(window).load(function(){
-            $('.flexslider').flexslider({
-              animation: "slide",
-              start: function(slider){
-                $('body').removeClass('loading');
-              }
-            });
-          }); 
+        setTimeout(() => {
+            $(window).load(function(){
+                $('.flexslider').flexslider({
+                  animation: "slide",
+                  start: function(slider){
+                    $('body').removeClass('loading');
+                  }
+                });
+              }); 
+        }, 10);  
      }
      ngDoCheck(){
      
