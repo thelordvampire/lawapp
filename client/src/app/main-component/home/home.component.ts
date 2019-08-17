@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, DoCheck } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { AuthenticationService, UserService } from 'src/app/_services';
-import * as $ from 'jquery';
+declare var $: any;
 
 
 @Component({ selector: 'home',
 templateUrl: 'home.component.html',
 styleUrls: ['./home.component.scss'] })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
     currentUser: any;
     users = [];
 
@@ -19,17 +19,19 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        $(document).ready(function () {
-            console.log('xyyzzz');
-            // $(window).load(function(){
-                console.log('abc');
-                $('.flexslider').flexslider({
-                  animation: "slide",
-                  start: function(slider){
-                    $('body').removeClass('loading');
-                  }
-                });
-              });
-        // });
+      
+    }
+     ngAfterViewInit() {
+        $(window).load(function(){
+            $('.flexslider').flexslider({
+              animation: "slide",
+              start: function(slider){
+                $('body').removeClass('loading');
+              }
+            });
+          }); 
+     }
+     ngDoCheck(){
+     
     }
 }
