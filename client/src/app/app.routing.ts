@@ -10,10 +10,10 @@ import { ClientsComponent } from './main-component/clients/clients.component';
 import { ResourcesComponent } from './main-component/resources/resources.component';
 import { TypoComponent } from './main-component/typo/typo.component';
 import { ContactComponent } from './main-component/contact/contact.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
-    // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    // { path: '', component: HomeComponent },
+
     { path: '', component: HomeComponent },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
@@ -23,6 +23,8 @@ const routes: Routes = [
     { path: 'resources', component: ResourcesComponent },
     { path: 'typo', component: TypoComponent },
     { path: 'contact', component: ContactComponent },
+    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
 ];

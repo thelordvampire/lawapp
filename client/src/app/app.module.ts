@@ -20,6 +20,7 @@ import { TypoComponent } from './main-component/typo/typo.component';
 import { ContactComponent } from './main-component/contact/contact.component';
 import { HeaderComponent } from './main-component/header/header.component';
 import { FooterComponent } from './main-component/footer/footer.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
     imports: [
@@ -40,7 +41,8 @@ import { FooterComponent } from './main-component/footer/footer.component';
         TypoComponent,
         ContactComponent,
         HeaderComponent,
-        FooterComponent
+        FooterComponent,
+        AdminComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

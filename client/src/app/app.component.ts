@@ -14,7 +14,7 @@ export class AppComponent {
         private router: Router,
         private authenticationService: AuthenticationService
     ) {
-        this.router.navigate(['/home']);
+      //  this.router.navigate(['/home']);
        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     }
 
