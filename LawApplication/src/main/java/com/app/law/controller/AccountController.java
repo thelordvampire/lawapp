@@ -74,7 +74,7 @@ public class AccountController {
                 loginedUser.setToken("Bearer "+ result);
                 return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(loginedUser);
             } else
-                return ResponseEntity.ok().headers(HeaderUtil.createNotAuthenHeader()).body(null);
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("login fail");
         } catch (Exception ex) {
             result = "Server Error";
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;

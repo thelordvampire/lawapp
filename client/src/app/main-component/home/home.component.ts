@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { AuthenticationService, UserService } from 'src/app/_services';
-
+import * as $ from 'jquery';
 
 
 @Component({ selector: 'home',
@@ -19,18 +19,17 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.loadAllUsers();
+        $(document).ready(function () {
+            console.log('xyyzzz');
+            // $(window).load(function(){
+                console.log('abc');
+                $('.flexslider').flexslider({
+                  animation: "slide",
+                  start: function(slider){
+                    $('body').removeClass('loading');
+                  }
+                });
+              });
+        // });
     }
-
-    // deleteUser(id: number) {
-    //     this.userService.delete(id)
-    //         .pipe(first())
-    //         .subscribe(() => this.loadAllUsers());
-    // }
-
-    // private loadAllUsers() {
-    //     this.userService.getAll()
-    //         .pipe(first())
-    //         .subscribe(users => this.users = users);
-    // }
 }

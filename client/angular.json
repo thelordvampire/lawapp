@@ -27,12 +27,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less",
-              // "src/assets/css/styles.css",
-              // "src/assets/css/flexslider.css",
-              // "src/assets/css/bootstrap.css"
+              "src/styles.less"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/js/jquery.flexslider.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -87,10 +86,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.less",
-              // "src/assets/css/styles.css",
-              // "src/assets/css/flexslider.css",
-              // "src/assets/css/bootstrap.css"
+              "src/styles.less"
             ],
             "scripts": [
               "../node_modules/jquery/dist/jquery.min.js",
