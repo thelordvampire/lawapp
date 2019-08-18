@@ -22,6 +22,8 @@ import { HeaderComponent } from './main-component/header/header.component';
 import { FooterComponent } from './main-component/footer/footer.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppService } from './app.service';
+import { ChatComponent } from './main-component/chat/chat.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -29,6 +31,7 @@ import { AppService } from './app.service';
         ReactiveFormsModule,
         HttpClientModule,
         appRoutingModule,
+        FormsModule
     ],
     declarations: [
         AppComponent,
@@ -43,7 +46,8 @@ import { AppService } from './app.service';
         ContactComponent,
         HeaderComponent,
         FooterComponent,
-        AdminComponent
+        AdminComponent,
+        ChatComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
