@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import SockJS from 'sockjs-client';
+import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import { AppService } from '../../app.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -43,19 +43,18 @@ export class ChatComponent implements OnInit {
 
  connect() {
    console.log('document.querySelector', document.querySelector('#name'));
-   
-//  this.username = document.querySelector('#name').value.trim();
+   // this.username = document.querySelector('#name').value.trim();
 
-      // this.usernamePage.classList.add('hidden');
-      // this.chatPage.classList.remove('hidden');
-      const url = 'http://localhost:8080/ws'
-      const socket = new SockJS(url);
-  console.log('dfsdg', socket);
-  
+   // this.usernamePage.classList.add('hidden');
+   // this.chatPage.classList.remove('hidden');
+   const url = 'http://localhost:8080/ws';
+   const socket = new SockJS(url);
+   console.log('dfsdg', socket);
 
-      this.stompClient = Stomp.over(socket);
-      console.log('this.chatForm', this.stompClient);
-      this.stompClient.connect({}, this.onConnected, this.onError);
+
+   this.stompClient = Stomp.over(socket);
+   console.log('this.chatForm', this.stompClient);
+   this.stompClient.connect({}, this.onConnected, this.onError);
   // event.preventDefault();
 }
 
@@ -67,11 +66,13 @@ export class ChatComponent implements OnInit {
   // Tell your username to the server
 
   console.log('onConected');
-  
-  this.stompClient.send("/app/chat.addUser",
+
+  if (this.stompClient) {
+    this.stompClient.send('/app/chat.addUser',
       {},
       JSON.stringify({sender: this.username, type: 'JOIN'})
-  )
+    );
+  }
 
   // this.connectingElement.classList.add('hidden');
 }
@@ -79,7 +80,7 @@ export class ChatComponent implements OnInit {
 
  onError(error) {
    console.log('on err');
-   
+
   this.connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
   // this.connectingElement.style.color = 'red';
 }
