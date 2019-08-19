@@ -41,10 +41,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     }
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     @Autowired
-    UserDetailsService userDetailService;
+    private UserDetailsService userDetailService;
 
     // Enable jdbc authentication
     @Autowired
@@ -173,12 +173,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 //            .and()
                     .cors()
                     .and()
-                    .authorizeRequests()
-                    .antMatchers("/user/login", "/user/sign_up")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated()
-                    .and()
+//                    .authorizeRequests()
+//                    .antMatchers("/user/login", "/user/sign_up")
+//                    .permitAll()
+//                    .anyRequest()
+//                    .authenticated()
+//                    .and()
                     .addFilterBefore(authenticationFilter(), CustomBasicAuthenticationFilter.class);
 //                .formLogin()
 ////                .loginPage("/user/login")
