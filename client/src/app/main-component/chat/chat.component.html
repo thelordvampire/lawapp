@@ -1,5 +1,8 @@
-<form [formGroup]="chatForm">
-    <div id="username-page">
+<form [formGroup]="chatForm" class="formchat-wrap">
+    <div class="chat-header" (click)="onPressCloseHeader()">
+        Contact with me!
+    </div>
+    <div id="username-page" *ngIf="!isShow && !isShowHeader">
         <div class="username-page-container">
             <h1 class="title">Type your username</h1>
                 <div class="form-group">
@@ -11,18 +14,12 @@
         </div>
     </div>
     
-    <div id="chat-page" class="hidden">
+    <div id="chat-page" *ngIf="isShow && !isShowHeader">
         <div class="chat-container">
-            <div class="chat-header">
-                <h2>Spring WebSocket Chat Demo</h2>
-            </div>
-            <div class="connecting">
-                Connecting...
-            </div>
             <ul id="messageArea">
     
             </ul>
-                <div class="form-group">
+                <div class="form-group chat-content">
                     <div class="input-group clearfix">
                         <input type="text" id="message" formControlName="Message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
                         <button type="submit" class="primary" (click)="sendMessage()">Send</button>
@@ -32,25 +29,5 @@
     </div>
 
 </form>
-<!-- <div style="text-align:center">
-    <h1>
-      Welcome to {{title}}!
-    </h1>
-    <div class="chat-container">
-      <div class="chat">
-        <div class="message"></div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="footer">
-    <div class="send-button">
-  
-      <div class="send" (click)="sendMessage(input.value)">gdfgfd
-      </div>
-      <input  id="input" type="text" #input>
-    </div>
-  
-  </div>
-   -->
+
   

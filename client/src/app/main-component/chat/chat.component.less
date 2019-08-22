@@ -32,7 +32,7 @@ body:before {
     z-index: 0;
 }
 
-.clearfix:after {
+/deep/.clearfix:after {
     display: block;
     content: "";
     clear: both;
@@ -42,15 +42,11 @@ body:before {
     display: none;
 }
 
-.form-control {
+/deep/.form-control {
     width: 100%;
     min-height: 38px;
     font-size: 15px;
     border: 1px solid #c8c8c8;
-}
-
-.form-group {
-    margin-bottom: 15px;
 }
 
 input {
@@ -71,7 +67,7 @@ a {
     color: #128ff2;
 }
 
-button {
+/deep/button {
     box-shadow: none;
     border: 1px solid transparent;
     font-size: 14px;
@@ -86,71 +82,41 @@ button {
     min-height: 38px;
 }
 
-button.default {
+/deep/button.default {
     background-color: #e8e8e8;
     color: #333;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
 }
 
-button.primary {
+/deep/button.primary {
     background-color: #128ff2;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
 
-button.accent {
+/deep/button.accent {
     background-color: #ff4743;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
 
-#username-page {
+/deep/#username-page {
     text-align: center;
 }
 
-.username-page-container {
-    background: #fff;
-    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-    border-radius: 2px;
-    width: 100%;
-    max-width: 500px;
+/deep/.username-page-container {
     display: inline-block;
-    margin-top: 42px;
     vertical-align: middle;
     position: relative;
-    padding: 35px 55px 35px;
     min-height: 250px;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    margin-top: -160px;
 }
 
-.username-page-container .username-submit {
+/deep/.username-page-container .username-submit {
     margin-top: 10px;
 }
 
 
-#chat-page {
-    position: relative;
-    height: 100%;
-}
-
-.chat-container {
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #fff;
-    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-    margin-top: 30px;
-    height: calc(100% - 60px);
-    max-height: 600px;
-    position: relative;
-}
-
-#chat-page ul {
+/deep/#chat-page ul {
     list-style-type: none;
     background-color: #FFF;
     margin: 0;
@@ -160,39 +126,40 @@ button.accent {
     height: calc(100% - 150px);
 }
 
-#chat-page #messageForm {
+/deep/#chat-page #messageForm {
     padding: 20px;
 }
 
-#chat-page ul li {
+/deep/#chat-page ul li {
     line-height: 1.5rem;
     padding: 10px 20px;
     margin: 0;
     border-bottom: 1px solid #f4f4f4;
 }
 
-#chat-page ul li p {
+/deep/#chat-page ul li p {
     margin: 0;
 }
 
-#chat-page .event-message {
+/deep/#chat-page .event-message {
     width: 100%;
     text-align: center;
     clear: both;
 }
 
-#chat-page .event-message p {
+/deep/#chat-page .event-message p {
     color: #777;
     font-size: 14px;
     word-wrap: break-word;
 }
 
-#chat-page .chat-message {
+/deep/#chat-page .chat-message {
     padding-left: 68px;
     position: relative;
 }
 
-#chat-page .chat-message i {
+
+/deep/#chat-page .chat-message i {
     position: absolute;
     width: 42px;
     height: 42px;
@@ -209,45 +176,117 @@ button.accent {
     text-transform: uppercase;
 }
 
-#chat-page .chat-message span {
+/deep/#chat-page .chat-message span {
     color: #333;
     font-weight: 600;
 }
 
-#chat-page .chat-message p {
+/deep/#chat-page .chat-message p {
     color: #43464b;
 }
 
-#messageForm .input-group input {
+/deep/#messageForm .input-group input {
     float: left;
     width: calc(100% - 85px);
 }
 
-#messageForm .input-group button {
+/deep/#messageForm .input-group button {
     float: left;
     width: 80px;
     height: 38px;
     margin-left: 5px;
 }
 
-.chat-header {
-    text-align: center;
-    padding: 15px;
-    border-bottom: 1px solid #ececec;
+/deep/.chat-header {
+    padding: 0 15px;
+    border-bottom: 1px solid #ddd;
 }
 
-.chat-header h2 {
+/deep/.chat-header h2 {
     margin: 0;
     font-weight: 500;
 }
 
-.connecting {
+/deep/.connecting {
     padding-top: 5px;
     text-align: center;
     color: #777;
     position: absolute;
     top: 65px;
     width: 100%;
+}
+
+
+.chat-container{
+    position: relative;
+    height: 100%;
+}
+
+.formchat{
+    &-wrap{
+        position: fixed;
+        right: 15px;
+        bottom: 15px;
+        background: #fff;
+        box-shadow: 0 4px 10px #ccc;
+        width: 360px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        & > div + div{
+            height: 400px;
+            position: relative;
+        }
+    }
+}
+.btn-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    outline: 0;
+}
+.chat-header{
+    cursor: pointer;
+    height: 40px;
+    position: relative;
+    line-height: 40px;
+    button{
+        line-height: auto;
+    }
+}
+.input-group{
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    height: 36px;
+    margin: 0;
+    input {
+        width: 80%;
+        height: 100%;
+    }
+    button {
+        width: 20%;
+        height: 100%;
+    }
+}
+#messageArea{
+    height: 320px;
+}
+.chat-content{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    margin: 0;
+}
+/deep/#chat-page .chat-message.right-text{
+    padding-right: 68px;
+    padding-left: unset;
+    text-align: right;
+    i{
+        right: 10px;
+        left: unset;
+    }
 }
 
 
@@ -261,6 +300,10 @@ button.accent {
 }
 
 @media screen and (max-width: 480px) {
+    .formchat-wrap {
+        width: 100%;
+        right: 0;
+    }
     .chat-container {
         height: calc(100% - 30px);
     }
@@ -284,9 +327,6 @@ button.accent {
         width: calc(100% - 70px);
     }
 
-    .chat-header {
-        padding: 10px;
-    }
 
     .connecting {
         top: 60px;
@@ -296,46 +336,3 @@ button.accent {
         font-size: 1.1em;
     }
 }
-
-// .chat-container{
-//     height: 80vh;
-//     width: 100vw;
-//   }
-//   .chat{
-//     text-align: left;
-//     margin: 0 auto;
-//     width: 50%;
-//     height: 100%;
-//     border: 1px solid grey;
-//   }
-  
-//   .footer{
-//     background: #cccccc;
-//     margin: 0 auto;
-//     position: absolute;
-//     bottom: 0;
-//     height: 10vh;
-//     width: 100vw;
-//   }
-//   .send-button{
-//     margin: 0 auto;
-//     height: 70%;
-//     width: 50%;
-//   }
-//   input{
-//     float: right;
-//     height: 30px;
-//     border-radius: 15px;
-//     font-size: 1.5em;
-//   }
-//   .send{
-//     float: right;
-//     // background: url("../assets/images/send.png");
-//     background-size: contain;
-//     background-repeat: no-repeat;
-//     height: 30px;
-//     width: 30px;
-//     margin-left: 5px;
-  
-//   }
-  
