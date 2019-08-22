@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
     $isShowHeader = new BehaviorSubject<any>(true);
+    $defaulData = new Subject<any>();
     setHeader(isShow: boolean) {
         this.$isShowHeader.next(isShow);
     }
     get getHeader() {
         return this.$isShowHeader.asObservable();
+    }
+
+    setDefaulChat(data) {
+        this.$defaulData.next(data);
+    }
+    get getDefaulChat() {
+        return this.$defaulData.asObservable();
     }
 }

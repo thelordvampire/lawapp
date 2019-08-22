@@ -3,6 +3,7 @@ import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import { AppService } from '../../app.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -24,7 +25,9 @@ export class ChatComponent implements OnInit {
   constructor(
     private appService: AppService,
     private fb: FormBuilder,
-    ) { }
+    private router: ActivatedRoute
+    ) {
+     }
 
   ngOnInit() {
     this.chatForm = this.fb.group({
@@ -51,7 +54,11 @@ export class ChatComponent implements OnInit {
 ];
 
  connect() {
-   console.log('onConnect');
+  if (this.router.snapshot && this.router.snapshot.routeConfig && this.router.snapshot.routeConfig.path == 'admin') {
+    this.chatForm.patchValue({
+              Username: 'Admin',
+            });
+  }
    this.isShow = true;
    const url = 'http://localhost:8080/ws';
    const socket = new SockJS(url);
@@ -61,11 +68,10 @@ export class ChatComponent implements OnInit {
 
 
  onConnected() {
-  console.log('onConnected');
+  console.log('onConnected', this.username);
   // Subscribe to the Public Topic
   // Tell your username to the server
     this.stompClient.subscribe('/topic/public', this.onMessageReceived.bind(this));
-    console.log('thi111111111111ent', this.stompClient);
     this.stompClient.send('/app/chat.addUser', {}, JSON.stringify({sender: this.username, type: 'JOIN'}));
 }
 
@@ -78,7 +84,6 @@ export class ChatComponent implements OnInit {
 
 
  sendMessage() {
-  console.log('sendMessage');
       var chatMessage = {
           sender: this.chatForm.controls.Username.value,
           content: this.chatForm.controls.Message.value,
