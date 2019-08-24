@@ -16,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.util.StringUtils;
@@ -25,7 +27,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  *
@@ -40,42 +41,36 @@ public class CustomBasicAuthenticationFilter extends BasicAuthenticationFilter {
     private JwtProvider jwtProvider;
 
     @Autowired
-    private IUserService IUserService;
+    private UserDetailsService userDetailsService;
 
     public CustomBasicAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
     
-    private String resolveToken(String token){
-        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
-            return token.substring(7, token.length());
-        }
-        return null;
-    }
-
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request,
+        HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String authToken = request.getHeader(TOKEN_HEADER);
         authToken = resolveToken(authToken);
-        if(jwtProvider.validateTokenLogin(authToken)) 
+        if(jwtProvider.validateTokenLogin(authToken))
         {
             String username = jwtProvider.getUsernameFromToken(authToken);
-            User user = IUserService.findUserByUsername(username);
-            if (user != null) {
-                boolean enabled = true;
-                boolean accountNonExpired = true;
-                boolean credentialsNonExpired = true;
-                boolean accountNonLocked = true;
-                UserDetails userDetail = new org.springframework.security.core.userdetails.User(
-                        username, user.getPassword(), enabled, accountNonExpired,credentialsNonExpired, accountNonLocked, new ArrayList<>());
-
+            try {
+                UserDetails userDetail = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetail, null, userDetail.getAuthorities());
                 token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(token);
+            } catch(UsernameNotFoundException ex) {
+                log.debug("user name not found: {}", ex.getMessage());
             }
         }
         super.doFilterInternal(request, response, chain);
 //        chain.doFilter(request, response);
+    }
+
+    private String resolveToken(String token){
+        return StringUtils.hasText(token) && token.startsWith("Bearer ") ?
+            token.substring(7) : null;
     }
 
     @Override

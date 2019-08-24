@@ -60,31 +60,26 @@ public class AccountController {
     private JwtProvider jwtProvider;
 
     @RequestMapping(value="/user/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> login(@RequestBody User user) throws URISyntaxException {
+    public ResponseEntity<Object> login(@RequestBody User user) {
         //201 - ok()   202 - accept()
         log.debug("login: {}", user);
         User loginedUser = userService.login(user.getUsername(), user.getPassword());
-        String result;
-        HttpStatus httpStatus;
-        try
-        {
-            if (loginedUser!= null)
-            {
+        String result = "Login failed";
+        try {
+            if (loginedUser!= null) {
                 result = jwtProvider.generateTokenLogin(loginedUser.getUsername());
                 loginedUser.setToken("Bearer "+ result);
                 return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(loginedUser);
-            } else
-                throw new Exception("Login fail");
-//                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("login fail");
+            }
         } catch (Exception ex) {
+            log.debug("Login failed: {}", ex.getMessage());
             result = "Server Error";
-            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        return new ResponseEntity<>(result, httpStatus);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
     }
 
     @RequestMapping(value="/user/autologin", method = RequestMethod.POST)
-    public ResponseEntity<Object> autologin() throws URISyntaxException {
+    public ResponseEntity<Object> autologin() {
         log.debug("autologin");
         User loginedUser = userService.getLoginedUser();
         if (loginedUser!= null)
@@ -94,7 +89,7 @@ public class AccountController {
     }
 
     @RequestMapping(value="/user/sign_up", method = RequestMethod.POST)
-    public ResponseEntity<Object> createAccount(@RequestBody User user) throws URISyntaxException {
+    public ResponseEntity<Object> createAccount(@RequestBody User user) {
         log.debug("sign_up: {}", user);
         if(user== null)
             return ResponseEntity.badRequest().headers(HttpHeaders.EMPTY).body("user can not be null");

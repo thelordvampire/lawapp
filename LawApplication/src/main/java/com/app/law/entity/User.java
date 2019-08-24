@@ -15,7 +15,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
@@ -32,9 +32,12 @@ public class User implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "role_id", insertable = false, updatable = false)
+    private Integer roleId;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private UserRole role;
+    private Role role;
 
     @Transient
     private String token;
