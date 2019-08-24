@@ -5,6 +5,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class AppService {
     $isShowHeader = new BehaviorSubject<any>(true);
     $defaulData = new Subject<any>();
+    $dataChatBox = new Subject<any>();
     setHeader(isShow: boolean) {
         this.$isShowHeader.next(isShow);
     }
@@ -17,5 +18,12 @@ export class AppService {
     }
     get getDefaulChat() {
         return this.$defaulData.asObservable();
+    }
+
+    setOpenChatBox(data) {
+        this.$dataChatBox.next(data)
+    }
+    get getChatBox() {
+        return this.$dataChatBox.asObservable();
     }
 }

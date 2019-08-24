@@ -69,9 +69,6 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.appService.setHeader(false);
-    this.appService.setDefaulChat(this.DEFAULDATA);
-    
-    
   }
   ngAfterViewInit() {
     // child is set
@@ -82,6 +79,10 @@ export class AdminComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/login']);
     if (window.location.href.indexOf('reload')==-1) {
       window.location.replace(window.location.href+'?reload');
- }
-}
+   }
+  } 
+  onPressOpenChatBox(id) {
+    console.log('Open chat box with', id);
+    this.appService.setOpenChatBox(id);
+  }
 }

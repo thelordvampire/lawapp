@@ -1,20 +1,40 @@
-
-
-
-
 <div class ="admin-page">
     <div class ="admin-content">
-        <p>
-            admin works!
-          </p>
-          <a (click) ="logout()"> logout</a>
-      <app-chat #appChat class="admin-content__message"></app-chat>
-    </div>
-    <div class = "user-list">
-        <div class="content">
-            <ul *ngFor="let item of data">
-                <li><span>{{item.user}}</span></li>
-            </ul>
+          <header role="banner">
+                <h1>Admin Panel</h1>
+                <ul class="utilities">
+                  <br>
+                  <li class="users"><a href="#">My Account</a></li>
+                  <li class="logout warn"><a (click) ="logout()">Log Out</a></li>
+                </ul>
+              </header>
+              
+              <nav role='navigation'>
+                <ul class="main">
+                  <li class="dashboard"><a href="admindashboard">Dashboard</a></li>
+                  <li class="edit"><a href="#">Edit Website</a></li>
+                  <li class="write"><a href="#">Write news</a></li>
+                  <li class="comments"><a href="#">Ads</a></li>
+                  <li class="users"><a href="#">Manage Users</a></li>
+                </ul>
+              </nav>
+              
+              <main role="main">
+                
+                <section class="panel important">
+                  <h2>Write Some News</h2>
+                  <ul>
+                    <li>Information Panel</li>
+                  </ul>
+                </section>
+              </main>
+        </div>
+        <div class = "user-list">
+            <div class="content">
+                <ul *ngFor="let item of data">
+                    <li (click)="onPressOpenChatBox(item.id)"><span>{{item.user}}</span></li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
+    <app-chat #appChat class="admin-content__message"></app-chat>

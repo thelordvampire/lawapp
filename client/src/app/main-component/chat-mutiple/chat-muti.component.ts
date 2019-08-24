@@ -7,11 +7,11 @@ import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.less']
+  selector: 'app-chat-muti',
+  templateUrl: './chat-muti.component.html',
+  styleUrls: ['./chat-muti.component.less']
 })
-export class ChatComponent implements OnInit {
+export class ChatMutiComponent implements OnInit {
   chatForm: FormGroup;
   isShow = false;
   isShowHeader = true;
@@ -35,6 +35,7 @@ export class ChatComponent implements OnInit {
     this.chatForm = this.fb.group({
       Username: [''],
       Message: [''],
+      RoomId: ['']
     });
 
     this.usernamePage = document.querySelector('#username-page');
@@ -42,7 +43,7 @@ export class ChatComponent implements OnInit {
     this.usernameForm = document.querySelector('#usernameForm');
     this.messageForm = document.querySelector('#messageForm');
     this.messageInput = document.querySelector('#message');
-    this.messageArea = document.querySelector('#messageArea');
+    this.messageArea = document.querySelector('#messageAreaMuti');
     this.connectingElement = document.querySelector('.connecting');
     this.OpentChatBox();
   }
@@ -143,8 +144,8 @@ export class ChatComponent implements OnInit {
   textElement.appendChild(messageText);
 
   messageElement.appendChild(textElement);
-  $('#messageArea').append(messageElement);
-  $('#messageArea').scrollTop = $('#messageArea').scrollHeight;
+  $('#messageAreaMuti').append(messageElement);
+  $('#messageAreaMuti').scrollTop = $('#messageAreaMuti').scrollHeight;
 }
 
 
