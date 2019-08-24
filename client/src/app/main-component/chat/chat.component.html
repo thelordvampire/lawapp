@@ -1,6 +1,6 @@
-<form [formGroup]="chatForm" class="formchat-wrap">
+<form [formGroup]="chatForm" [class]="!isAdmin ? 'formchat-wrap' : 'formchat-admin'">
     <div class="chat-header" (click)="onPressCloseHeader()">
-        Contact with me!
+        {{name}}
     </div>
     <div id="username-page" *ngIf="!isShow && !isShowHeader">
         <div class="username-page-container">
@@ -27,7 +27,6 @@
                 </div>
         </div>
     </div>
-
 </form>
 
   

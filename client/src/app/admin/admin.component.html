@@ -1,6 +1,20 @@
-<p>
-  admin works!
-</p>
-<a (click) ="logout()"> logout</a>
 
-<app-chat #appChat></app-chat>
+
+
+
+<div class ="admin-page">
+    <div class ="admin-content">
+        <p>
+            admin works!
+          </p>
+          <a (click) ="logout()"> logout</a>
+      <app-chat #appChat class="admin-content__message"></app-chat>
+    </div>
+    <div class = "user-list">
+        <div class="content">
+            <ul *ngFor="let item of data">
+                <li><span>{{item.user}}</span></li>
+            </ul>
+        </div>
+    </div>
+</div>

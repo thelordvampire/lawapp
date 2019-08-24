@@ -16,6 +16,28 @@ export class AdminComponent implements OnInit, AfterViewInit {
     message: 'Xin chào'
   }
 
+  data = [{
+    id: 1,
+    user: 'Nguyễn Văn A'
+  },
+  {
+    id: 2,
+    user: 'Đoàn Tuấn B'
+  },
+  {
+    id: 3,
+    user: 'Nguyễn Thị D'
+  },
+  {
+    id: 4,
+    user: 'Cao Bá D'
+  },
+  {
+    id: 5,
+    user: 'Nguyễn Đức T'
+  },
+]
+
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,

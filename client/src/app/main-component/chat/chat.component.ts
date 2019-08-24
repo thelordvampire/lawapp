@@ -15,6 +15,7 @@ export class ChatComponent implements OnInit {
   chatForm: FormGroup;
   isShow = false;
   isShowHeader = true;
+  isAdmin = false;
   usernamePage;
   chatPage;
   usernameForm;
@@ -22,6 +23,7 @@ export class ChatComponent implements OnInit {
   messageInput;
   messageArea;
   connectingElement;
+  name: any;
   constructor(
     private appService: AppService,
     private fb: FormBuilder,
@@ -55,6 +57,7 @@ export class ChatComponent implements OnInit {
 
  connect() {
   if (this.router.snapshot && this.router.snapshot.routeConfig && this.router.snapshot.routeConfig.path == 'admin') {
+    this.isAdmin = true;
     this.chatForm.patchValue({
               Username: 'Admin',
             });
@@ -68,6 +71,7 @@ export class ChatComponent implements OnInit {
 
 
  onConnected() {
+   this.name = this.chatForm.controls.Username.value;
   console.log('onConnected', this.username);
   // Subscribe to the Public Topic
   // Tell your username to the server
