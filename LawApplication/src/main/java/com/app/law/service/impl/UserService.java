@@ -32,10 +32,8 @@ public class UserService implements IUserService {
     @Override
     public User login(String username, String raw_password) {
         User user = userRepo.findOneByUsername(username);
-        if(user!= null && passwordEncoder.matches(raw_password, user.getPassword()))
-            return user;
-
-        return null;
+        return user!= null && passwordEncoder.matches(raw_password, user.getPassword()) ?
+            user : null;
     }
 
     @Override

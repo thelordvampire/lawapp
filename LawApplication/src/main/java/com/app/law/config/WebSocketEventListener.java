@@ -5,7 +5,7 @@
  */
 package com.app.law.config;
 
-import com.app.law.dto.chat.ChatMessage;
+import com.app.law.dto.chat.ChatMessageDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +41,11 @@ public class WebSocketEventListener {
         if(username != null) {
             logger.info("User Disconnected : " + username);
 
-            ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setType(ChatMessage.MessageType.LEAVE);
-            chatMessage.setSender(username);
+            ChatMessageDTO chatMessageDTO = new ChatMessageDTO();
+            chatMessageDTO.setType(ChatMessageDTO.MessageType.LEAVE);
+            chatMessageDTO.setSender(username);
 
-            messagingTemplate.convertAndSend("/topic/public", chatMessage);
+            messagingTemplate.convertAndSend("/topic/public", chatMessageDTO);
         }
     }
 }

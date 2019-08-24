@@ -12,7 +12,7 @@ import lombok.Data;
  * @author bao
  */
 @Data
-public class ChatMessage {
+public class ChatMessageDTO {
     
     private MessageType type;
     private String content;

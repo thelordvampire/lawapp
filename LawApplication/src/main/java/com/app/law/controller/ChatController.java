@@ -5,7 +5,7 @@
  */
 package com.app.law.controller;
 
-import com.app.law.dto.chat.ChatMessage;
+import com.app.law.dto.chat.ChatMessageDTO;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -21,17 +21,17 @@ public class ChatController {
     
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        return chatMessage;
+    public ChatMessageDTO sendMessage(@Payload ChatMessageDTO chatMessageDTO) {
+        return chatMessageDTO;
     }
 
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")
-    public ChatMessage addUser(@Payload ChatMessage chatMessage, 
-                               SimpMessageHeaderAccessor headerAccessor) {
+    public ChatMessageDTO addUser(@Payload ChatMessageDTO chatMessageDTO,
+                                  SimpMessageHeaderAccessor headerAccessor) {
         // Add username in web socket session
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-        return chatMessage;
+        headerAccessor.getSessionAttributes().put("username", chatMessageDTO.getSender());
+        return chatMessageDTO;
     }
     
 }
