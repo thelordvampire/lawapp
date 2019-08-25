@@ -69,6 +69,13 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.appService.setHeader(false);
+    this.getAllUserChat();
+  }
+
+  getAllUserChat() {
+    this.appService.GetListUserChat().subscribe(res => {
+      console.log('user list', res);
+    })
   }
   ngAfterViewInit() {
     // child is set

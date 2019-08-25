@@ -24,6 +24,8 @@ export class ChatComponent implements OnInit {
   messageArea;
   connectingElement;
   name: any;
+  urlRoom: any;
+  roomId: Object;
   constructor(
     private appService: AppService,
     private fb: FormBuilder,
@@ -60,6 +62,7 @@ export class ChatComponent implements OnInit {
   '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
+
  connect() {
   if (this.router.snapshot && this.router.snapshot.routeConfig && this.router.snapshot.routeConfig.path == 'admin') {
     this.isAdmin = true;
@@ -68,20 +71,38 @@ export class ChatComponent implements OnInit {
             });
   }
    this.isShow = true;
-   const url = 'http://localhost:8080/ws';
-   const socket = new SockJS(url);
-   this.stompClient = Stomp.over(socket);
-   this.stompClient.connect({}, this.onConnected.bind(this), this.onError.bind(this));
+  //  
+  //   this.urlRoom.subscribe('http://localhost:8080/chat/room/create', this.roomId.bind(this));
+  const data = {
+    clientUserName: 'user1'
+  }
+
+  this.appService.CreateRoom(data).subscribe(res => {
+    this.roomId = res;
+    this.enterRoom();
+  })
 }
 
+  enterRoom() {
+    const url = 'http://localhost:8080/ws';
+    const socket = new SockJS(url);
+    this.stompClient = Stomp.over(socket);
+    this.stompClient.connect({}, this.onConnected.bind(this), this.onError.bind(this));
+  }
 
  onConnected() {
    this.name = this.chatForm.controls.Username.value;
-  console.log('onConnected', this.username);
+  console.log('onConnected', this.roomId['id']);
   // Subscribe to the Public Topic
   // Tell your username to the server
-    this.stompClient.subscribe('/topic/public', this.onMessageReceived.bind(this));
-    this.stompClient.send('/app/chat.addUser', {}, JSON.stringify({sender: this.username, type: 'JOIN'}));
+    this.stompClient.subscribe(`/topic/${this.roomId['id']}`, this.onMessageReceived.bind(this));
+
+
+    if (this.isAdmin) {
+      this.stompClient.send(`/chat/${this.roomId['id']}/addUser`, {}, JSON.stringify({serverUserId: 1, type: 'JOIN'}));
+    } else {
+      this.stompClient.send(`/chat/${this.roomId['id']}/addUser`, {}, JSON.stringify({sender: this.chatForm.controls.Username.value, type: 'JOIN'}));
+    }
 }
 
 
@@ -98,9 +119,10 @@ export class ChatComponent implements OnInit {
       var chatMessage = {
           sender: this.chatForm.controls.Username.value,
           content: this.chatForm.controls.Message.value,
-          type: 'CHAT'
+          type: 'CHAT',
+          roomId: this.roomId['id'],
       };
-      this.stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+      this.stompClient.send(`/chat/${this.roomId['id']}/sendMessage`, {}, JSON.stringify(chatMessage));
       this.chatForm.controls.Message.reset();
 }
 

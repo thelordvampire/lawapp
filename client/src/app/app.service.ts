@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Observable } from 'rxjs';
+import { environment } from '@environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
+    constructor(private http: HttpClient) {
+    }
+
     $isShowHeader = new BehaviorSubject<any>(true);
     $defaulData = new Subject<any>();
     $dataChatBox = new Subject<any>();
@@ -25,5 +30,14 @@ export class AppService {
     }
     get getChatBox() {
         return this.$dataChatBox.asObservable();
+    }
+
+    CreateRoom(data) {
+        const url = `${environment.apiUrl}/chat/room/create/`
+        return this.http.post(url, data);
+    }
+    GetListUserChat() {
+        const url = `${environment.apiUrl}/chat/room/get-new`
+        return this.http.get(url);
     }
 }
