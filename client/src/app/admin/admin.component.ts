@@ -3,6 +3,7 @@ import { AuthenticationService } from '../_services';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { ChatComponent } from '../main-component/chat/chat.component';
+import { reverse } from 'dns';
 
 @Component({
   selector: 'app-admin',
@@ -15,49 +16,50 @@ export class AdminComponent implements OnInit, AfterViewInit {
     name: 'Admin',
     message: 'Xin chào'
   }
+  data: Object;
 
-  data = [
-    {
-    id: 1,
-    user: 'Nguyễn Văn A'
-  },
-  {
-    id: 2,
-    user: 'Đoàn Tuấn B'
-  },
-  {
-    id: 3,
-    user: 'Nguyễn Thị D'
-  },
-  {
-    id: 4,
-    user: 'Cao Bá D'
-  },
-  {
-    id: 5,
-    user: 'Nguyễn Đức T'
-  },
-  {
-    id: 1,
-    user: 'Nguyễn Văn A'
-  },
-  {
-    id: 2,
-    user: 'Đoàn Tuấn B'
-  },
-  {
-    id: 3,
-    user: 'Nguyễn Thị D'
-  },
-  {
-    id: 4,
-    user: 'Cao Bá D'
-  },
-  {
-    id: 5,
-    user: 'Nguyễn Đức T'
-  },
-]
+//   data = [
+//     {
+//     id: 1,
+//     user: 'Nguyễn Văn A'
+//   },
+//   {
+//     id: 2,
+//     user: 'Đoàn Tuấn B'
+//   },
+//   {
+//     id: 3,
+//     user: 'Nguyễn Thị D'
+//   },
+//   {
+//     id: 4,
+//     user: 'Cao Bá D'
+//   },
+//   {
+//     id: 5,
+//     user: 'Nguyễn Đức T'
+//   },
+//   {
+//     id: 1,
+//     user: 'Nguyễn Văn A'
+//   },
+//   {
+//     id: 2,
+//     user: 'Đoàn Tuấn B'
+//   },
+//   {
+//     id: 3,
+//     user: 'Nguyễn Thị D'
+//   },
+//   {
+//     id: 4,
+//     user: 'Cao Bá D'
+//   },
+//   {
+//     id: 5,
+//     user: 'Nguyễn Đức T'
+//   },
+// ]
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -74,12 +76,17 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
   getAllUserChat() {
     this.appService.GetListUserChat().subscribe(res => {
-      console.log('user list', res);
+      this.data = res.reverse();
     })
+    setInterval(() => {
+      this.appService.GetListUserChat().subscribe(res => {
+        this.data = res.reverse();
+      })
+    }, 60 * 1000);
   }
   ngAfterViewInit() {
     // child is set
-    this.appChat.connect();
+    // this.appChat.enterRoom();
   }
   logout() {
     this.authenticationService.logout();
@@ -91,5 +98,6 @@ export class AdminComponent implements OnInit, AfterViewInit {
   onPressOpenChatBox(id) {
     console.log('Open chat box with', id);
     this.appService.setOpenChatBox(id);
+    this.appChat.enterRoom(id, this.data);
   }
 }
