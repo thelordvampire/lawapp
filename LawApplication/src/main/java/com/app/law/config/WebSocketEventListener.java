@@ -5,6 +5,7 @@
  */
 package com.app.law.config;
 
+import com.app.law.constant.MessageType;
 import com.app.law.dto.chat.ChatMessageDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +43,7 @@ public class WebSocketEventListener {
             logger.info("User Disconnected : " + username);
 
             ChatMessageDTO chatMessageDTO = new ChatMessageDTO();
-            chatMessageDTO.setType(ChatMessageDTO.MessageType.LEAVE);
+            chatMessageDTO.setType(MessageType.LEAVE);
             chatMessageDTO.setSender(username);
 
             messagingTemplate.convertAndSend("/topic/public", chatMessageDTO);

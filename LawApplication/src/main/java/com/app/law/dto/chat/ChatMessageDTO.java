@@ -5,13 +5,18 @@
  */
 package com.app.law.dto.chat;
 
+import com.app.law.constant.MessageType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author bao
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChatMessageDTO {
     
     private MessageType type;
@@ -21,11 +26,5 @@ public class ChatMessageDTO {
     private Integer roomId;
     private Integer serverUserId;
     private String serverUserName;
-
-    public enum MessageType {
-        CHAT,
-        JOIN,
-        LEAVE
-    }
     
 }

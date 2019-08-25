@@ -5,6 +5,7 @@
  */
 package com.app.law.controller;
 
+import com.app.law.constant.MessageType;
 import com.app.law.dto.chat.ChatMessageDTO;
 import com.app.law.dto.chat.ChatRoomDTO;
 import com.app.law.entity.ChatMessage;
@@ -68,7 +69,7 @@ public class ChatController {
 
         if (currentRoomId != null) {
             ChatMessageDTO leaveMessage = new ChatMessageDTO();
-            leaveMessage.setType(ChatMessageDTO.MessageType.LEAVE);
+            leaveMessage.setType(MessageType.LEAVE);
             leaveMessage.setSender(chatMessageDTO.getSender());
             messagingTemplate.convertAndSend(String.format("/topic/%s", currentRoomId), leaveMessage);
         }
