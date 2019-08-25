@@ -8,12 +8,13 @@ package com.app.law.controller;
 import com.app.law.constant.MessageType;
 import com.app.law.dto.chat.ChatMessageDTO;
 import com.app.law.dto.chat.ChatRoomDTO;
+import com.app.law.dto.chat.ChatRoomDTO;
 import com.app.law.entity.ChatMessage;
 import com.app.law.entity.ChatRoom;
 import com.app.law.entity.User;
 import com.app.law.service.IChatMessageService;
-import com.app.law.service.IChatRoomService;
 import com.app.law.service.IUserService;
+import com.app.law.service.IChatRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,9 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -85,8 +88,8 @@ public class ChatController {
         return chatMessageDTO;
     }
 
-    @RequestMapping(value = "/chat/room/create")
-    public ResponseEntity<ChatRoomDTO> createRoom(@Payload ChatRoomDTO chatRoomDTO) {
+    @RequestMapping(value = "/chat/room/create", method = RequestMethod.POST)
+    public ResponseEntity<ChatRoomDTO> createRoom(@RequestBody ChatRoomDTO chatRoomDTO) {
 //        headerAccessor.getSessionAttributes().put("username", chatRoomDTO.getClientUserName());
         ChatRoom chatRoom = chatRoomService.createChatRoom(chatRoomDTO.getClientUserName());
 

@@ -22,7 +22,7 @@ public class ChatRoom implements Serializable {
     @Column(name = "clientUserName", nullable = false)
     private String clientUserName;
 
-    @Column(name = "serverUserId", nullable = false)
+    @Column(name = "serverUserId")
     private Integer serverUserId;
 
     @Column(name = "startDate")
