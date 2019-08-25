@@ -31,6 +31,9 @@ public class ChatRoom implements Serializable {
     @Column(name = "endDate")
     private Instant endDate;
 
+    @Column(name = "status")
+    private Integer status;
+
     @OneToMany(mappedBy = "roomId")
     private List<ChatMessage> listChatMessage;
 

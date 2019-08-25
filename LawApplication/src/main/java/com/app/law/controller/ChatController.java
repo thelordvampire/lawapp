@@ -96,5 +96,12 @@ public class ChatController {
 
         return ResponseEntity.status(HttpStatus.OK).body(chatRoomDTO);
     }
+
+    @RequestMapping(value = "/chat/room/get-new")
+    public ResponseEntity<List<ChatRoom>> getAllNewChatRoom() {
+        return ResponseEntity.status(HttpStatus.OK).body(chatRoomService.getAllNewChatRoom());
+    }
+
+
     
 }

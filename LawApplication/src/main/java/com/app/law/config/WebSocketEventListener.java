@@ -7,6 +7,7 @@ package com.app.law.config;
 
 import com.app.law.constant.MessageType;
 import com.app.law.dto.chat.ChatMessageDTO;
+import com.app.law.service.IChatRoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class WebSocketEventListener {
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
+    @Autowired
+    private IChatRoomService roomService;
+
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
         logger.info("Received a new web socket connection");
@@ -37,8 +41,8 @@ public class WebSocketEventListener {
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-
         String username = (String) headerAccessor.getSessionAttributes().get("username");
+        Integer roomId = (Integer) headerAccessor.getSessionAttributes().get("room_id");
         if(username != null) {
             logger.info("User Disconnected : " + username);
 
@@ -46,7 +50,8 @@ public class WebSocketEventListener {
             chatMessageDTO.setType(MessageType.LEAVE);
             chatMessageDTO.setSender(username);
 
-            messagingTemplate.convertAndSend("/topic/public", chatMessageDTO);
+            roomService.closeRoom(roomId);
+            messagingTemplate.convertAndSend(String.format("/topic/%d", roomId), chatMessageDTO);
         }
     }
 }
