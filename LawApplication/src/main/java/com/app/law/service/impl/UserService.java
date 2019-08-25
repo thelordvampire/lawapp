@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class UserService implements IUserService {
@@ -59,6 +60,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User findUserById(Integer userId) {
+        return userRepo.getOne(userId);
+    }
+
+    @Override
     public User updateUser(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -69,6 +75,11 @@ public class UserService implements IUserService {
         String encodedPassword = passwordEncoder.encode(newPassword);
         loginedUser.setPassword(encodedPassword);
         return userRepo.save(loginedUser)!= null;
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userRepo.findAll();
     }
 
 

@@ -18,6 +18,10 @@ public class ChatMessageDTO {
     private String content;
     private String sender;
 
+    private Integer roomId;
+    private Integer serverUserId;
+    private String serverUserName;
+
     public enum MessageType {
         CHAT,
         JOIN,

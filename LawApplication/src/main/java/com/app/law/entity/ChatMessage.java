@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 
 @Entity(name = "chat_message")
 @Table(name = "chat_message")
@@ -22,6 +23,18 @@ public class ChatMessage implements Serializable {
 
     @Column(name = "type")
     private MessageType type;
+
+    @Column(name = "createdDate")
+    private Instant createdDate;
+
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private Integer userId;
+
+    @Column(name = "sender")
+    private String sender;
+
+    @OneToOne
+    private User user;
 
     @Column(name = "roomId")
     private Integer roomId;

@@ -86,10 +86,12 @@ export class ChatComponent implements OnInit {
 
 
  onError(error) {
-   console.log('on err');
-  this.connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
-  this.connectingElement.style.color = 'red';
-}
+    console.log('on err');
+    if (this.connectingElement) {
+      this.connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
+      this.connectingElement.style.color = 'red';
+    }
+  }
 
 
  sendMessage() {
@@ -118,13 +120,13 @@ export class ChatComponent implements OnInit {
   } else {
       messageElement.classList.add('chat-message');
       console.log('fsdjklfsdklfj', );
-      
+
       if(this.chatForm.controls.Username.value == JSON.parse(payload.body).sender) {
         messageElement.classList.add('right-text');
       } else {
         messageElement.classList.add('left-text');
       }
-      
+
       var avatarElement = document.createElement('i');
       var avatarText = document.createTextNode(message.sender[0]);
       avatarElement.appendChild(avatarText);

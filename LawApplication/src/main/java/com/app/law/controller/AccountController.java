@@ -33,16 +33,16 @@ public class AccountController {
 //        return ResponseEntity.accepted().headers(HttpHeaders.EMPTY).body("no logined user found");
 //    }
 
-    @RequestMapping(value="/user/login1", method = RequestMethod.GET)
-    public ResponseEntity<Object> login111(@RequestParam(required = false) String username, @RequestParam(required = false) String password,
-                                           HttpServletResponse response) throws URISyntaxException, IOException {
-
-//        response.addHeader("Location", "http://localhost:3000/user/login");
-        response.sendRedirect("/user/login");
-        System.out.println("login 1");
-
-        return null;
-    }
+//    @RequestMapping(value="/user/login1", method = RequestMethod.GET)
+//    public ResponseEntity<Object> login111(@RequestParam(required = false) String username, @RequestParam(required = false) String password,
+//                                           HttpServletResponse response) throws URISyntaxException, IOException {
+//
+////        response.addHeader("Location", "http://localhost:3000/user/login");
+//        response.sendRedirect("/user/login");
+//        System.out.println("login 1");
+//
+//        return null;
+//    }
 
 //    @RequestMapping(value="/user/fail", method = RequestMethod.GET)
 //    public ResponseEntity<Object> login_fail() throws URISyntaxException {
@@ -88,21 +88,24 @@ public class AccountController {
             return ResponseEntity.ok().headers(HeaderUtil.createNotAuthenHeader()).body(null);
     }
 
-    @RequestMapping(value="/user/sign_up", method = RequestMethod.POST)
+    @RequestMapping(value="/user/create", method = RequestMethod.POST)
     public ResponseEntity<Object> createAccount(@RequestBody User user) {
-        log.debug("sign_up: {}", user);
-        if(user== null)
-            return ResponseEntity.badRequest().headers(HttpHeaders.EMPTY).body("user can not be null");
+        log.debug("create user: {}", user);
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        String message = "no user created";
 
-        User foundUser = userService.findUserByUsername(user.getUsername());
-        if (foundUser != null)
-            return ResponseEntity.badRequest().headers(HttpHeaders.EMPTY).body("username existed");
+        if(user== null) {
+            message = "user can not be null";
+        } else {
+            User foundUser = userService.findUserByUsername(user.getUsername());
+            if (foundUser != null)
+                return ResponseEntity.badRequest().headers(HttpHeaders.EMPTY).body("username existed");
 
-        User createdUser = userService.createUser(user);
-        if(createdUser!=null)
-            return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(createdUser);
-
-        return ResponseEntity.badRequest().headers(HttpHeaders.EMPTY).body("no user created");
+            User createdUser = userService.createUser(user);
+            if(createdUser!=null)
+                return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(createdUser);
+        }
+        return ResponseEntity.status(status).body(message);
     }
 
     @RequestMapping(value="/user/change_password", method = RequestMethod.POST)

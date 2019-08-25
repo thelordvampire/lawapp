@@ -35,7 +35,7 @@ public class User implements Serializable {
     @Column(name = "role_id", insertable = false, updatable = false)
     private Integer roleId;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "role_id")
     private Role role;
 
@@ -43,6 +43,22 @@ public class User implements Serializable {
     private String token;
 
     public User() {
+    }
+
+    public User(String username, String password, String email, String name, Integer roleId) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.roleId = roleId;
+    }
+
+    public User(String username, String password, String email, String name, Role role) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.role = role;
     }
 
     @Override
