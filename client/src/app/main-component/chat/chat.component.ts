@@ -5,6 +5,7 @@ import { AppService } from '../../app.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {cloneDeep} from 'lodash'
+import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -24,11 +25,12 @@ export class ChatComponent implements OnInit {
   messageInput;
   messageArea;
   connectingElement;
-  name: any;
+  name: any = 'Contact with me';
   urlRoom: any;
   roomId: Object;
   chatHistory: any;
   currentChat: any;
+  connectRoom: Subscription;
   constructor(
     private appService: AppService,
     private fb: FormBuilder,
@@ -53,13 +55,22 @@ export class ChatComponent implements OnInit {
     if (this.router.snapshot && this.router.snapshot.routeConfig && this.router.snapshot.routeConfig.path == 'admin') {
       this.isAdmin = true;
     }
+    // this.getChatBoxUser();
   }
   OpentChatBox() {
     this.appService.getChatBox.subscribe(res => {
       this.isShowHeader = false;
     })
   }
-
+getChatBoxUser(){
+  if (localStorage.getItem('UserRoom')) {
+    this.appService.GetListUserChat().subscribe(res => {
+      this.enterRoom(JSON.parse(localStorage.getItem('UserRoom')), res.reverse());
+      this.isShowHeader = false;
+    })
+   
+  }
+}
  stompClient = null;
  username = null;
 
@@ -70,18 +81,13 @@ export class ChatComponent implements OnInit {
 
 
  connect() {
- 
- 
-  //
-  //   this.urlRoom.subscribe('http://localhost:8080/chat/room/create', this.roomId.bind(this));
   const data = {
     clientUserName: this.chatForm.controls.Username.value,
   }
-
-  this.appService.CreateRoom(data).subscribe(res => {
-    this.roomId = res['id'];
-    this.enterRoom();
-  })
+    this.appService.CreateRoom(data).subscribe(res => {
+      this.roomId = res['id'];
+      this.enterRoom();
+    })
 }
 
   enterRoom(roomId?, chatHistory?) {
@@ -92,7 +98,9 @@ export class ChatComponent implements OnInit {
     }
     if (chatHistory) {
       this.currentChat = chatHistory.find(el => el.id == roomId);
-
+      this.chatForm.patchValue({
+        Username: this.currentChat.clientUserName
+      });
     }
     const url = 'http://localhost:8080/ws';
     const socket = new SockJS(url);
@@ -106,37 +114,39 @@ export class ChatComponent implements OnInit {
     this.chatForm.patchValue({
               Username: 'Admin',
             });
-  }
+  } 
+  localStorage.setItem('UserRoom', JSON.stringify(this.roomId));
   this.isShow = true;
-
    this.name = this.chatForm.controls.Username.value;
   // Subscribe to the Public Topic
   // Tell your username to the server
-    this.stompClient.subscribe(`/topic/${this.roomId}`, this.onMessageReceived.bind(this));
-
-
+  this.connectRoom = this.stompClient.subscribe(`/topic/${this.roomId}`, this.onMessageReceived.bind(this))
     if (this.isAdmin) {
       this.stompClient.send(`/app/chat/${this.roomId}/addUser`, {}, JSON.stringify({serverUserId: 1, type: 'JOIN'}));
     } else {
-      this.stompClient.send(`/app/chat/${this.roomId}/addUser`, {}, JSON.stringify({sender: this.chatForm.controls.Username.value, type: 'JOIN'}));
+      if (!localStorage.getItem('UserRoom')) {
+        this.stompClient.send(`/app/chat/${this.roomId}/addUser`, {}, JSON.stringify({sender: this.chatForm.controls.Username.value, type: 'JOIN'}));
+      }
     }
-    if (this.currentChat && this.currentChat.listChatMessage.length > 0) {
-        var i = 0;
-        var data = cloneDeep(this.currentChat);
-        var interval = setInterval(() =>{
-        const xx = {
-            body: JSON.stringify(data.listChatMessage[i])
-        }
-        i++;
-        this.onMessageReceived(xx)
-          
-          if(i == data.listChatMessage.length) {
-            clearInterval(interval);
-          }
-      }, 1);
-    }
+  this.getHistory();
 }
-
+getHistory() {
+  if (this.currentChat && this.currentChat.listChatMessage.length > 0 ) {
+      var i = 0;
+      var data = cloneDeep(this.currentChat);
+      var interval = setInterval(() =>{
+      const content = {
+          body: JSON.stringify(data.listChatMessage[i])
+      }
+      i++;
+      this.onMessageReceived(content)
+        
+        if(i == data.listChatMessage.length) {
+          clearInterval(interval);
+        }
+    }, 1);
+}
+}
 
  onError(error) {
     console.log('on err');
@@ -165,8 +175,6 @@ if (payload.body) {
   var message = JSON.parse(payload.body);
   // var message =  this.currentChat;
   console.log('message', message);
-  
-  
     var messageElement = document.createElement('li');
   
     if(message.type === 'JOIN') {
@@ -221,7 +229,15 @@ if (payload.body) {
   return this.colors[index];
 }
 onPressCloseHeader() {
- 
   this.isShowHeader = !this.isShowHeader;
-}
+  if (this.isShowHeader == false) {
+      this.getChatBoxUser();
+    } else {
+      this.disConnect();
+    }
+  } 
+
+  disConnect() {
+    this.connectRoom.unsubscribe();
+  }
 }

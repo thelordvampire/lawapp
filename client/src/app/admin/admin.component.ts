@@ -74,18 +74,19 @@ export class AdminComponent implements OnInit, AfterViewInit {
   }
 
   getAllUserChat() {
-    this.appService.GetListUserChat().subscribe(res => {
-      this.data = res.reverse();
-    })
+    this.getUser();
     setInterval(() => {
-      this.appService.GetListUserChat().subscribe(res => {
-        this.data = res.reverse();
-      })
+      this.getUser();
     }, 60 * 1000);
   }
   ngAfterViewInit() {
     // child is set
     // this.appChat.enterRoom();
+  }
+  getUser() {
+    this.appService.GetListUserChat().subscribe(res => {
+      this.data = res.reverse();
+    })
   }
   logout() {
     this.authenticationService.logout();
@@ -95,8 +96,9 @@ export class AdminComponent implements OnInit, AfterViewInit {
    }
   } 
   onPressOpenChatBox(id) {
-    console.log('Open chat box with', id);
+    this.getUser();
     this.appService.setOpenChatBox(id);
     this.appChat.enterRoom(id, this.data);
+    this.appChat.disConnect();
   }
 }
