@@ -71,7 +71,7 @@ export class ChatComponent implements OnInit {
             });
   }
    this.isShow = true;
-  //  
+  //
   //   this.urlRoom.subscribe('http://localhost:8080/chat/room/create', this.roomId.bind(this));
   const data = {
     clientUserName: 'user1'
@@ -99,9 +99,9 @@ export class ChatComponent implements OnInit {
 
 
     if (this.isAdmin) {
-      this.stompClient.send(`/chat/${this.roomId['id']}/addUser`, {}, JSON.stringify({serverUserId: 1, type: 'JOIN'}));
+      this.stompClient.send(`/app/chat/${this.roomId['id']}/addUser`, {}, JSON.stringify({serverUserId: 1, type: 'JOIN'}));
     } else {
-      this.stompClient.send(`/chat/${this.roomId['id']}/addUser`, {}, JSON.stringify({sender: this.chatForm.controls.Username.value, type: 'JOIN'}));
+      this.stompClient.send(`/app/chat/${this.roomId['id']}/addUser`, {}, JSON.stringify({sender: this.chatForm.controls.Username.value, type: 'JOIN'}));
     }
 }
 
@@ -122,7 +122,7 @@ export class ChatComponent implements OnInit {
           type: 'CHAT',
           roomId: this.roomId['id'],
       };
-      this.stompClient.send(`/chat/${this.roomId['id']}/sendMessage`, {}, JSON.stringify(chatMessage));
+      this.stompClient.send(`/app/chat/${this.roomId['id']}/sendMessage`, {}, JSON.stringify(chatMessage));
       this.chatForm.controls.Message.reset();
 }
 

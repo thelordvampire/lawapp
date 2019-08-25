@@ -59,14 +59,18 @@ public class ChatController {
     
     @MessageMapping("/chat/{roomId}/sendMessage")
     public void sendMessage(@DestinationVariable Integer roomId, @Payload ChatMessageDTO chatMessageDTO) {
+        System.out.println("vao send Message roi");
         chatMessageDTO = chatMessageService.saveMessage(chatMessageDTO);
         messagingTemplate.convertAndSend(String.format("/topic/%d", roomId), chatMessageDTO);
     }
 
     @MessageMapping("/chat/{roomId}/addUser")
 //    @SendTo("/topic/public")
-    public ChatMessageDTO addUser(@DestinationVariable Integer roomId, @Payload ChatMessageDTO chatMessageDTO,
-                                  SimpMessageHeaderAccessor headerAccessor) {
+    public ChatMessageDTO addUser(@DestinationVariable Integer roomId,
+        @Payload ChatMessageDTO chatMessageDTO,
+        SimpMessageHeaderAccessor headerAccessor)
+    {
+        System.out.println("vao add user roi");
         // Add username in web socket session
         Integer currentRoomId = (Integer) headerAccessor.getSessionAttributes().put("room_id", roomId);
 
@@ -90,13 +94,8 @@ public class ChatController {
 
     @RequestMapping(value = "/chat/room/create", method = RequestMethod.POST)
     public ResponseEntity<ChatRoomDTO> createRoom(@RequestBody ChatRoomDTO chatRoomDTO) {
-//        headerAccessor.getSessionAttributes().put("username", chatRoomDTO.getClientUserName());
         ChatRoom chatRoom = chatRoomService.createChatRoom(chatRoomDTO.getClientUserName());
-
-        chatRoomDTO = new ChatRoomDTO();
         chatRoomDTO.setId(chatRoom.getId());
-        chatRoomDTO.setClientUserName(chatRoom.getClientUserName());
-
         return ResponseEntity.status(HttpStatus.OK).body(chatRoomDTO);
     }
 
@@ -104,7 +103,5 @@ public class ChatController {
     public ResponseEntity<List<ChatRoom>> getAllNewChatRoom() {
         return ResponseEntity.status(HttpStatus.OK).body(chatRoomService.getAllNewChatRoom());
     }
-
-
     
 }
