@@ -3,7 +3,6 @@ import { AuthenticationService } from '../_services';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { ChatComponent } from '../main-component/chat/chat.component';
-import { reverse } from 'dns';
 
 @Component({
   selector: 'app-admin',
