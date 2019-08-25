@@ -60,7 +60,7 @@ public class ChatController {
     @MessageMapping("/chat/{roomId}/sendMessage")
     public void sendMessage(@DestinationVariable Integer roomId, @Payload ChatMessageDTO chatMessageDTO) {
         chatMessageDTO = chatMessageService.saveMessage(chatMessageDTO);
-        messagingTemplate.convertAndSend(String.format("/topic/%s", roomId), chatMessageDTO);
+        messagingTemplate.convertAndSend(String.format("/topic/%d", roomId), chatMessageDTO);
     }
 
     @MessageMapping("/chat/{roomId}/addUser")
@@ -74,7 +74,7 @@ public class ChatController {
             ChatMessageDTO leaveMessage = new ChatMessageDTO();
             leaveMessage.setType(MessageType.LEAVE);
             leaveMessage.setSender(chatMessageDTO.getSender());
-            messagingTemplate.convertAndSend(String.format("/topic/%s", currentRoomId), leaveMessage);
+            messagingTemplate.convertAndSend(String.format("/topic/%d", currentRoomId), leaveMessage);
         }
         if(chatMessageDTO.getServerUserId()!= null) {
             User user = userService.findUserById(chatMessageDTO.getServerUserId());
@@ -84,7 +84,7 @@ public class ChatController {
         } else {
             headerAccessor.getSessionAttributes().put("username", chatMessageDTO.getSender());
         }
-        messagingTemplate.convertAndSend(String.format("/topic/%s", roomId), chatMessageDTO);
+        messagingTemplate.convertAndSend(String.format("/topic/%d", roomId), chatMessageDTO);
         return chatMessageDTO;
     }
 
