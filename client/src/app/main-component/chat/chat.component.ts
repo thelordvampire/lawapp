@@ -81,6 +81,9 @@ getChatBoxUser(){
 
 
  connect() {
+   if(this.chatForm.controls.Username.value.trim() == '') {
+     return;
+   }
   const data = {
     clientUserName: this.chatForm.controls.Username.value,
   }

@@ -6,12 +6,13 @@ import { first } from 'rxjs/operators';
 import { UserService, AuthenticationService, AlertService } from '../_services';
 import { AppService } from '../app.service';
 
-@Component({ templateUrl: 'register.component.html' })
+@Component({ templateUrl: 'register.component.html' ,  styleUrls: ['./register.component.scss'] })
 export class RegisterComponent implements OnInit, OnDestroy {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
     comparePass = false;
+    roleList: any;
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
@@ -29,14 +30,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.appService.setHeader(false);
         this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
+            email: ['', Validators.required],
             username: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6)]],
-            repassword: ['', [Validators.required, Validators.minLength(6)]]
+            repassword: ['', [Validators.required, Validators.minLength(6)]],
+            roleId: ['', Validators.required]
         });
-
-      
+        this.userService.getAllRole().subscribe(res => {
+            console.log('ress', res);
+            this.roleList = res;
+        })
+        this.f.password.valueChanges.subscribe(el => {
+            this.comparePass = false;
+        })
+        this.f.repassword.valueChanges.subscribe(el => {
+            this.comparePass = false;
+        })
     }
     ngOnDestroy() {
         this.appService.setHeader(true);
@@ -52,7 +61,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         }
         // reset alerts on submit
         this.alertService.clear();
-
+        console.log('11', this.registerForm);
+        
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;

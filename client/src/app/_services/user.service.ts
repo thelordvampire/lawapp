@@ -12,10 +12,13 @@ export class UserService {
     }
 
     register(user) {
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+        return this.http.post(`${environment.apiUrl}/user/create`, user);
     }
 
     delete(id) {
         return this.http.delete(`${environment.apiUrl}/users/${id}`);
+    }
+    getAllRole() {
+        return this.http.get<any>(`${environment.apiUrl}/role/get-all`);
     }
 }
