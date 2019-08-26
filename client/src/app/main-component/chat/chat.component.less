@@ -134,7 +134,6 @@ a {
     line-height: 1.5rem;
     padding: 10px 20px;
     margin: 0;
-    border-bottom: 1px solid #f4f4f4;
 }
 
 /deep/#chat-page ul li p {
@@ -200,6 +199,10 @@ a {
 /deep/.chat-header {
     padding: 0 15px;
     border-bottom: 1px solid #ddd;
+    background-color: #3578E5;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 /deep/.chat-header h2 {
@@ -230,8 +233,8 @@ a {
         background: #fff;
         box-shadow: 0 4px 10px #ccc;
         width: 360px;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
         & > div + div{
             height: 400px;
             position: relative;
@@ -244,8 +247,8 @@ a {
         background: #fff;
         box-shadow: 0 4px 10px #ccc;
         width: 360px;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
         & > div + div{
             height: 400px;
             position: relative;
@@ -285,6 +288,8 @@ a {
 }
 #messageArea{
     height: 320px;
+    width: 100% !important;
+    word-wrap: break-word !important;
 }
 .chat-content{
     position: absolute;
@@ -301,9 +306,22 @@ a {
         right: 10px;
         left: unset;
     }
+    p {
+        background-color: #3578E5;
+        border-radius: 20px;
+        padding: 10px;
+        color: white;
+        text-align: left
+    }
+   
 }
-
-
+/deep/#chat-page .chat-message.left-text{
+    p {
+        background-color: #F2F3F5;
+        border-radius: 20px;
+        padding: 10px;
+    }
+}
 @media screen and (max-width: 730px) {
 
     .chat-container {

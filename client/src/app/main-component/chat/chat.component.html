@@ -1,12 +1,12 @@
 <form [formGroup]="chatForm" [class]="!isAdmin ? 'formchat-wrap' : 'formchat-admin'">
     <div class="chat-header" (click)="onPressCloseHeader()">
-        {{name}}
+        <span>{{name}}</span>
     </div>
     <div id="username-page" *ngIf="!isShow && !isShowHeader">
         <div class="username-page-container">
             <h1 class="title">Type your username</h1>
                 <div class="form-group">
-                    <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" formControlName="Username" />
+                    <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" formControlName="Username" maxlength="25" />
                 </div>
                 <div class="form-group">
                     <button type="submit" class="accent username-submit" (click)="connect()">Start Chatting</button>

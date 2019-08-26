@@ -77,7 +77,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
     this.getUser();
     setInterval(() => {
       this.getUser();
-    }, 60 * 1000);
+    }, 30 * 1000);
   }
   ngAfterViewInit() {
     // child is set
