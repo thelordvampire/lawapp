@@ -11,7 +11,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
-
+    comparePass = false;
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
@@ -32,8 +32,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            repassword: ['', [Validators.required, Validators.minLength(6)]]
         });
+
+      
     }
     ngOnDestroy() {
         this.appService.setHeader(true);
@@ -43,7 +46,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         this.submitted = true;
-
+        if(this.f.password.value != this.f.repassword.value) {
+            this.comparePass = true;
+            return;
+        }
         // reset alerts on submit
         this.alertService.clear();
 

@@ -55,7 +55,7 @@ export class ChatComponent implements OnInit {
     if (this.router.snapshot && this.router.snapshot.routeConfig && this.router.snapshot.routeConfig.path == 'admin') {
       this.isAdmin = true;
     }
-    // this.getChatBoxUser();
+    this.getCurrentUser();
   }
   OpentChatBox() {
     this.appService.getChatBox.subscribe(res => {
@@ -122,7 +122,7 @@ getChatBoxUser(){
   // Tell your username to the server
   this.connectRoom = this.stompClient.subscribe(`/topic/${this.roomId}`, this.onMessageReceived.bind(this))
     if (this.isAdmin) {
-      this.stompClient.send(`/app/chat/${this.roomId}/addUser`, {}, JSON.stringify({serverUserId: 1, type: 'JOIN'}));
+      this.stompClient.send(`/app/chat/${this.roomId}/addUser`, {}, JSON.stringify({serverUserId: this.getCurrentUser(), type: 'JOIN'}));
     } else {
       if (!localStorage.getItem('UserRoom')) {
         this.stompClient.send(`/app/chat/${this.roomId}/addUser`, {}, JSON.stringify({sender: this.chatForm.controls.Username.value, type: 'JOIN'}));
@@ -185,7 +185,6 @@ if (payload.body) {
         message.content = message.sender + ' left!';
     } else {
         messageElement.classList.add('chat-message');
-        console.log('fsdjklfsdklfj', );
   
         if(this.chatForm.controls.Username.value == JSON.parse(payload.body).sender) {
         // if(this.chatForm.controls.Username.value == this.currentChat.sender) {
@@ -239,5 +238,11 @@ onPressCloseHeader() {
 
   disConnect() {
     this.connectRoom.unsubscribe();
+  }
+   getCurrentUser() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      return currentUser.id
+    }
   }
 }
