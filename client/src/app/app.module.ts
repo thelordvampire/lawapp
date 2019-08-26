@@ -24,7 +24,6 @@ import { AdminComponent } from './admin/admin.component';
 import { AppService } from './app.service';
 import { ChatComponent } from './main-component/chat/chat.component';
 import { FormsModule } from '@angular/forms';
-import { ChatMutiComponent } from './main-component/chat-mutiple/chat-muti.component';
 
 @NgModule({
     imports: [
@@ -49,7 +48,6 @@ import { ChatMutiComponent } from './main-component/chat-mutiple/chat-muti.compo
         FooterComponent,
         AdminComponent,
         ChatComponent,
-        ChatMutiComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

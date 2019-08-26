@@ -12,7 +12,6 @@ import { TypoComponent } from './main-component/typo/typo.component';
 import { ContactComponent } from './main-component/contact/contact.component';
 import { AdminComponent } from './admin/admin.component';
 import { ChatComponent } from './main-component/chat/chat.component';
-import { ChatMutiComponent } from './main-component/chat-mutiple/chat-muti.component';
 
 const routes: Routes = [
 
@@ -26,7 +25,7 @@ const routes: Routes = [
     { path: 'typo', component: TypoComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
-    { path: 'chat', component: ChatMutiComponent },
+  //  { path: 'chat', component: ChatComponent },
 
 
     // otherwise redirect to home
