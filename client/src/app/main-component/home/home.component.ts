@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
                   }
                 });
               }); 
-        }, 10);  
+        }, 100);  
      }
      ngDoCheck(){
      
