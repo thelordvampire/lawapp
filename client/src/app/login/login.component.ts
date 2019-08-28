@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        
         this.appService.setHeader(false);
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
