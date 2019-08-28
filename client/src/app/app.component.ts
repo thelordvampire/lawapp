@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from './_services';
@@ -28,6 +28,8 @@ export class AppComponent implements OnInit {
             console.log('out', output);
             this.isLogin = output;
         })
+
+        this.authenticationService.getTokenExpirationDate(JSON.parse(localStorage.getItem('currentUser')).token);
     }
     logout() {
         this.authenticationService.logout();
