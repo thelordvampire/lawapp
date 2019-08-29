@@ -25,11 +25,11 @@ export class AppComponent implements OnInit {
     }
     ngOnInit() {
         this.appService.getHeader.pipe(debounceTime(100)).subscribe(output => {
-            console.log('out', output);
             this.isLogin = output;
         })
-
-        this.authenticationService.getTokenExpirationDate(JSON.parse(localStorage.getItem('currentUser')).token);
+        if (localStorage.getItem('currentUser')) {
+            this.authenticationService.getTokenExpirationDate(JSON.parse(localStorage.getItem('currentUser')).token);
+        }
     }
     logout() {
         this.authenticationService.logout();

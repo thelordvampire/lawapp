@@ -240,7 +240,9 @@ onPressCloseHeader() {
   } 
 
   disConnect() {
-    this.connectRoom.unsubscribe();
+    if (this.connectRoom) {
+      this.connectRoom.unsubscribe();
+    }
   }
    getCurrentUser() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
