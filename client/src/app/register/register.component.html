@@ -2,55 +2,55 @@
 
 <div class="row border-form">
         <div class="col-md-6 col-md-offset-3">
-                <h2>Register</h2>
+                <h2>Đăng ký</h2>
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                            <div *ngIf="f.email.errors.required" class="errMessage">Email is required</div>
+                            <div *ngIf="f.email.errors.required" class="errMessage">Bạn bắt buộc phải nhập email</div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="username">Username</label>
+                        <label for="username">Tài khoản</label>
                         <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                         <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                            <div *ngIf="f.username.errors.required" class="errMessage">Username is required</div>
+                            <div *ngIf="f.username.errors.required" class="errMessage">Bạn bắt buộc phải nhập tên tài khoản</div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">Mật khẩu</label>
                         <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                            <div *ngIf="f.password.errors.required" class="errMessage">Password is required</div>
-                            <div *ngIf="f.password.errors.minlength" class="errMessage">Password must be at least 6 characters</div>
+                            <div *ngIf="f.password.errors.required" class="errMessage">Bạn bắt buộc phải nhập mật khẩu</div>
+                            <div *ngIf="f.password.errors.minlength" class="errMessage">Mật khẩu phải dài hơn 6 ký tự</div>
                         </div>
-                        <div *ngIf="comparePass == true" class="errMessage">Re Password dont like Password</div>
+                        <div *ngIf="comparePass == true" class="errMessage">Mật khẩu phải trùng khớp</div>
                     </div>
                     <div class="form-group">
-                        <label for="repassword">Re Password</label>
+                        <label for="repassword">Nhập lại mật khẩu</label>
                         <input type="password" formControlName="repassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.repassword.errors }" />
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                            <div *ngIf="f.repassword.errors.required" class="errMessage">Password is required</div>
-                            <div *ngIf="f.repassword.errors.minlength" class="errMessage">Password must be at least 6 characters</div>
+                            <div *ngIf="f.repassword.errors.required" class="errMessage">Bạn bắt buộc phải nhập lại mật khẩu</div>
+                            <div *ngIf="f.repassword.errors.minlength" class="errMessage">Mật khẩu phải dài hơn 6 ký tự</div>
                         </div>
-                        <div *ngIf="comparePass == true" class="errMessage">Re Password dont like Password</div>
+                        <div *ngIf="comparePass == true" class="errMessage">RMật khẩu phải trùng khớp</div>
                     </div>
                     <div class="form-group">
-                        <label for="roleId">Role</label>
+                        <label for="roleId">Loại tài khoản</label>
                         <select class="form-control" formControlName="roleId" *ngFor = "let item of roleList">
                             <option  [value]="item.id" class="form-control">{{item.id}}</option>
                           </select>
                           <div *ngIf="submitted && f.roleId.errors" class="invalid-feedback">
-                            <div *ngIf="f.roleId.errors.required" class="errMessage">Role is required</div>
+                            <div *ngIf="f.roleId.errors.required" class="errMessage">Bạn phải chọn loại tài khoản</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <button [disabled]="loading" class="btn btn-primary">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                            Register
+                            Đăng ký
                         </button>
-                        <a routerLink="/home" class="btn btn-link">Back to home</a>
+                        <a routerLink="/home" class="btn btn-link">Quay về trang chủ</a>
                     </div>
 
                     
