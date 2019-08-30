@@ -11,5 +11,7 @@ public interface IChatRoomService {
 
     List<ChatRoom> getAllNewChatRoom();
 
+    List<ChatRoom> getAllNotFinishChatRoom();
+
     ChatRoom closeRoom(Integer id);
 }

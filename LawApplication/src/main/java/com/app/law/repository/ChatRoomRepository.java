@@ -9,4 +9,6 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Integer> {
 
     List<ChatRoom> getAllRoomByStatus(Integer status);
 
+    List<ChatRoom> getAllRoomByStatusIn(List<Integer> statuses);
+
 }

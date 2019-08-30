@@ -7,6 +7,7 @@ import com.app.law.service.IChatRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -31,22 +32,32 @@ public class ChatRoomService implements IChatRoomService {
     }
 
     @Override
+    public List<ChatRoom> getAllNotFinishChatRoom() {
+        return chatRoomRepo.getAllRoomByStatusIn(Arrays.asList(RoomStatus.NEW, RoomStatus.SERVER_JOIN));
+    }
+
+    @Override
     public ChatRoom addServerUser(Integer chatRoomId, Integer serverUserId) {
         if(chatRoomId == null || serverUserId == null)
             throw new NullPointerException("id null");
 
         ChatRoom chatRoom = chatRoomRepo.getOne(chatRoomId);
-        chatRoom.setServerUserId(serverUserId);
-        chatRoom.setStatus(RoomStatus.SERVER_JOIN);
-        return chatRoomRepo.save(chatRoom);
+        if(chatRoom != null) {
+            chatRoom.setServerUserId(serverUserId);
+            chatRoom.setStatus(RoomStatus.SERVER_JOIN);
+            return chatRoomRepo.save(chatRoom);
+        }
+        return null;
     }
 
     @Override
     public ChatRoom closeRoom(Integer roomId) {
         ChatRoom chatRoom = chatRoomRepo.getOne(roomId);
-        chatRoom.setEndDate(Instant.now());
-        chatRoom.setStatus(RoomStatus.END);
-
-        return chatRoomRepo.save(chatRoom);
+        if(chatRoom!= null) {
+            chatRoom.setEndDate(Instant.now());
+            chatRoom.setStatus(RoomStatus.END);
+            return chatRoomRepo.save(chatRoom);
+        }
+        return null;
     }
 }

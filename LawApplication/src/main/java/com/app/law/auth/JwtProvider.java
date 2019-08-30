@@ -24,7 +24,7 @@ public class JwtProvider {
     private final Logger log = LoggerFactory.getLogger(JwtProvider.class);
     public static final String USERNAME = "username";
     public static final String SECRET_KEY = "11111111111111111111111111111111";
-    public static final int EXPIRE_TIME = 86400000;
+    public static final int EXPIRE_TIME = 86400000*2;//2 day
 
     public String generateTokenLogin(String username) {
         String token = null;
