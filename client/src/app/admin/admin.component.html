@@ -32,7 +32,7 @@
         <div class = "user-list">
             <div class="content">
                 <ul *ngFor="let item of data">
-                    <li (click)="onPressOpenChatBox(item.id)"><span>{{item.clientUserName}}</span></li>
+                    <li (click)="onPressOpenChatBox(item.id)" [class.active]="item.id == selectedId"> <span class = "avatar">{{item.clientUserName[0]}}</span><span>{{item.clientUserName}}</span></li>
                 </ul>
             </div>
         </div>

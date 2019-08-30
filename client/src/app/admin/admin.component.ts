@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
     name: 'Admin',
     message: 'Xin chào'
   }
+  selectedId: any;
   data: Object;
   constructor(
     private authenticationService: AuthenticationService,
@@ -52,6 +53,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
    }
   } 
   onPressOpenChatBox(id) {
+    this.selectedId = id;
     this.getUser();
     this.appService.setOpenChatBox(id);
     this.appChat.enterRoom(id, this.data);
