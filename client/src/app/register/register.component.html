@@ -1,7 +1,7 @@
 
 
-<div class="row border-form">
-        <div class="col-md-6 col-md-offset-3">
+<div class="row border-form registerForm">
+        <div class="col-md-2 col-md-offset-5">
                 <h2>Đăng ký</h2>
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
@@ -50,7 +50,7 @@
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             Đăng ký
                         </button>
-                        <a routerLink="/home" class="btn btn-link">Quay về trang chủ</a>
+                        <!-- <a routerLink="/home" class="btn btn-link">Quay về trang chủ</a> -->
                     </div>
 
                     

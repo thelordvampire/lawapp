@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     loading = false;
     submitted = false;
     comparePass = false;
-    roleList: any;
+    roleList = [{id: 1}];
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.appService.setHeader(false);
+        // this.appService.setHeader(false);
         this.registerForm = this.formBuilder.group({
             email: ['', Validators.required],
             username: ['', Validators.required],
@@ -37,7 +37,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
             roleId: ['', Validators.required]
         });
         this.userService.getAllRole().subscribe(res => {
-            console.log('ress', res);
             this.roleList = res;
         })
         this.f.password.valueChanges.subscribe(el => {
@@ -61,8 +60,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
         }
         // reset alerts on submit
         this.alertService.clear();
-        console.log('11', this.registerForm);
-        
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
