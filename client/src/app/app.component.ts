@@ -10,29 +10,26 @@ import { debounceTime } from 'rxjs/operators';
  templateUrl: 'app.component.html',
  styleUrls: ['./app.component.scss'] })
 export class AppComponent implements OnInit {
-    currentUser: any; 
+    currentUser: any;
     isLogin = true;
 
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService,
+        private auth: AuthenticationService,
         private route: ActivatedRoute,
         private appService: AppService,
     ) {
       //  this.router.navigate(['/home']);
-       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-        
+       this.auth.currentUser.subscribe(x => this.currentUser = x);
     }
     ngOnInit() {
         this.appService.getHeader.pipe(debounceTime(100)).subscribe(output => {
             this.isLogin = output;
-        })
-        if (localStorage.getItem('currentUser')) {
-            this.authenticationService.getTokenExpirationDate(JSON.parse(localStorage.getItem('currentUser')).token);
-        }
+        });
+        this.auth.validateTokenExpirationDate();
     }
     logout() {
-        this.authenticationService.logout();
+        this.auth.logout();
         this.router.navigate(['/login']);
     }
-} 
+}

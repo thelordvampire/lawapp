@@ -14,15 +14,15 @@ export class AdminComponent implements OnInit, AfterViewInit {
   DEFAULDATA = {
     name: 'Admin',
     message: 'Xin chào'
-  }
+  };
   selectedId: any;
   data: Object;
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
     private appService: AppService
-    ) { 
-      
+    ) {
+
     }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
     this.getUser();
     setInterval(() => {
       this.getUser();
-    }, 30 * 1000);
+    }, 5 * 1000);
   }
   ngAfterViewInit() {
     // child is set
@@ -43,20 +43,32 @@ export class AdminComponent implements OnInit, AfterViewInit {
   getUser() {
     this.appService.GetListUserChat().subscribe(res => {
       this.data = res.reverse();
-    })
+    });
   }
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
-    if (window.location.href.indexOf('reload')==-1) {
-      window.location.replace(window.location.href+'?reload');
+    if (window.location.href.indexOf('reload') == -1) {
+      window.location.replace(window.location.href + '?reload');
    }
-  } 
+  }
+
+  activeRoomId = null;
+  listEnterRoomId = [];
   onPressOpenChatBox(id) {
     this.selectedId = id;
     this.getUser();
-    this.appService.setOpenChatBox(id);
-    this.appChat.enterRoom(id, this.data);
-    this.appChat.disConnect();
+    if (this.activeRoomId !== id) {
+      this.activeRoomId = id;
+      this.appService.setOpenChatBox(id);
+    }
+    if (this.listEnterRoomId.find(item => item === id)) {
+      this.appChat.enterRoom(id, this.data);
+    } else {
+      this.listEnterRoomId.push(id);
+      this.appChat.enterRoom(id, this.data);
+    }
+
+    // this.appChat.disConnect();
   }
 }
