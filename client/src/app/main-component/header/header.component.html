@@ -24,8 +24,20 @@
                <li ><a routerLink="/home">Trang chủ</a></li> 
                <li><a  routerLink="/typo">Giới thiệu</a></li>
                   <li><a routerLink="/practice">Lĩnh vực</a></li>
-                  <li><a routerLink="/resources">Nhân sự</a></li>
-                  <li><a  routerLink="/clients">Tin tức</a></li>
+                  <li><a routerLink="/resources" (mouseenter)="isShowResources = true" >Nhân sự</a>
+                    <ng-container>
+                        <div class="resources-menu" (mouseleave) = "isShowResources = false" *ngIf="isShowResources" >
+                                <div class="welcome-right">
+                                        <h3>Lĩnh vực hoạt động</h3>
+                                        <div><a href="">Tư vấn pháp luật</a></div>
+                                        <div><a href="">Tham gia tố tụng</a></div>
+                                        <div><a href="">Đại diện ngoài tố tụng cho khách hàng</a></div>
+                                        <div><a href="">Thực hiện các dịch vụ pháp lý khác</a></div>
+                                    </div>
+                        </div>
+                    </ng-container>
+                </li>
+                  <li><a  routerLink="/news">Tin tức</a></li>
                   <li><a routerLink="/contact">Liên hệ</a></li>
                   <li><a routerLink="/register">Đăng ký</a></li>
               </ul>
@@ -36,6 +48,8 @@
       <div class="clearfix"></div>
   </div>
 </div>
+
+
 <!--header-top-end-->
 <!--start-header-->
 <div class="header">

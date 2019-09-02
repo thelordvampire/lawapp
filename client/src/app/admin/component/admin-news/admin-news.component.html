@@ -1,0 +1,54 @@
+<form [formGroup]="newsForm" >
+  <div class="form-group">
+      <label for="title">Tiêu đề</label>
+      <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required" style="color:red">Bạn bắt buộc phải nhập tiêu đề bài viết</div>
+      </div>
+  </div>
+  <div class="form-group">
+      <label for="content">Nội dung</label>
+      <tinymce [config]="config" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></tinymce>
+  </div>
+  <div class="form-group">
+    <label for="image">Hình ảnh</label>
+
+    <div class="input-group">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile01"
+          aria-describedby="inputGroupFileAddon01"  formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }">
+      </div>
+    </div>
+    <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+        <div *ngIf="f.image.errors.required" style="color:red">Bạn bắt buộc phải thêm hình ảnh</div>
+    </div>
+</div>
+  <div class="form-group">
+      <button [disabled]="loading" class="btn" style = "background-color: #9E6E4E; color: #fff" (click)="createNews()">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Tạo mới
+      </button>
+  </div>
+</form>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Content</th>
+      <th scope="col">Create At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor ="let item of tableData">
+      <th scope="row">{{item.stt}}</th>
+      <td>{{item.title}}</td>
+      <td>{{item.content}}</td>
+      <td>@{{item.createAt}}</td>
+    </tr>
+
+  </tbody>
+</table>

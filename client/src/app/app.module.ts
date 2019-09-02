@@ -14,7 +14,6 @@ import { RegisterComponent } from './register';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './main-component/home';
 import { PracticeComponent } from './main-component/practice/practice.component';
-import { ClientsComponent } from './main-component/clients/clients.component';
 import { ResourcesComponent } from './main-component/resources/resources.component';
 import { TypoComponent } from './main-component/typo/typo.component';
 import { ContactComponent } from './main-component/contact/contact.component';
@@ -27,6 +26,10 @@ import { FormsModule } from '@angular/forms';
 import { NgxCarouselModule } from 'ngx-carousel';
 import 'hammerjs';
 import { ShareComponent } from './share/share.component';
+import { NewsComponent } from './main-component/news/news.component';
+import { NewsDetailComponent } from './main-component/news/component/news-detail/news-detail.component';
+import { AdminNewsComponent } from './admin/component/admin-news/admin-news.component';
+import { NgxTinymceModule } from 'ngx-tinymce';
 @NgModule({
     imports: [
         BrowserModule,
@@ -34,7 +37,11 @@ import { ShareComponent } from './share/share.component';
         HttpClientModule,
         appRoutingModule,
         FormsModule,
-        NgxCarouselModule
+        NgxCarouselModule,
+        NgxTinymceModule.forRoot({
+            // or cdn
+            baseURL: '//cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.0/'
+          })
     ],
     declarations: [
         AppComponent,
@@ -43,7 +50,7 @@ import { ShareComponent } from './share/share.component';
         RegisterComponent,
         AlertComponent,
         PracticeComponent,
-        ClientsComponent,
+        NewsComponent,
         ResourcesComponent,
         TypoComponent,
         ContactComponent,
@@ -52,6 +59,8 @@ import { ShareComponent } from './share/share.component';
         AdminComponent,
         ChatComponent,
         ShareComponent,
+        NewsDetailComponent,
+        AdminNewsComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

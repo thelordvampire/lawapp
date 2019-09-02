@@ -4,3 +4,24 @@ img {
 /deep/.head-main {
     width: 13%;
 }
+.resources-menu {
+    position: absolute;
+    height: auto;
+    width: 400px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px #ccc;
+  //  left: 500px;
+  //  top: 100px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    div {
+        padding: 15px;
+        color: black;
+        a:hover {
+            background-color: #9E6E4E;
+            color: #fff;
+            padding: 10px;
+        }
+    }
+}

@@ -7,8 +7,9 @@ import * as $ from 'jquery';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  isShowResources = false;
+  constructor() {
+   }
 
   ngOnInit() {
     $("span.menu").click(function(){
@@ -16,5 +17,4 @@ export class HeaderComponent implements OnInit {
       });
   });
   }
-
 }
