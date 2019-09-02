@@ -26,18 +26,23 @@ export class AppService {
     }
 
     setOpenChatBox(data) {
-        this.$dataChatBox.next(data)
+        this.$dataChatBox.next(data);
     }
     get getChatBox() {
         return this.$dataChatBox.asObservable();
     }
 
     CreateRoom(data) {
-        const url = `${environment.apiUrl}/chat/room/create/`
+        const url = `${environment.apiUrl}/chat/room/create/`;
         return this.http.post(url, data);
     }
-    GetListUserChat() : Observable<any> {
-        const url = `${environment.apiUrl}/chat/room/get-new`
+    GetListUserChat(): Observable<any> {
+        const url = `${environment.apiUrl}/chat/room/get-new`;
         return this.http.get(url);
     }
+
+  GetHistoryRoomChat(roomId): Observable<any> {
+    const url = `${environment.apiUrl}/chat/room/${roomId}/get-all`;
+    return this.http.get(url);
+  }
 }

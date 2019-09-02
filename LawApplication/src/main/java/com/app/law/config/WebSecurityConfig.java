@@ -1,6 +1,7 @@
 package com.app.law.config;
 
 import com.app.law.auth.CustomBasicAuthenticationFilter;
+import com.app.law.constant.Enviroment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -101,7 +102,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 //        config.addExposedHeader("Set-Cookie xsrf-token");
             config.addExposedHeader("Set-Cookie");
             config.addExposedHeader("xsrf-token");
-            config.addAllowedOrigin("http://localhost:4200");
+            if(Enviroment.cors != null) {
+                Enviroment.cors.forEach(config::addAllowedOrigin);
+            }
+
             config.setAllowedMethods(Arrays.asList("POST", "OPTIONS", "GET", "DELETE", "PUT"));
             config.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization", "xsrf-token", "x-csrf-token", "credentials"));
             config.setMaxAge(8000L);
@@ -171,8 +175,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 //            .ignoringAntMatchers("/user/login")
 //            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //            .and()
-                    .cors()
-                    .and()
+                    .cors().disable();
+            http
+
 //                    .authorizeRequests()
 //                    .antMatchers("/user/login", "/user/sign_up")
 //                    .permitAll()

@@ -28,20 +28,23 @@ export class AuthenticationService {
                 return user;
             }));
     }
-    getTokenExpirationDate(token: string): Date {
+    validateTokenExpirationDate(): Date {
+      if (this.isAdmin()) {
+        const token  = this.getCurrentUser().token;
         const currentTime = new Date();
         const decoded = jwt_decode(token);
         if (decoded.exp === undefined) {
-            this.clearLocalStorage();
-            return null;
-        };
-        const date = new Date(0); 
+          this.clearLocalStorage();
+          return null;
+        }
+        const date = new Date(0);
         date.setUTCSeconds(decoded.exp);
         if (currentTime.getTime() >= date.getTime()) {
-            this.clearLocalStorage();
+          this.clearLocalStorage();
         }
         return date;
       }
+    }
     logout() {
         // remove user from local storage and set current user to null
         localStorage.removeItem('currentUser');
@@ -51,6 +54,23 @@ export class AuthenticationService {
     clearLocalStorage() {
         localStorage.removeItem('UserRoom');
         localStorage.removeItem('currentUser');
+    }
 
+  getCurrentUser() {
+    return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+  createUser(userName) {
+      debugger;
+    const currentUser = localStorage.getItem('currentUser');
+    // if (!currentUser) {
+      localStorage.setItem('currentUser', JSON.stringify({username: userName, isAdmin: false}));
+    // }
+  }
+
+    isAdmin() {
+      const user = this.getCurrentUser();
+      return !!user.id;
+      // return user ? user.isAdmin : null;
     }
 }

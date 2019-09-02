@@ -22,12 +22,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/admin']);
         }
     }
 
     ngOnInit() {
-        
         // this.appService.setHeader(false);
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
@@ -61,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 data => {
                     console.log('data', data);
                     this.router.navigate(['/admin']);
-                    
+
                 },
                 error => {
                     this.alertService.error(error);
