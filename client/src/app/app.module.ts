@@ -24,14 +24,17 @@ import { AdminComponent } from './admin/admin.component';
 import { AppService } from './app.service';
 import { ChatComponent } from './main-component/chat/chat.component';
 import { FormsModule } from '@angular/forms';
-
+import { NgxCarouselModule } from 'ngx-carousel';
+import 'hammerjs';
+import { ShareComponent } from './share/share.component';
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
         appRoutingModule,
-        FormsModule
+        FormsModule,
+        NgxCarouselModule
     ],
     declarations: [
         AppComponent,
@@ -48,6 +51,7 @@ import { FormsModule } from '@angular/forms';
         FooterComponent,
         AdminComponent,
         ChatComponent,
+        ShareComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
