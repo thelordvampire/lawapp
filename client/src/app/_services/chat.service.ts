@@ -10,7 +10,6 @@ export class ChatService {
 
   stompClient = null;
   connectRoom: Subscription;
-  id = null;
   constructor(
     private auth: AuthenticationService,
   ) { }
@@ -24,7 +23,6 @@ export class ChatService {
   }
 
   createDestination(roomId, onMessageReceived) {
-    this.id = roomId;
     this.connectRoom = this.stompClient.subscribe(`/topic/${roomId}`, onMessageReceived);
   }
 
@@ -34,37 +32,26 @@ export class ChatService {
     }
   }
 
-  sendMessage(userName, message) {
-    if (this.id) {
+  sendMessage(roomId, message) {
+    if (roomId) {
       const chatMessage = {
-        sender: userName,
+        sender: this.auth.getCurrentUser().name,
         content: message,
         type: 'CHAT',
-        roomId: this.id,
+        roomId: roomId,
+        serverUserId: this.auth.getCurrentUser().id
       };
-      this.stompClient.send(`/app/chat/${this.id}/sendMessage`, {}, JSON.stringify(chatMessage));
+      this.stompClient.send(`/app/chat/${roomId}/sendMessage`, {}, JSON.stringify(chatMessage));
     }
   }
 
-  join() {
+  join(roomId) {
     if (this.auth.isAdmin()) {
-      this.stompClient.send(`/app/chat/${this.id}/addUser`, {},
+      this.stompClient.send(`/app/chat/${roomId}/addUser`, {},
         JSON.stringify({serverUserId: this.auth.getCurrentUser().id, type: 'JOIN'}));
     } else {
-      this.stompClient.send(`/app/chat/${this.id}/addUser`, {},
-        JSON.stringify({sender: this.auth.getCurrentUser().username, type: 'JOIN'}));
+      this.stompClient.send(`/app/chat/${roomId}/addUser`, {},
+        JSON.stringify({sender: this.auth.getCurrentUser().name, type: 'JOIN'}));
     }
   }
 }
-
-
-// if (this.isAdmin) {
-//   this.stompClient.send(`/app/chat/${this.roomId}/addUser`, {}, JSON.stringify({serverUserId: this.getCurrentUser(), type: 'JOIN'}));
-// } else {
-//   if (!localStorage.getItem('UserRoom')) {
-//     this.stompClient.send(`/app/chat/${this.roomId}/addUser`, {}, JSON.stringify({
-//       sender: this.chatForm.controls.Username.value,
-//       type: 'JOIN'
-//     }));
-//   }
-// }
