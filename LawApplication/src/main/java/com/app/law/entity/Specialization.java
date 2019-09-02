@@ -4,14 +4,13 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-@Table(name = "role")
+@Table(name = "specialization")
 @Data
-public class Role implements Serializable {
+public class Specialization implements Serializable {
 
-    private static final long serialVersionUID = -3983459089478748068L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,8 +19,4 @@ public class Role implements Serializable {
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    @OneToMany(mappedBy = "roleId")
-    private List<Role_Privilege> listRolePrivilege;
-
 }

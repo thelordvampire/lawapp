@@ -175,8 +175,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 //            .ignoringAntMatchers("/user/login")
 //            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //            .and()
-                    .cors().disable();
-            http
+                    .cors().and()
 
 //                    .authorizeRequests()
 //                    .antMatchers("/user/login", "/user/sign_up")

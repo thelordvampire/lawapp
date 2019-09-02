@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../app.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import {cloneDeep} from 'lodash';
 import {Observable, Subscription} from 'rxjs';
 import {ChatService} from '../../_services/chat.service';
 import {AuthenticationService} from '../../_services';
@@ -28,7 +27,7 @@ export class ChatComponent implements OnInit {
   messageInput;
   messageArea;
   connectingElement;
-  title: any = 'Chat với chúng tôi';
+  title: any = 'Tư vấn trực tuyến';
   roomId: Object;
   chatHistory: any;
   currentChat: any;
@@ -74,7 +73,7 @@ export class ChatComponent implements OnInit {
     }
   }
 
- username = null;
+  username = null;
 
  colors = [
   '#2196F3', '#32c787', '#00BCD4', '#ff5652',
@@ -83,18 +82,34 @@ export class ChatComponent implements OnInit {
 
   createRoom() {
    // client call
-    debugger;
-   if (this.chatForm.controls.Username.value.trim() == '') {
-     return;
-   }
-   const data = { clientUserName: this.chatForm.controls.Username.value };
+    if (this.chatForm.controls.Username.value.trim() == '') {
+      return;
+    }
+   const data = { clientName: this.chatForm.controls.Username.value };
    this.appService.CreateRoom(data).subscribe((res: any) => {
-     debugger;
      this.roomId = res.id;
-     this.auth.createUser(res.clientUserName);
+     this.auth.createUser(res.clientName);
      this.enterRoom();
+     this.isAdmin = this.auth.isAdmin();
+     this.fakeMessage();
+
     });
 }
+  fakeMessage() {
+    setTimeout(() => {
+      this.onMessageReceived({
+        body:  JSON.stringify(
+          {
+            content: `Xin chào ${this.auth.getCurrentUser().name}. Tôi có thể giúp gì cho bạn`,
+            sender: 'Trợ lý ảo',
+            serverUserId: -1
+          }
+        )});
+    }, 1500);
+
+
+  }
+
 
   enterRoom(roomId?, chatHistory?) {
     console.log('enter room');
@@ -103,10 +118,24 @@ export class ChatComponent implements OnInit {
 
     this.isShowChatDialog = true;
     this.isShow = true;
-    this.title = 'Chào ' + this.auth.getCurrentUser().username;
     this.isAdmin = this.auth.isAdmin();
 
     $('#messageArea').html('');
+
+    if (this.roomId) {
+      this.getHistory(this.roomId).subscribe(res => {
+        console.log(res);
+        if (res && res.length > 0) {
+          // const data = cloneDeep(res);
+          for (let i = 0; i < res.length; i++) {
+            const content = {body: JSON.stringify(res[i])};
+            this.onMessageReceived(content);
+          }
+          this.chatService.join(this.roomId);
+        }
+      });
+    }
+
 
 
     // if (chatHistory) {
@@ -121,43 +150,30 @@ export class ChatComponent implements OnInit {
    this.chatService.createDestination(this.roomId, this.onMessageReceived.bind(this));
    if (this.router.snapshot && this.router.snapshot.routeConfig && this.router.snapshot.routeConfig.path == 'admin') {
      // this.isAdmin = true;
-     // this.chatForm.patchValue({ Username: 'Quản trị viên'});
+     // this.chatForm.patchValue({ name: 'Quản trị viên'});
    }
    localStorage.setItem('UserRoom', JSON.stringify(this.roomId));
    this.isShow = true;
-   let a = new Observable(() => {
-     this.getHistory(this.roomId);
-   }).subscribe(() => {
-     debugger;
-     this.chatService.join();
-   });
-
 }
   getHistory(roomId) {
-    this.appService.GetHistoryRoomChat(roomId).subscribe(res => {
-    console.log(res);
-    if (res && res.length > 0 ) {
-      // const data = cloneDeep(res);
-      for (let i = 0; i < res.length; i++) {
-        const content = {body: JSON.stringify(res[i])};
-        this.onMessageReceived(content);
-      }
-          // if (i == data.length) {
-          //   clearInterval(interval);
-          // }
-    }});
+    return this.appService.GetHistoryRoomChat(roomId);
   }
 
  sendMessage() {
-   debugger;
-   const sender = this.auth.getCurrentUser().username;
    const message = this.chatForm.controls.Message.value;
-   this.chatService.sendMessage(sender, message);
+   this.chatService.sendMessage(this.roomId, message);
    this.chatForm.controls.Message.reset();
  }
+  showRight(userId) {
+    if (userId) {// admin
+      return this.router.snapshot && this.router.snapshot.routeConfig && this.router.snapshot.routeConfig.path == 'admin';
+    } else {
+      return !(this.router.snapshot && this.router.snapshot.routeConfig && this.router.snapshot.routeConfig.path == 'admin');
+    }
+
+  }
 
  onMessageReceived(payload) {
-    debugger;
    console.log('payload', payload);
    if (payload.body) {
      const message = JSON.parse(payload.body);
@@ -166,19 +182,16 @@ export class ChatComponent implements OnInit {
      const messageElement = document.createElement('li');
 
      if (message.type === 'JOIN') {
-      messageElement.classList.add('event-message');
-      message.content = message.sender + ' đã tham gia!';
+       return;
+      // messageElement.classList.add('event-message');
+      // message.content = message.sender + ' đã tham gia!';
      } else if (message.type === 'LEAVE') {
-       messageElement.classList.add('event-message');
-       message.content = message.sender + ' đã rời khỏi!';
+       return;
+       // messageElement.classList.add('event-message');
+       // message.content = message.sender + ' đã rời khỏi!';
      } else {
        messageElement.classList.add('chat-message');
-       if (this.chatForm.controls.Username.value == message.sender) {
-            // if(this.chatForm.controls.Username.value == this.currentChat.sender) {
-         messageElement.classList.add('right-text');
-       } else {
-         messageElement.classList.add('left-text');
-       }
+       messageElement.classList.add(this.showRight(message.userId ? message.userId : message.serverUserId) ? 'right-text' : 'left-text');
 
        const avatarElement = document.createElement('i');
        const avatarText = document.createTextNode(message.sender[0]);
@@ -206,7 +219,7 @@ export class ChatComponent implements OnInit {
  getAvatarColor(messageSender) {
   let hash = 0;
   for (let i = 0; i < messageSender.length; i++) {
-      hash = 31 * hash + messageSender.charCodeAt(i);
+      hash = 5 * hash + messageSender.charCodeAt(i);
   }
   const index = Math.abs(hash % this.colors.length);
   return this.colors[index];
@@ -222,6 +235,7 @@ onPressCloseHeader() {
 
   onError(error) {
     console.log('on err');
+    $('#messageArea').html('');
     if (this.connectingElement) {
       this.connectingElement.textContent = 'Mất kết nối. Hãy tải lại trang và thử lại!';
       this.connectingElement.style.color = 'red';

@@ -36,6 +36,12 @@ export class AppService {
         const url = `${environment.apiUrl}/chat/room/create/`;
         return this.http.post(url, data);
     }
+
+    closeRoom(roomId) {
+    const url = `${environment.apiUrl}/chat/room/force-close/${roomId}`;
+    return this.http.get(url);
+  }
+
     GetListUserChat(): Observable<any> {
         const url = `${environment.apiUrl}/chat/room/get-new`;
         return this.http.get(url);

@@ -63,11 +63,11 @@ public class AccountController {
     public ResponseEntity<Object> login(@RequestBody User user) {
         //201 - ok()   202 - accept()
         log.debug("login: {}", user);
-        User loginedUser = userService.login(user.getUsername(), user.getPassword());
+        User loginedUser = userService.login(user.getEmail(), user.getPassword());
         String result = "Login failed";
         try {
             if (loginedUser!= null) {
-                result = jwtProvider.generateTokenLogin(loginedUser.getUsername());
+                result = jwtProvider.generateTokenLogin(loginedUser.getEmail());
                 loginedUser.setToken("Bearer "+ result);
                 return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(loginedUser);
             }
@@ -97,7 +97,7 @@ public class AccountController {
         if(user== null) {
             message = "user can not be null";
         } else {
-            User foundUser = userService.findUserByUsername(user.getUsername());
+            User foundUser = userService.findUserByEmail(user.getEmail());
             if (foundUser != null)
                 return ResponseEntity.badRequest().headers(HttpHeaders.EMPTY).body("username existed");
 

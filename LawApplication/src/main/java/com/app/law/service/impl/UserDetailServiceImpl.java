@@ -1,6 +1,6 @@
 package com.app.law.service.impl;
 
-import com.app.law.entity.Role_Privilege;
+import com.app.law.entity.User_Privilege;
 import com.app.law.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,17 +27,16 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional(readOnly=true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.debug(this.getClass().getCanonicalName()+ " load user by username: {}", username);
-        com.app.law.entity.User user = userService.findUserByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        log.debug(this.getClass().getCanonicalName()+ " load user by email: {}", email);
+        com.app.law.entity.User user = userService.findUserByEmail(email);
         if(user == null)
             throw new UsernameNotFoundException("User not authorized.");
 
         List<GrantedAuthority> grantList = new ArrayList<>();
-        grantList.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().getName()));// add role
-        for (Role_Privilege role_privilege : user.getRole().getListRolePrivilege()) {
+        for (User_Privilege user_privilege : user.getListUserPrivilege()) {
             //add privilege
-            GrantedAuthority authority = new SimpleGrantedAuthority(role_privilege.getPrivilege().getName());
+            GrantedAuthority authority = new SimpleGrantedAuthority(user_privilege.getPrivilege().getName());
             grantList.add(authority);
         }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +45,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
 
-        UserDetails userDetails = new User(user.getUsername(),user.getPassword(), enabled,
+        UserDetails userDetails = new User(user.getEmail(),user.getPassword(), enabled,
             accountNonExpired, credentialsNonExpired, accountNonLocked, grantList);
 //        Authentication request = new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword());
 //        SecurityContextHolder.getContext().setAuthentication(request);

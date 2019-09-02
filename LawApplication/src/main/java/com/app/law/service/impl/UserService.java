@@ -3,16 +3,24 @@ package com.app.law.service.impl;
 import com.app.law.entity.User;
 import com.app.law.repository.UserRepository;
 import com.app.law.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
 public class UserService implements IUserService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -27,12 +35,19 @@ public class UserService implements IUserService {
     public User createUser(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        return userRepo.save(user);
+        User createdUser = null;
+        try {
+            createdUser = userRepo.saveAndFlush(user);
+            logger.info("create user success");
+        } catch(Exception ex) {
+            logger.info("create user fail: {}", ex.getMessage());
+        }
+        return createdUser;
     }
 
     @Override
-    public User login(String username, String raw_password) {
-        User user = userRepo.findOneByUsername(username);
+    public User login(String email, String raw_password) {
+        User user = userRepo.findOneByEmail(email);
         return user!= null && passwordEncoder.matches(raw_password, user.getPassword()) ?
             user : null;
     }
@@ -43,18 +58,18 @@ public class UserService implements IUserService {
         Object principal = auth.getPrincipal();
         if(principal instanceof UserDetails) {
             UserDetails objUserDetail = (UserDetails) principal;
-            String username = objUserDetail.getUsername();
-            return findUserByUsername(username);
+            String email = objUserDetail.getUsername();
+            return this.findUserByEmail(email);
         }
 
         return null;
     }
 
     @Override
-    public User findUserByUsername(String username) {
+    public User findUserByEmail(String email) {
         //gọi khi tạo user, xem user name và email có chưa
-        if(username!=null && !username.isEmpty())
-            return userRepo.findOneByUsername(username);
+        if(email!=null && !email.isEmpty())
+            return userRepo.findOneByEmail(email);
 
         return null;
     }

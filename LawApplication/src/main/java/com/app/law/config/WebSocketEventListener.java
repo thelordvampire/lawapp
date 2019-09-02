@@ -44,9 +44,11 @@ public class WebSocketEventListener {
         String username = (String) headerAccessor.getSessionAttributes().get("username");
         Integer roomId = (Integer) headerAccessor.getSessionAttributes().get("room_id");
 
-        if(roomId != null) {
-            roomService.closeRoom(roomId);
-        }
+        logger.info("socket Disconnected: username: {}, roomId: {}, sessionId: {}", username, roomId, event.getSessionId());
+        logger.info("socket Disconnected: close: {}", event.getCloseStatus().getReason());
+//        if(roomId != null) {
+//            roomService.closeRoom(roomId);
+//        }
 
         if(username != null) {
             logger.info("User Disconnected : " + username);

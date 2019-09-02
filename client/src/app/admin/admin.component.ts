@@ -3,6 +3,7 @@ import { AuthenticationService } from '../_services';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { ChatComponent } from '../main-component/chat/chat.component';
+import {ChatService} from '../_services/chat.service';
 
 @Component({
   selector: 'app-admin',
@@ -20,21 +21,21 @@ export class AdminComponent implements OnInit, AfterViewInit {
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
-    private appService: AppService
+    private appService: AppService,
     ) {
 
     }
+    currentUser = null;
 
   ngOnInit() {
     this.appService.setHeader(false);
     this.getAllUserChat();
+    this.currentUser = this.authenticationService.getCurrentUser();
   }
 
   getAllUserChat() {
     this.getUser();
-    setInterval(() => {
-      this.getUser();
-    }, 5 * 1000);
+    setInterval(() => { this.getUser(); }, 5 * 1000);
   }
   ngAfterViewInit() {
     // child is set
@@ -70,5 +71,15 @@ export class AdminComponent implements OnInit, AfterViewInit {
     }
 
     // this.appChat.disConnect();
+  }
+
+  closeRoom(roomId, $event) {
+    // thong baos message;
+    $event.stopPropagation();
+    if (true) {
+      this.appService.closeRoom(roomId).subscribe((res: any) => {
+        console.log(res);
+      });
+    }
   }
 }

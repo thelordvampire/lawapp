@@ -6,5 +6,5 @@ import lombok.Data;
 public class ChatRoomDTO {
 
     private Integer id;
-    private String clientUserName;
+    private String clientName;
 }

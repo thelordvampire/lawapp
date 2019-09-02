@@ -52,15 +52,15 @@ public class ChatController {
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
+
     @RequestMapping(value = "/chat/room/{roomId}/get-all")
     public ResponseEntity<List<ChatMessage>> getAllChatMessage(@PathVariable Integer roomId) {
         List<ChatMessage> allMessageByRoomID = chatMessageService.getAllMessageByRoomID(roomId);
         return ResponseEntity.status(HttpStatus.OK).body(allMessageByRoomID);
     }
-    
     @MessageMapping("/chat/{roomId}/sendMessage")
     public void sendMessage(@DestinationVariable Integer roomId, @Payload ChatMessageDTO chatMessageDTO) {
-        System.out.println("vao send Message roi");
+        logger.info("send message: roomId: {}, chatMessageDTO: {}", roomId, chatMessageDTO);
         chatMessageDTO = chatMessageService.saveMessage(chatMessageDTO);
         messagingTemplate.convertAndSend(String.format("/topic/%d", roomId), chatMessageDTO);
     }
@@ -81,17 +81,22 @@ public class ChatController {
         // Add username in web socket session
         Integer currentRoomId = (Integer) headerAccessor.getSessionAttributes().put("room_id", roomId);
 
-        if (currentRoomId != null) {
-            ChatMessageDTO leaveMessage = new ChatMessageDTO();
-            leaveMessage.setType(MessageType.LEAVE);
-            leaveMessage.setSender(chatMessageDTO.getSender());
-            messagingTemplate.convertAndSend(String.format("/topic/%d", currentRoomId), leaveMessage);
-        }
+//        if (currentRoomId != null) {
+//            ChatMessageDTO leaveMessage = new ChatMessageDTO();
+//            leaveMessage.setType(MessageType.LEAVE);
+//
+//            String sender = chatMessageDTO.getSender() != null ? chatMessageDTO.getSender() :
+//                userService.findUserById(chatMessageDTO.getServerUserId()).getName();
+//            leaveMessage.setSender(sender);
+//            messagingTemplate.convertAndSend(String.format("/topic/%d", currentRoomId), leaveMessage);
+//        }
         if(chatMessageDTO.getServerUserId()!= null) {
             User user = userService.findUserById(chatMessageDTO.getServerUserId());
-            headerAccessor.getSessionAttributes().put("username", user.getName());
+            headerAccessor.getSessionAttributes().put("server username", user.getName());
+            headerAccessor.getSessionAttributes().put("server userId", user.getId());
             chatMessageDTO.setServerUserName(user.getName());
             chatMessageDTO.setSender(user.getName());
+            chatMessageDTO.setServerUserId(user.getId());
             chatRoomService.addServerUser(roomId, user.getId());
         } else {
             headerAccessor.getSessionAttributes().put("username", chatMessageDTO.getSender());
@@ -102,9 +107,14 @@ public class ChatController {
 
     @RequestMapping(value = "/chat/room/create", method = RequestMethod.POST)
     public ResponseEntity<ChatRoomDTO> createRoom(@RequestBody ChatRoomDTO chatRoomDTO) {
-        ChatRoom chatRoom = chatRoomService.createChatRoom(chatRoomDTO.getClientUserName());
+        ChatRoom chatRoom = chatRoomService.createChatRoom(chatRoomDTO.getClientName());
         chatRoomDTO.setId(chatRoom.getId());
         return ResponseEntity.status(HttpStatus.OK).body(chatRoomDTO);
+    }
+
+    @RequestMapping(value = "/chat/room/force-close/{roomId}")
+    public ResponseEntity<Boolean> forceCloseRoom(@PathVariable Integer roomId) {
+        return ResponseEntity.status(HttpStatus.OK).body(chatRoomService.closeRoom(roomId));
     }
 
     @RequestMapping(value = "/chat/room/get-new")
