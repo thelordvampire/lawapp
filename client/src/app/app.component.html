@@ -1,5 +1,5 @@
 <app-header *ngIf="isLogin"></app-header>
 <router-outlet></router-outlet>
-<app-contact></app-contact>
+<app-contact *ngIf="isLogin"></app-contact>
 <app-footer *ngIf="isLogin"></app-footer>
 <app-chat *ngIf="isLogin"></app-chat>

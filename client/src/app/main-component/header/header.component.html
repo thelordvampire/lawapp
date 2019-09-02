@@ -23,8 +23,7 @@
               <ul class="nav navbar-nav">
                <li ><a routerLink="/home">Trang chủ</a></li> 
                <li><a  routerLink="/typo">Giới thiệu</a></li>
-                  <li><a routerLink="/practice">Lĩnh vực</a></li>
-                  <li><a routerLink="/resources" (mouseenter)="isShowResources = true" >Nhân sự</a>
+                  <li><a routerLink="/practice" (mouseenter)="isShowResources = true">Lĩnh vực</a>
                     <ng-container>
                         <div class="resources-menu" (mouseleave) = "isShowResources = false" *ngIf="isShowResources" >
                                 <div class="welcome-right">
@@ -35,11 +34,13 @@
                                         <div><a href="">Thực hiện các dịch vụ pháp lý khác</a></div>
                                     </div>
                         </div>
-                    </ng-container>
+                    </ng-container></li>
+                  <li><a routerLink="/resources"  >Nhân sự</a>
+         
                 </li>
                   <li><a  routerLink="/news">Tin tức</a></li>
-                  <li><a routerLink="/contact">Liên hệ</a></li>
-                  <li><a routerLink="/register">Đăng ký</a></li>
+                  <!-- <li><a routerLink="/contact">Liên hệ</a></li> -->
+                  <!-- <li><a routerLink="/register">Đăng ký</a></li> -->
               </ul>
           </div>
           <!--/.navbar-collapse-->

@@ -4,33 +4,16 @@
             <section class="slider">
                 <div class="flexslider">
                     <ul class="slides">
-                        <li>	
+                        <li *ngFor = "let item of newsList">	
                             <div class="banner-text">
                                 <!-- <h2>“WE OFFER OUR CLIENTS AN EXPERT LEGAL ADVICE!”</h2> -->
-                                <p> Vì: Quyền, lợi ích hợp pháp của khách hàng, <br>
-                                    Nên: sẵn sàng tận tâm vì khách hàng, tận tụy với công việc, hoàn thành dịch vụ đúng tiến độ, đáp ứng chính xác yêu cầu của khách hàng.</p>
+                                <h3> {{item.title}} </h3>
+                                   <p> {{item.content}}</p>
                                 <br>
                                 <a class="hvr-shutter-in-horizontal" routerLink="/typo">Xem thêm</a>
                             </div>
                         </li>
-                        <li>	
-                            <div class="banner-text">
-                                <p>Đặt quyền và lợi ích của quý khách hàng lên hàng đầu.</p>
-                                <p>Cung cấp dịch vụ chuyên nghiệp với tinh thần trách nhiệm cao.</p>
-                                <p>Cung cấp các giải pháp pháp lý linh hoạt nhất.</p>
-                                <!-- <h2>“CLIENTS AN EXPERT WE OFFER OUR  LEGAL ADVICE!”</h2> -->
-                                <!-- <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</p> -->
-                                <a class="hvr-shutter-in-horizontal" routerLink="/typo">Xem thêm</a>
-                            </div>
-                        </li> 
-                        <li>	
-                            <div class="banner-text">
-                                <p>Tối đa hóa lợi ích của khách hàng thông qua việc cung cấp các giải pháp tư vấn hiệu quả, phù hợp với điều kiện thực tế và chuẩn mực luật pháp.</p>
-                                <!-- <h2>“AN EXPERT LEGAL WE OFFER OUR CLIENTS  ADVICE!”</h2> -->
-                                <!-- <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</p> -->
-                                <a class="hvr-shutter-in-horizontal" routerLink="/typo">Xem thêm</a>
-                            </div>
-                        </li>
+                     
                     </ul>
                 </div>
             </section>
@@ -55,43 +38,31 @@
             <div class="clearfix"></div>
         </div>
         <div class="col-md-4 welcome-right">
-            <h3>Lĩnh vực hoạt động</h3>
-                <ul>
-                    <li><a href="#"><span></span>Tư vấn pháp luật</a></li>
-                    <li><a href="#"><span></span>Tham gia tố tụng</a></li>
-                    <li><a href="#"><span></span>Đại diện ngoài tố tụng cho khách hàng</a></li>
-                    <li><a href="#"><span></span>Thực hiện các dịch vụ pháp lý khác </a></li>
-                    <li><a href="#"><span></span></a></li>
-                    <li><a href="#"><span></span> </a></li>
-                    
-                </ul>
+            <h3>Từ khóa nổi bật</h3>
+                <div class="tagList">
+                    <span *ngFor ="let item of tagList" class="tagName">#{{item.tagName}}</span>
+                </div>
         </div>
         <div class="clearfix"></div>
     </div>
+</div>
+
+<div class="welcome">
+        <div class="container">
+                <h3 class="welcome-right">Lĩnh vực hoạt động</h3>
+                <div class= "feild-container" >
+                        <br>
+                        <div class="feild" *ngFor="let item of fieldList">
+                            <span>{{item.fieldName}}</span>
+                        </div>
+                    </div>
+        </div>
+  
 </div>
 <!-- welcome -->
 <!-- cases -->
 <div class="cases">
     <div class="container">
-        <!-- <div class="col-md-4 cases-left">
-            <h3>Kinh nghiệm</h3>
-            <img src="../assets/images/11.jpg" alt=" " class="img-responsive">
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-            <a class="hvr-shutter-in-horizontal" href="#">Xem thêm</a>
-        </div>
-        <div class="col-md-4 cases-left">
-            <h3>Tài nguyên</h3>
-            <img src="../assets/images/9.jpg" alt=" " class="img-responsive">
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-            <a class="hvr-shutter-in-horizontal" href="#">Xem thêm</a>
-        </div>
-        <div class="col-md-4 cases-left">
-            <h3>Các trường hợp</h3>
-            <img src="../assets/images/6.jpg" alt=" " class="img-responsive">
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-            <a class="hvr-shutter-in-horizontal" href="#">Xem thêm</a>
-        </div>
-        <div class="clearfix"></div> -->
         <h3>Các luật sư của chúng tôi</h3>
         <ngx-carousel
         [inputs]="carouselOne"
@@ -116,51 +87,3 @@
 </div>
 <!-- cases-end -->
 <!-- news -->
-<div class="news">
-    <div class="container">
-        <h3>Tin tức và sự kiện</h3>
-        <!-- <div class="col-md-6 news-left">
-            <div class="col-md-6 new-lft">
-                <img src="../assets/images/10.jpg" alt=" " class="img-responsive">
-            </div>
-            <div class="col-md-6 new-rgt">
-                <h5> [10-08-2015]</h5>
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
-            </div>
-                <div class="clearfix"></div>
-        </div>
-        <div class="col-md-6 news-left">
-            <div class="col-md-6 new-lft">
-                <img src="../assets/images/7.jpg" alt=" " class="img-responsive">
-            </div>
-            <div class="col-md-6 new-rgt">
-                <h5> [10-08-2015]</h5>
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
-            </div>
-                <div class="clearfix"></div> -->
-                
-
-                ==
-        <div class="col-md-4 cases-left">
-            <!-- <h3>Kinh nghiệm</h3> -->
-            <img src="../assets/images/11.jpg" alt=" " class="img-responsive">
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-            <a class="hvr-shutter-in-horizontal" href="#">Xem thêm</a>
-        </div>
-        <div class="col-md-4 cases-left">
-            <!-- <h3>Tài nguyên</h3> -->
-            <img src="../assets/images/9.jpg" alt=" " class="img-responsive">
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-            <a class="hvr-shutter-in-horizontal" href="#">Xem thêm</a>
-        </div>
-        <div class="col-md-4 cases-left">
-            <!-- <h3>Các trường hợp</h3> -->
-            <img src="../assets/images/6.jpg" alt=" " class="img-responsive">
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-            <a class="hvr-shutter-in-horizontal" href="#">Xem thêm</a>
-        </div>
-        <!-- <div class="clearfix"></div> -->
-        <!-- </div> -->
-        <div class="clearfix"></div>
-    </div>
-</div>
