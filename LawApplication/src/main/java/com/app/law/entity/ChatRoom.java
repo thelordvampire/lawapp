@@ -19,8 +19,8 @@ public class ChatRoom implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "clientUserName", nullable = false)
-    private String clientUserName;
+    @Column(name = "clientName", nullable = false)
+    private String clientName;
 
     @Column(name = "serverUserId")
     private Integer serverUserId;

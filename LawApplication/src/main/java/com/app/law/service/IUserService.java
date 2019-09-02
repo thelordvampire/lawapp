@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IUserService {
 
-    User login(String username, String password);
+    User login(String email, String password);
 
-    User findUserByUsername(String username);
+    User findUserByEmail(String email);
 
     User findUserById(Integer userId);
 

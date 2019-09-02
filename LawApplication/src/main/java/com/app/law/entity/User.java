@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name = "user")
 @Table(name = "user")
@@ -17,11 +18,8 @@ public class User implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false, length = 100)
     private String email;
-
-    @Column(name = "username", unique = true, nullable = false)
-    private String username;
 
     @Column(name = "password")
     private String password;
@@ -32,33 +30,40 @@ public class User implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "role_id", insertable = false, updatable = false)
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "roleId")
     private Integer roleId;
 
-    @ManyToOne()
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @OneToMany(mappedBy = "userId")
+    private List<User_Privilege> listUserPrivilege;
+
+    @OneToMany(mappedBy = "userId")
+    private List<User_Specialization> listUserSpecialization;
 
     @Transient
     private String token;
 
+    @Transient
+    private List<Privilege> listPrivilege;
+
     public User() {
     }
 
-    public User(String username, String password, String email, String name, Integer roleId) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.name = name;
-        this.roleId = roleId;
-    }
+//    public User(String username, String password, String email, String name) {
+//        this.username = username;
+//        this.password = password;
+//        this.email = email;
+//        this.name = name;
+//    }
 
-    public User(String username, String password, String email, String name, Role role) {
-        this.username = username;
+    public User(String password, String email, String name, Integer roleId, List<Privilege> listPrivilege) {
         this.password = password;
         this.email = email;
         this.name = name;
-        this.role = role;
+        this.listPrivilege = listPrivilege;
+        this.roleId = roleId;
     }
 
     @Override
@@ -66,7 +71,6 @@ public class User implements Serializable {
         return "User"+" ,"+
                 "id="+id+" ,"+
                 "email="+email+" ,"+
-                "username="+username+" ,"+
                 "password="+password+" ,"+
                 "token="+token+" ,"+
                 "name="+name;

@@ -17,9 +17,9 @@ public class ChatRoomService implements IChatRoomService {
     private ChatRoomRepository chatRoomRepo;
 
     @Override
-    public ChatRoom createChatRoom(String clientUserName) {
+    public ChatRoom createChatRoom(String clientName) {
         ChatRoom room = new ChatRoom();
-        room.setClientUserName(clientUserName);
+        room.setClientName(clientName);
         room.setStartDate(Instant.now());
         room.setStatus(RoomStatus.NEW);
 
@@ -51,13 +51,15 @@ public class ChatRoomService implements IChatRoomService {
     }
 
     @Override
-    public ChatRoom closeRoom(Integer roomId) {
+    public Boolean closeRoom(Integer roomId) {
         ChatRoom chatRoom = chatRoomRepo.getOne(roomId);
         if(chatRoom!= null) {
             chatRoom.setEndDate(Instant.now());
             chatRoom.setStatus(RoomStatus.END);
-            return chatRoomRepo.save(chatRoom);
+            ChatRoom saved = chatRoomRepo.saveAndFlush(chatRoom);
+            if(saved!= null)
+                return Boolean.TRUE;
         }
-        return null;
+        return Boolean.FALSE;
     }
 }

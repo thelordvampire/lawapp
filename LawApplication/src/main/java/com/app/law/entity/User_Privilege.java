@@ -2,19 +2,22 @@ package com.app.law.entity;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "role_privilege")
+@Table(name = "user_privilege")
 @Data
-public class Role_Privilege {
+public class User_Privilege implements Serializable {
+
+    private static final long serialVersionUID = 5393126870159716461L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "role_id")
-    private Integer roleId;
+    @Column(name = "user_id")
+    private Integer userId;
 
     @Column(name = "privilege_id", insertable = false, updatable = false)
     private Integer privilegeId;
