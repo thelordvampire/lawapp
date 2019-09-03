@@ -4,7 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "user")
 @Table(name = "user")
@@ -41,6 +43,9 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "userId")
     private List<User_Specialization> listUserSpecialization;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Post> listPost = new HashSet<>();
 
     @Transient
     private String token;
