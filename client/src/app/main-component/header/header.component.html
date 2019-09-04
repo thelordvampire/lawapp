@@ -1,72 +1,305 @@
-<div class="header-top">
-  <div class="container">
-      <div class="head-main">
-          <!-- <h1><a href="index.html">LAW</a></h1> -->
-          <img routerLink="/home" src="../assets/images/logo.jpg" alt="" height="75" width="60">
-      </div>
+<header id="header" class="site-header header-style-1">
+    <div class="topbar" style="">
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-10">
+                    <div class="contact-info ">
+                        <ul>
+                            <li><i class="ti-location-pin"></i>Hà Nội, Việt Nam</li>
+                            <li><i class="ti-mobile"></i>1254-145(25455)</li>
+                            <li><i class="ti-email"></i>Aequity@example.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col col-md-2">
+                    <div class="social ">
+                        <ul>
+                            <li><a href="#"><i class="ti-facebook" style=""></i></a></li>
+                            <li><a href="#"><i class="ti-twitter-alt" style=""></i></a></li>
+                            <li><a href="#"><i class="ti-linkedin" style=""></i></a></li>
+                            <li><a href="#"><i class="ti-pinterest" style=""></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navigation  sticky-menu-on  navbar navbar-default original">
+        <!-- Navigation & Search -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="open-btn">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="site-logo  has_menu " style="">
+                    <a class="navbar-brand" href="/tf/wp1/aequity/">
+                        <img src="../../../assets/images/logo.jpg" alt="Aequity">
+                    </a>
+                </div>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse navigation-holder  has-cta   navbar-right ">
+                <button class="close-navbar"><i class="ti-close"></i></button>
+                <ul id="menu-main-menu" class="nav navbar-nav">
+                    <li id="menu-item-15"
+                        class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-15">
+                        <a href="/tf/wp1/aequity/home/">Trang chủ</a>
+                        <!-- <ul class="sub-menu">
+                            <li id="menu-item-56"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-56"><a
+                                    href="/tf/wp1/aequity/home/">Home style 1</a></li>
+                            <li id="menu-item-55"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-55"><a
+                                    href="/tf/wp1/aequity/home-style-2/">Home style 2</a></li>
+                            <li id="menu-item-54"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-24 current_page_item menu-item-54">
+                                <a href="/tf/wp1/aequity/" aria-current="page">Home style 3</a></li>
+                        </ul> -->
+                    </li>
+                    <li id="menu-item-16"
+                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-16">
+                        <a href="#">Giới thiệu</a>
+                        <!-- <ul class="sub-menu">
+                            <li id="menu-item-36"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a
+                                    href="/tf/wp1/aequity/about/">About</a></li>
+                            <li id="menu-item-37"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a
+                                    href="/tf/wp1/aequity/about-style-2/">About style 2</a></li>
+                            <li id="menu-item-38"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a
+                                    href="/tf/wp1/aequity/attorneys/">Attorneys</a></li>
+                            <li id="menu-item-307"
+                                class="menu-item menu-item-type-post_type menu-item-object-attorney menu-item-307"><a
+                                    href="/tf/wp1/aequity/attorney/bredmen-jhon/">Attorney single</a></li>
+                            <li id="menu-item-322"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-322"><a
+                                    href="/tf/wp1/aequity/shop/">Shop</a></li>
+                            <li id="menu-item-347"
+                                class="menu-item menu-item-type-post_type menu-item-object-product menu-item-347"><a
+                                    href="/tf/wp1/aequity/product/hoodie-with-zipper/">Shop Details</a></li>
+                            <li id="menu-item-40"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40"><a
+                                    href="/tf/wp1/aequity/faq/">FAQ</a></li>
+                            <li id="menu-item-39"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a
+                                    href="/tf/wp1/aequity/testimonials/">Testimonials</a></li>
+                            <li id="menu-item-41"
+                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-41"><a
+                                    href="/tf/wp1/aequity/404">404</a></li>
+                        </ul> -->
+                    </li>
+                    <li id="menu-item-17"
+                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-17">
+                        <a href="#">Lĩnh vực</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-47"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a
+                                    href="/tf/wp1/aequity/practice-areas/">Tư vấn pháp luật</a></li>
+                            <li id="menu-item-46"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46"><a
+                                    href="/tf/wp1/aequity/practice-areas-s2/">Tham gia tố tụng</a></li>
+                            <li id="menu-item-308"
+                                class="menu-item menu-item-type-post_type menu-item-object-practice menu-item-308"><a
+                                    href="/tf/wp1/aequity/practice/legal-advice/">Đại diện ngoài tố tụng cho khách hàng</a></li>
+                            <li id="menu-item-308"
+                                class="menu-item menu-item-type-post_type menu-item-object-practice menu-item-308"><a
+                                    href="/tf/wp1/aequity/practice/legal-advice/">Thực hiện các dịch vụ pháp lý khác</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-18"
+                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-18">
+                        <a href="#">Nhân sự</a>
+                        <!-- <ul class="sub-menu">
+                            <li id="menu-item-53"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-53"><a
+                                    href="/tf/wp1/aequity/cases/">Cases</a></li>
+                            <li id="menu-item-52"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a
+                                    href="/tf/wp1/aequity/cases-s2/">Cases Style 2</a></li>
+                            <li id="menu-item-475"
+                                class="menu-item menu-item-type-post_type menu-item-object-case menu-item-475"><a
+                                    href="/tf/wp1/aequity/case/a-collection-of-textile-samples-lay-spread/">Cases
+                                    single</a></li>
+                        </ul> -->
+                    </li>
+                    <li id="menu-item-14"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-14">
+                        <a href="/tf/wp1/aequity/blog/">Tin tức</a>
+                        <!-- <ul class="sub-menu">
+                            <li id="menu-item-312"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-312"><a
+                                    href="/tf/wp1/aequity/blog/">Blog Default</a></li>
+                            <li id="menu-item-313"
+                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-313"><a
+                                    href="/tf/wp1/aequity/blog/?sidebar=sidebar-left">Blog left sidebar</a></li>
+                            <li id="menu-item-314"
+                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-314"><a
+                                    href="/tf/wp1/aequity/blog/?sidebar=sidebar-hide">Blog fullwidth</a></li>
+                            <li id="menu-item-496"
+                                class="menu-item menu-item-type-post_type menu-item-object-post menu-item-496"><a
+                                    href="/tf/wp1/aequity/theres-a-troubling-inequality-at-the-heart-of-our-justice-system/">Blog
+                                    Details</a></li>
+                        </ul> -->
+                    </li>
+                    <!-- <li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21">
+                        <a href="/tf/wp1/aequity/contact/">Contact</a></li> -->
+                </ul>
+            </div><!-- end of nav-collapse -->
+            <div class="search-quote">
+                <div class="header-search-area">
 
-      <div class="hea-rgt">
-          <a href="#">Tạo cuộc hẹn</a>
-      </div>
-      <div class="navigation">
-           <nav class="navbar navbar-default" role="navigation">
-          <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button>
-          </div>
-          <!--/.navbar-header-->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-               <li ><a routerLink="/home">Trang chủ</a></li> 
-               <li><a  routerLink="/typo">Giới thiệu</a></li>
-                  <li><a routerLink="/practice" (mouseenter)="isShowResources = true">Lĩnh vực</a>
-                    <ng-container>
-                        <div class="resources-menu" (mouseleave) = "isShowResources = false" *ngIf="isShowResources" >
-                                <div class="welcome-right">
-                                        <h3>Lĩnh vực hoạt động</h3>
-                                        <div><a href="">Tư vấn pháp luật</a></div>
-                                        <div><a href="">Tham gia tố tụng</a></div>
-                                        <div><a href="">Đại diện ngoài tố tụng cho khách hàng</a></div>
-                                        <div><a href="">Thực hiện các dịch vụ pháp lý khác</a></div>
-                                    </div>
-                        </div>
-                    </ng-container></li>
-                  <li><a routerLink="/resources"  >Nhân sự</a>
-         
-                </li>
-                  <li><a  routerLink="/news">Tin tức</a></li>
-                  <!-- <li><a routerLink="/contact">Liên hệ</a></li> -->
-                  <!-- <li><a routerLink="/register">Đăng ký</a></li> -->
-              </ul>
-          </div>
-          <!--/.navbar-collapse-->
-      </nav>
-      </div>
-      <div class="clearfix"></div>
-  </div>
-</div>
+                    <div>
+                        <button class="btn open-btn"><i class="fi flaticon-magnifying-glass-browser"></i></button>
+                    </div>
+                </div>
+                <div class="quote">
+                    <a href="/tf/wp1/aequity/contact/" class=" theme-btn ">Free consultation</a>
+                </div>
+            </div>
+        </div><!-- end of container -->
 
 
-<!--header-top-end-->
-<!--start-header-->
-<div class="header">
-  <div class="container">
-      <div class="head">
+    </nav>
+    <nav class="navigation  sticky-menu-on  navbar navbar-default sticky-header">
+        <!-- Navigation & Search -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="open-btn">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="site-logo  has_menu " style="">
+                    <a class="navbar-brand" href="/tf/wp1/aequity/">
+                        <img src="../../../assets/images/logo.jpg" alt="Aequity">
+                    </a>
+                </div>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse navigation-holder  has-cta   navbar-right ">
+                <button class="close-navbar"><i class="ti-close"></i></button>
+                <ul id="menu-main-menu" class="nav navbar-nav">
+                    <li id="menu-item-15"
+                        class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-15">
+                        <a href="/tf/wp1/aequity/home/">Trang chủ</a>
+                        <!-- <ul class="sub-menu">
+                            <li id="menu-item-56"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-56"><a
+                                    href="/tf/wp1/aequity/home/">Home style 1</a></li>
+                            <li id="menu-item-55"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-55"><a
+                                    href="/tf/wp1/aequity/home-style-2/">Home style 2</a></li>
+                            <li id="menu-item-54"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-24 current_page_item menu-item-54">
+                                <a href="/tf/wp1/aequity/" aria-current="page">Home style 3</a></li>
+                        </ul> -->
+                    </li>
+                    <li id="menu-item-16"
+                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-16">
+                        <a href="#">Giới thiệu</a>
+                        <!-- <ul class="sub-menu">
+                            <li id="menu-item-36"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a
+                                    href="/tf/wp1/aequity/about/">About</a></li>
+                            <li id="menu-item-37"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a
+                                    href="/tf/wp1/aequity/about-style-2/">About style 2</a></li>
+                            <li id="menu-item-38"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a
+                                    href="/tf/wp1/aequity/attorneys/">Attorneys</a></li>
+                            <li id="menu-item-307"
+                                class="menu-item menu-item-type-post_type menu-item-object-attorney menu-item-307"><a
+                                    href="/tf/wp1/aequity/attorney/bredmen-jhon/">Attorney single</a></li>
+                            <li id="menu-item-322"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-322"><a
+                                    href="/tf/wp1/aequity/shop/">Shop</a></li>
+                            <li id="menu-item-347"
+                                class="menu-item menu-item-type-post_type menu-item-object-product menu-item-347"><a
+                                    href="/tf/wp1/aequity/product/hoodie-with-zipper/">Shop Details</a></li>
+                            <li id="menu-item-40"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40"><a
+                                    href="/tf/wp1/aequity/faq/">FAQ</a></li>
+                            <li id="menu-item-39"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a
+                                    href="/tf/wp1/aequity/testimonials/">Testimonials</a></li>
+                            <li id="menu-item-41"
+                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-41"><a
+                                    href="/tf/wp1/aequity/404">404</a></li>
+                        </ul> -->
+                    </li>
+                    <li id="menu-item-17"
+                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-17">
+                        <a href="#">Lĩnh vực</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-47"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a
+                                    href="/tf/wp1/aequity/practice-areas/">Tư vấn pháp luật</a></li>
+                            <li id="menu-item-46"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46"><a
+                                    href="/tf/wp1/aequity/practice-areas-s2/">Tham gia tố tụng</a></li>
+                            <li id="menu-item-308"
+                                class="menu-item menu-item-type-post_type menu-item-object-practice menu-item-308"><a
+                                    href="/tf/wp1/aequity/practice/legal-advice/">Đại diện ngoài tố tụng cho khách hàng</a></li>
+                            <li id="menu-item-308"
+                                class="menu-item menu-item-type-post_type menu-item-object-practice menu-item-308"><a
+                                    href="/tf/wp1/aequity/practice/legal-advice/">Thực hiện các dịch vụ pháp lý khác</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-18"
+                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-18">
+                        <a href="#">Nhân sự</a>
+                        <!-- <ul class="sub-menu">
+                            <li id="menu-item-53"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-53"><a
+                                    href="/tf/wp1/aequity/cases/">Cases</a></li>
+                            <li id="menu-item-52"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a
+                                    href="/tf/wp1/aequity/cases-s2/">Cases Style 2</a></li>
+                            <li id="menu-item-475"
+                                class="menu-item menu-item-type-post_type menu-item-object-case menu-item-475"><a
+                                    href="/tf/wp1/aequity/case/a-collection-of-textile-samples-lay-spread/">Cases
+                                    single</a></li>
+                        </ul> -->
+                    </li>
+                    <li id="menu-item-14"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-14">
+                        <a href="/tf/wp1/aequity/blog/">Tin tức</a>
+                        <!-- <ul class="sub-menu">
+                            <li id="menu-item-312"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-312"><a
+                                    href="/tf/wp1/aequity/blog/">Blog Default</a></li>
+                            <li id="menu-item-313"
+                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-313"><a
+                                    href="/tf/wp1/aequity/blog/?sidebar=sidebar-left">Blog left sidebar</a></li>
+                            <li id="menu-item-314"
+                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-314"><a
+                                    href="/tf/wp1/aequity/blog/?sidebar=sidebar-hide">Blog fullwidth</a></li>
+                            <li id="menu-item-496"
+                                class="menu-item menu-item-type-post_type menu-item-object-post menu-item-496"><a
+                                    href="/tf/wp1/aequity/theres-a-troubling-inequality-at-the-heart-of-our-justice-system/">Blog
+                                    Details</a></li>
+                        </ul> -->
+                    </li>
+                    <!-- <li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21">
+                        <a href="/tf/wp1/aequity/contact/">Contact</a></li> -->
+                </ul>
+            </div><!-- end of nav-collapse -->
+            <div class="search-quote">
+                <div class="header-search-area">
 
-          <div class="header-right">
-<!--              <div class="search-bar">-->
-<!--                  &lt;!&ndash; <form> &ndash;&gt;-->
-<!--                      <input type="text" value="Tìm kiếm..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">-->
-<!--                      <input type="submit" value="">-->
-<!--                  &lt;!&ndash; </form> &ndash;&gt;-->
-<!--              </div>-->
-          </div>
+                    <div>
+                        <button class="btn open-btn"><i class="fi flaticon-magnifying-glass-browser"></i></button>
+                    </div>
+                </div>
+                <div class="quote">
+                    <a href="/tf/wp1/aequity/contact/" class=" theme-btn ">Free consultation</a>
+                </div>
+            </div>
+        </div><!-- end of container -->
 
-              <div class="clearfix"></div>
-      </div>
-  </div>
-</div>
+
+    </nav>
+</header>
