@@ -1,20 +1,19 @@
 package com.app.law.service.impl;
 
+import com.app.law.dto.UserDto;
 import com.app.law.entity.User;
+import com.app.law.entity.mapper.UserMapper;
 import com.app.law.repository.UserRepository;
 import com.app.law.service.IUserService;
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -27,6 +26,8 @@ public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepo;
+
+    private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
 //    @Autowired
 //    private AuthenticationManager authenManager;
@@ -46,10 +47,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User login(String email, String raw_password) {
+    public UserDto login(String email, String raw_password) {
         User user = userRepo.findOneByEmail(email);
         return user!= null && passwordEncoder.matches(raw_password, user.getPassword()) ?
-            user : null;
+                userMapper.toDTO(user) : null;
     }
 
     @Override
