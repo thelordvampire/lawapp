@@ -6,21 +6,23 @@
           <div *ngIf="f.title.errors.required" style="color:red">Bạn bắt buộc phải nhập tiêu đề bài viết</div>
       </div>
   </div>
-  <!-- <div class="form-group">
-      <label for="content">Nội dung</label> -->
-      <!-- <tinymce [config]="config" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></tinymce> -->
-  <!-- </div> -->
   <div class="form-group">
+      <label for="content">Nội dung</label>
+      <tinymce [config]="config" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></tinymce>
+      <!-- <textarea id="editor"></textarea> -->
+   </div>
+  <!-- <div class="form-group">
     <label for="content">Nội dung</label>
-    <app-ngx-editor [config]="config"  [placeholder]="'Enter text here...'" [spellcheck]="true" formControlName="content"></app-ngx-editor>
-</div>
+    <app-ngx-editor [config]="config" (execute)="executeCommand($event)" (uploadImage)="onUploadImage($event)" [placeholder]="'Enter text here...'" [spellcheck]="true" formControlName="content"></app-ngx-editor>
+</div> -->
+
   <div class="form-group">
     <label for="image">Hình ảnh</label>
 
     <div class="input-group">
       <div class="custom-file">
         <input type="file" class="custom-file-input" id="inputGroupFile01"
-          aria-describedby="inputGroupFileAddon01"  formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }">
+          aria-describedby="inputGroupFileAddon01"  formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (input)="onFileChange($event)">
       </div>
     </div>
     <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
