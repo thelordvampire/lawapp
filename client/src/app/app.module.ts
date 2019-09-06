@@ -30,6 +30,7 @@ import { NewsComponent } from './main-component/news/news.component';
 import { NewsDetailComponent } from './main-component/news/component/news-detail/news-detail.component';
 import { AdminNewsComponent } from './admin/component/admin-news/admin-news.component';
 import { NgxTinymceModule } from 'ngx-tinymce';
+import { NgxEditorModule } from 'ngx-editor';
 @NgModule({
     imports: [
         BrowserModule,
@@ -38,6 +39,7 @@ import { NgxTinymceModule } from 'ngx-tinymce';
         appRoutingModule,
         FormsModule,
         NgxCarouselModule,
+        NgxEditorModule,
         NgxTinymceModule.forRoot({
             // or cdn
             baseURL: '//cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.0/'

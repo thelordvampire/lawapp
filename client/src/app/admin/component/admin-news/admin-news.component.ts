@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/_services';
 // import { MdbTablePaginationComponent, MdbTableDirective } from 'PATH-TO-MDB-ANGULAR-HERE';
-
+import { environment } from '@environments/environment';
 @Component({
   selector: 'app-admin-news',
   templateUrl: './admin-news.component.html',
@@ -34,7 +34,6 @@ export class AdminNewsComponent implements OnInit  {
       content: ['', Validators.required],
       image: ['', Validators.required],
   });
-
   }
   get f() { return this.newsForm.controls; }
   createNews() {
@@ -52,20 +51,24 @@ export class AdminNewsComponent implements OnInit  {
     console.log(this.newsForm)
   }
     config: any = {
-      height: 350,
-      theme: 'modern',
-      // powerpaste advcode toc tinymcespellchecker a11ychecker mediaembed linkchecker help
-      plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image imagetools link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists textcolor wordcount contextmenu colorpicker textpattern',
-      toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-      image_advtab: true,
-      imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
-      templates: [
-        { title: 'Test template 1', content: 'Test 1' },
-        { title: 'Test template 2', content: 'Test 2' }
-      ],
-      content_css: [
-        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-        '//www.tinymce.com/css/codepen.min.css'
+      "editable": true,
+      "spellcheck": true,
+      "height": "500px",
+      "minHeight": "500px",
+      "width": "auto",
+      "minWidth": "0",
+      "translate": "yes",
+      "enableToolbar": true,
+      "showToolbar": true,
+      "placeholder": "Enter text here...",
+      imageEndPoint: `${environment.apiUrl}/uploadOneFile`,
+      "toolbar": [
+          ["bold", "italic", "underline", "strikeThrough", "superscript", "subscript"],
+          ["fontName", "fontSize", "color"],
+          ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "indent", "outdent"],
+          ["cut", "copy", "delete", "removeFormat", "undo", "redo"],
+          ["paragraph", "blockquote", "removeBlockquote", "horizontalLine", "orderedList", "unorderedList"],
+          ["link", "unlink", "image", "video"]
       ]
     };
 }

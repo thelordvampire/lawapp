@@ -1,7 +1,9 @@
 package com.app.law.controller;
 
 import com.app.law.auth.JwtProvider;
+import com.app.law.dto.UserDto;
 import com.app.law.entity.User;
+import com.app.law.entity.mapper.UserMapper;
 import com.app.law.service.IUserService;
 import com.app.law.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -63,12 +65,13 @@ public class AccountController {
     public ResponseEntity<Object> login(@RequestBody User user) {
         //201 - ok()   202 - accept()
         log.debug("login: {}", user);
-        User loginedUser = userService.login(user.getEmail(), user.getPassword());
+        UserDto loginedUser = userService.login(user.getEmail(), user.getPassword());
         String result = "Login failed";
         try {
             if (loginedUser!= null) {
                 result = jwtProvider.generateTokenLogin(loginedUser.getEmail());
                 loginedUser.setToken("Bearer "+ result);
+
                 return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(loginedUser);
             }
         } catch (Exception ex) {

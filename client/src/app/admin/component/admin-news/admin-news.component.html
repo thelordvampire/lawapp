@@ -6,10 +6,14 @@
           <div *ngIf="f.title.errors.required" style="color:red">Bạn bắt buộc phải nhập tiêu đề bài viết</div>
       </div>
   </div>
+  <!-- <div class="form-group">
+      <label for="content">Nội dung</label> -->
+      <!-- <tinymce [config]="config" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></tinymce> -->
+  <!-- </div> -->
   <div class="form-group">
-      <label for="content">Nội dung</label>
-      <tinymce [config]="config" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></tinymce>
-  </div>
+    <label for="content">Nội dung</label>
+    <app-ngx-editor [config]="config"  [placeholder]="'Enter text here...'" [spellcheck]="true" formControlName="content"></app-ngx-editor>
+</div>
   <div class="form-group">
     <label for="image">Hình ảnh</label>
 
