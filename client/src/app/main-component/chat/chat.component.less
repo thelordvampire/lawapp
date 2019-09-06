@@ -199,8 +199,8 @@ a {
 /deep/.chat-header {
     padding: 0 15px;
     border-bottom: 1px solid #ddd;
-    background-color: #3578E5;
-    color: white;
+    background-color: #fff;
+    color: #000;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -264,9 +264,19 @@ a {
 }
 .chat-header{
     cursor: pointer;
-    height: 40px;
+    height: 48px;
     position: relative;
-    line-height: 40px;
+    text-align: center;
+    p{
+        color: #000;
+        margin: 0;
+        padding: 0;
+        & + p{
+            color: #555;
+            font-size: 12px;
+            line-height: 13px;
+        }
+    }
     button{
         line-height: auto;
     }
