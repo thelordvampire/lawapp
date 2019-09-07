@@ -32,7 +32,7 @@ public class User implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
 
     @Column(name = "roleId")

@@ -44,14 +44,14 @@ public class ImageController {
         return ResponseEntity.status(imagePath!= null? HttpStatus.OK : HttpStatus.BAD_REQUEST).body(imagePath);
     }
 
-    @GetMapping(value = "image/{imageName}")
-    public byte[] getImage(@PathVariable(value = "imageName") String imageName)  {
-
-        try {
-            return imageService.getImage(imageName);
-        } catch (IOException e){
-            logger.error(e.getMessage() , e);
-            return null;
-        }
-    }
+//    @GetMapping(value = "image/{imageName}")
+//    public byte[] getImage(@PathVariable(value = "imageName") String imageName)  {
+//
+//        try {
+//            return imageService.getImage(imageName);
+//        } catch (IOException e){
+//            logger.error(e.getMessage() , e);
+//            return null;
+//        }
+//    }
 }
