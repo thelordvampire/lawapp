@@ -3,6 +3,9 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/_services';
 // import { MdbTablePaginationComponent, MdbTableDirective } from 'PATH-TO-MDB-ANGULAR-HERE';
+import { environment } from '@environments/environment';
+
+declare var tinymce: any;
 
 @Component({
   selector: 'app-admin-news',
@@ -26,7 +29,9 @@ export class AdminNewsComponent implements OnInit  {
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
     this.newsForm = this.formBuilder.group({
@@ -34,9 +39,16 @@ export class AdminNewsComponent implements OnInit  {
       content: ['', Validators.required],
       image: ['', Validators.required],
   });
-
+  }
+  onFileChange(event?) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      console.log('RESULT', reader.result)
+    }
   }
   get f() { return this.newsForm.controls; }
+
   createNews() {
     this.submitted = true;
 
@@ -49,14 +61,36 @@ export class AdminNewsComponent implements OnInit  {
     }
 
     this.loading = true;
-    console.log(this.newsForm)
+    console.log(this.newsForm);
   }
+    // config: any = {
+    //   "editable": true,
+    //   "spellcheck": true,
+    //   "height": "500px",
+    //   "minHeight": "500px",
+    //   "width": "auto",
+    //   "minWidth": "0",
+    //   "translate": "yes",
+    //   "enableToolbar": true,
+    //   "showToolbar": true,
+    //   "placeholder": "Enter text here...",
+    //   // imageEndPoint:  `${environment.apiUrl}/uploadOneFile`,
+    //   imageEndPoint: this.onUploadImage(this),
+    //   "toolbar": [
+    //       ["bold", "italic", "underline", "strikeThrough", "superscript", "subscript"],
+    //       ["fontName", "fontSize", "color"],
+    //       ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "indent", "outdent"],
+    //       ["cut", "copy", "delete", "removeFormat", "undo", "redo"],
+    //       ["paragraph", "blockquote", "removeBlockquote", "horizontalLine", "orderedList", "unorderedList"],
+    //       ["link", "unlink", "image", "video"]
+    //   ]
+    // };
     config: any = {
-      height: 350,
+      height: 'auto',
+      minHeight: 450,
       theme: 'modern',
-      // powerpaste advcode toc tinymcespellchecker a11ychecker mediaembed linkchecker help
-      plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image imagetools link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists textcolor wordcount contextmenu colorpicker textpattern',
-      toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+      plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image imagetools link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists textcolor wordcount contextmenu colorpicker textpattern autoresize',
+      toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | link image',
       image_advtab: true,
       imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
       templates: [
@@ -64,8 +98,30 @@ export class AdminNewsComponent implements OnInit  {
         { title: 'Test template 2', content: 'Test 2' }
       ],
       content_css: [
-        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-        '//www.tinymce.com/css/codepen.min.css'
-      ]
+        // '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+        // '//www.tinymce.com/css/codepen.min.css'
+      ],
+      file_picker_types: 'image',
+      file_picker_callback: function(cb, value, meta) {
+        let input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.onchange = function() {
+          let file = this['files'][0];
+          let reader = new FileReader();
+          reader.onload = function() {
+            let id = 'blobid' + (new Date()).getTime();
+            let blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+            const base64 = String(reader.result).split(',')[1];
+            const blobInfo = blobCache.create(id, file, base64);
+            blobCache.add(blobInfo);
+
+            cb(blobInfo.blobUri(), { title: file.name });
+          };
+          reader.readAsDataURL(file);
+        };
+
+        input.click();
+      }
     };
 }

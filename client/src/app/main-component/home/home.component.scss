@@ -101,3 +101,36 @@
         padding: 10px;
     }
 }
+.feild-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+
+    .feild {
+    margin: 5px;
+    border: 1px solid gray;
+    background-color: #9E6E4E;
+    padding: 30px;
+    width: 23%;
+    text-align: center;
+    color: #fff;
+    }
+}
+
+
+.tagList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .tagName {
+        padding: 5px;
+        margin: 2px;
+        border: 1px solid gray;
+        background: #fff;
+       // box-shadow: 0 4px 10px #ccc;
+        border-radius: 4px;
+        word-wrap: break-word;
+        cursor: pointer;
+    }
+}

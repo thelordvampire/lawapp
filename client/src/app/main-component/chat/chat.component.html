@@ -1,6 +1,7 @@
 <form [formGroup]="chatForm" [class]="!isAdmin ? 'formchat-wrap' : 'formchat-admin'" [hidden]="!isShowChatDialog">
     <div class="chat-header" (click)="onPressCloseHeader()">
-        <span>{{title}}</span>
+        <p>Danh Việt - Luật người việt</p>
+        <p>Phản hồi trong vòng vài phút</p>
     </div>
     <div id="username-page" [hidden]="!(!isShow && !isShowHeader)">
         <div class="username-page-container">

@@ -21,7 +21,7 @@ import java.util.List;
 public class ImageServiceImpl implements ImageService {
 
 
-    private  String uploadRootPath = "C:\\image" ;
+    private  String uploadRootPath = "D:\\image" ;
 
     @Override
     public boolean uploadImage(HttpServletRequest request, ImageDto imageDto) {
@@ -72,6 +72,40 @@ public class ImageServiceImpl implements ImageService {
             }
         }
         return false;
+    }
+
+    @Override
+    public String uploadImage(MultipartFile imageFile) {
+        System.out.println("uploadRootPath=" + uploadRootPath);
+
+        File uploadRootDir = new File(uploadRootPath);
+        // Tạo thư mục gốc upload nếu nó không tồn tại.
+        if (!uploadRootDir.exists()) {
+            uploadRootDir.mkdirs();
+        }
+
+        // Tên file gốc tại Client.
+        String name = imageFile.getOriginalFilename();
+//        String[] s = name.split(".");
+
+        name = System.currentTimeMillis() + "." + name; //đặt tên ảnh theo thời gian upload
+        System.out.println("Client File Name = " + name);
+
+        if (name.length() > 0) {
+            try {
+                // Tạo file tại Server.
+                File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
+
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+                stream.write(imageFile.getBytes());
+                stream.close();
+                return uploadRootDir.getAbsolutePath() + File.separator + name;
+
+            } catch (Exception e) {
+                System.out.println("Error Write file: " + name);
+            }
+        }
+        return null;
     }
 
     @Override

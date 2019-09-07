@@ -23,6 +23,179 @@ body a{
 	-o-transition: 0.5s all ease;
 	-ms-transition: 0.5s all ease;
 }
+
+/*
+Theme Name: Aequity
+Theme URI: http://themeforest.net/user/themexshaper/
+Author: themexshaper
+Author URI: http://themeforest.net/user/themexshaper/portfolio
+Description: Aequity - Law WordPress Theme
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: aequity
+Tags: one-column, two-columns, left-sidebar, right-sidebar, custom-menu, featured-images, post-formats, theme-options, translation-ready
+*/
+
+
+/*--------------------------------------------------------------
+# Alignments
+--------------------------------------------------------------*/
+
+.alignleft {
+    display: inline;
+    float: left;
+    margin-right: 1.5em;
+}
+.clear-fix{
+    clear: both;
+}
+
+.alignright {
+    display: inline;
+    float: right;
+    margin-left: 1.5em;
+}
+
+.aligncenter {
+    clear: both;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/*--------------------------------------------------------------
+# Clearings
+--------------------------------------------------------------*/
+
+.clear:before,
+.clear:after,
+.entry-content:before,
+.entry-content:after,
+.comment-content:before,
+.comment-content:after,
+.site-header:before,
+.site-header:after,
+.site-content:before,
+.site-content:after {
+    content: "";
+    display: table;
+    table-layout: fixed;
+}
+
+.clear:after,
+.entry-content:after,
+.comment-content:after,
+.site-header:after,
+.site-content:after,
+.site-footer:after {
+    clear: both;
+}
+
+
+/* Make sure embeds and iframes fit their containers. */
+
+embed,
+iframe,
+object {
+    max-width: 100%;
+}
+
+
+/* By Authot Post */
+
+.bypostauthor {
+    display: inline-block;
+}
+
+
+/*--------------------------------------------------------------
+## Captions
+--------------------------------------------------------------*/
+
+.wp-caption {
+    margin-bottom: 1.5em;
+    max-width: 100%;
+}
+
+.wp-caption img[class*="wp-image-"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wp-caption .wp-caption-text {
+    margin: 0.8075em 0;
+}
+
+.wp-caption-text {
+    text-align: center;
+}
+
+
+/*--------------------------------------------------------------
+## Galleries
+--------------------------------------------------------------*/
+
+.gallery {
+    margin-bottom: 1.5em;
+    margin-right: -15px;
+}
+
+.gallery-item {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+    padding-right: 15px;
+}
+.gallery-item {
+  padding-bottom: 15px;
+}
+.gallery-columns-2 .gallery-item {
+    max-width: 50%;
+}
+
+.gallery-columns-3 .gallery-item {
+    max-width: 33.33%;
+}
+
+.gallery-columns-4 .gallery-item {
+    max-width: 25%;
+}
+
+.gallery-columns-5 .gallery-item {
+    max-width: 20%;
+}
+
+.gallery-columns-6 .gallery-item {
+    max-width: 16.66%;
+}
+
+.gallery-columns-7 .gallery-item {
+    max-width: 14.28%;
+}
+
+.gallery-columns-8 .gallery-item {
+    max-width: 12.5%;
+}
+
+.gallery-columns-9 .gallery-item {
+    max-width: 11.11%;
+}
+
+.gallery-caption {
+    display: block;
+}
+
+.screen-reader-text {
+    background: transparent;
+    display: none;
+}
+
+
+
 p{
 	margin:0;
 }
@@ -43,10 +216,9 @@ body a:hover{
 }
 /*--Header-top-end--*/
 /*--Header-Starts--*/
-.navigation {
-    float: left;
+/* .navigation {
     margin: 0.6em 0 0;
-}
+} */
 .navbar-default {
     background-color:#fff! important;
     border-color:#fff ! important;
@@ -841,9 +1013,7 @@ h3.title {
     padding: 0.5em 0.8em;
     font-size: 0.85em;
 }
-.navigation {
-    margin: 0.5em 0 0;
-}
+
 .head-main h1 a {
     font-size: 1.4em;
 }
@@ -942,6 +1112,12 @@ h3.title {
     font-size: 1.7em;
 }
 }
+.bg-gray{
+    background-color: #fafafa;
+}
+.section-site {
+    padding-top: 50px;
+}
 /*--responsive--*/
 @media(max-width:767px){
 .navbar-toggle {
@@ -982,7 +1158,6 @@ h3.title {
 }
 .navigation {
     margin: 0.5em 0 0;
-    float: left;
     width: 100%;
 }
 .navbar-default .navbar-nav > li > a {

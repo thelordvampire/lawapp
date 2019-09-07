@@ -25,8 +25,16 @@ public class LawApplication {
 			System.out.println("Init Data");
 			if(userService.getAll().size() == 0) {
 				List<User> listUser = Arrays.asList(
-					new User("123456", "hanguyen@gm.com", "Hà Nguyễn", RoleConstant.LUAT_SU, privilegeService.getAll()),
-					new User("123456", "bacnguyen@gm.com", "Bắc Nguyễn", RoleConstant.LUAT_SU, privilegeService.getAll())
+					new User("123456", "admin", "Hà Nguyễn", RoleConstant.LUAT_SU, privilegeService.getAll()),
+					new User("123456", "admin1", "Bắc Nguyễn", RoleConstant.LUAT_SU, privilegeService.getAll()),
+					new User("123456", "admin2", "Trần Văn Long", RoleConstant.LUAT_SU, privilegeService.getAll()),
+					new User("123456", "admin3", "Nguyễn Quốc Huy", RoleConstant.LUAT_SU, privilegeService.getAll()),
+					new User("123456", "admin4", "Phạm Huy Hùng", RoleConstant.LUAT_SU, privilegeService.getAll()),
+					new User("123456", "admin5", "Nguyễn Minh Đức", RoleConstant.LUAT_SU, privilegeService.getAll()),
+					new User("123456", "admin6", "Trần Thu Hà", RoleConstant.LUAT_SU, privilegeService.getAll()),
+					new User("123456", "admin7", "Nguyễn Mai Linh", RoleConstant.LUAT_SU, privilegeService.getAll()),
+					new User("123456", "admin8", "Trần Đình Trọng", RoleConstant.LUAT_SU, privilegeService.getAll()),
+					new User("123456", "admin9", "Trần Đức Long", RoleConstant.LUAT_SU, privilegeService.getAll())
 				);
 				listUser.forEach(userService::createUser);
 			}

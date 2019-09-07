@@ -1,6 +1,7 @@
 package com.app.law.controller;
 
 import com.app.law.auth.JwtProvider;
+import com.app.law.dto.UserDto;
 import com.app.law.entity.User;
 import com.app.law.service.IUserService;
 import com.app.law.util.HeaderUtil;
@@ -12,9 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -28,7 +26,7 @@ public class AccountController {
 
 //    @RequestMapping(value="/user/login", method = RequestMethod.GET, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
 //    public ResponseEntity<Object> logina(@RequestParam(required = false) String username, @RequestParam(required = false) String password) throws URISyntaxException {
-//        log.debug("login: {}, {}", username, password);
+//        log.info("login: {}, {}", username, password);
 //
 //        return ResponseEntity.accepted().headers(HttpHeaders.EMPTY).body("no logined user found");
 //    }
@@ -62,17 +60,17 @@ public class AccountController {
     @RequestMapping(value="/user/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> login(@RequestBody User user) {
         //201 - ok()   202 - accept()
-        log.debug("login: {}", user);
-        User loginedUser = userService.login(user.getEmail(), user.getPassword());
+        log.info("login: {}", user);
+        UserDto loginedUser = userService.login(user.getEmail(), user.getPassword());
         String result = "Login failed";
         try {
             if (loginedUser!= null) {
-                result = jwtProvider.generateTokenLogin(loginedUser.getEmail());
-                loginedUser.setToken("Bearer "+ result);
-                return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(loginedUser);
+                String token = jwtProvider.generateTokenLogin(loginedUser.getEmail());
+                loginedUser.setToken("Bearer "+ token);
+                return ResponseEntity.ok().body(loginedUser);
             }
         } catch (Exception ex) {
-            log.debug("Login failed: {}", ex.getMessage());
+            log.info("Login failed: {}", ex.getMessage());
             result = "Server Error";
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
@@ -80,17 +78,15 @@ public class AccountController {
 
     @RequestMapping(value="/user/autologin", method = RequestMethod.POST)
     public ResponseEntity<Object> autologin() {
-        log.debug("autologin");
+        log.info("autologin");
         User loginedUser = userService.getLoginedUser();
-        if (loginedUser!= null)
-            return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(loginedUser);
-        else
-            return ResponseEntity.ok().headers(HeaderUtil.createNotAuthenHeader()).body(null);
+        return ResponseEntity.status(loginedUser != null ?
+            HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR).body(loginedUser);
     }
 
     @RequestMapping(value="/user/create", method = RequestMethod.POST)
     public ResponseEntity<Object> createAccount(@RequestBody User user) {
-        log.debug("create user: {}", user);
+        log.info("create user: {}", user);
         HttpStatus status = HttpStatus.BAD_REQUEST;
         String message = "no user created";
 
@@ -99,18 +95,18 @@ public class AccountController {
         } else {
             User foundUser = userService.findUserByEmail(user.getEmail());
             if (foundUser != null)
-                return ResponseEntity.badRequest().headers(HttpHeaders.EMPTY).body("username existed");
+                return ResponseEntity.badRequest().body("username existed");
 
             User createdUser = userService.createUser(user);
             if(createdUser!=null)
-                return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(createdUser);
+                return ResponseEntity.ok().body(createdUser);
         }
         return ResponseEntity.status(status).body(message);
     }
 
     @RequestMapping(value="/user/change_password", method = RequestMethod.POST)
-    public ResponseEntity<Object> changePassword(@RequestBody String new_password) throws URISyntaxException {
-        log.debug("change Password: {}", new_password);
+    public ResponseEntity<String> changePassword(@RequestBody String new_password) throws URISyntaxException {
+        log.info("change Password: {}", new_password);
 
         boolean isSuccess = userService.changePassword(new_password);
         if(isSuccess)
