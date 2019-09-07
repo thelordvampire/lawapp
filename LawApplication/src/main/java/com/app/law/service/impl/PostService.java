@@ -1,5 +1,6 @@
 package com.app.law.service.impl;
 
+import com.app.law.constant.PostStatus;
 import com.app.law.entity.Post;
 import com.app.law.repository.PostRepository;
 import com.app.law.service.IPostService;
@@ -22,12 +23,19 @@ public class PostService implements IPostService {
 
     @Override
     public Post save(Post post) {
+        post.setStatus(PostStatus.PENDING);
         return pr.save(post);
     }
 
     @Override
     public Post update(Post post) {
-       return pr.save(post);
+        post.setStatus(PostStatus.PENDING);
+        return pr.save(post);
+    }
+
+    @Override
+    public List<Post> findAllByStatus(String status) {
+        return pr.findAllByStatus(status);
     }
 
     @Override
@@ -44,6 +52,19 @@ public class PostService implements IPostService {
     @Override
     public Page<Post> findAll(Pageable pageable) {
         return pr.findAll(pageable);
+    }
+
+    @Override
+    public boolean updateStatus(Long id , String status) {
+        try {
+            Optional<Post> optionalPost = pr.findById(id);
+            Post post = optionalPost.get();
+            post.setStatus(status);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 
     void deletePost(long id) {

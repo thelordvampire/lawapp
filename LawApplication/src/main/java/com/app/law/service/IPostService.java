@@ -16,11 +16,15 @@ public interface IPostService {
 
     Post update(Post post);
 
+    List<Post> findAllByStatus(String status);
+
     Post findById(long id);
 
     List<Post> findAll();
 
     Page<Post> findAll(Pageable pageable);
+
+    boolean updateStatus(Long id , String status);
 
 
 }
