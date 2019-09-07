@@ -40,7 +40,6 @@ public class Post implements Serializable {
     @Column(name =  "post_status")
     private String status;
 
-
     @Column(name = "created_datetime")
     @CreationTimestamp
     private Timestamp createdDatetime;

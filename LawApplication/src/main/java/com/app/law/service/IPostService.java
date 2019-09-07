@@ -1,5 +1,6 @@
 package com.app.law.service;
 
+import com.app.law.dto.PostDto;
 import com.app.law.entity.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,17 +13,17 @@ import java.util.Optional;
  */
 public interface IPostService {
 
-    Post save(Post post);
+    Post save(PostDto dto);
 
-    Post update(Post post);
+    Post update(PostDto dto);
 
-    List<Post> findAllByStatus(String status);
+    List<PostDto> findAllByStatus(String status);
 
     Post findById(long id);
 
-    List<Post> findAll();
+    List<PostDto> findAll();
 
-    Page<Post> findAll(Pageable pageable);
+    Page<PostDto> findAll(Pageable pageable);
 
     boolean updateStatus(Long id , String status);
 

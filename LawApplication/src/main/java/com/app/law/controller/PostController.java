@@ -1,8 +1,13 @@
 package com.app.law.controller;
 
+import com.app.law.dto.PostDto;
 import com.app.law.entity.Post;
+import com.app.law.mapper.PostMapper;
 import com.app.law.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +24,11 @@ public class PostController {
 
     // Lấy bài viết theo id
     @GetMapping("/post/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable(value = "id" ,required = true)  Long id) {
-        return ResponseEntity.ok(postService.findById(id));
+    public ResponseEntity getPostById(@PathVariable(value = "id" ,required = true)  Long id) {
+        Post post = postService.findById(id);
+        if(post != null) {
+            return ResponseEntity.ok(PostMapper.EntityToDto(post)) ;
+        } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found post");
     }
 
     //Lất tất cả bài viết
@@ -29,25 +37,43 @@ public class PostController {
         return ResponseEntity.ok(postService.findAll());
     }
 
+    @GetMapping("/posts/paging")
+    public ResponseEntity getAllPostPageing(@RequestParam(value = "page" , defaultValue = "0") int page,
+                                                  @RequestParam(value = "size" , defaultValue = "10") int size) {
+        return ResponseEntity.ok(postService.findAll(PageRequest.of(0 , 10)));
+    }
+
+
     //Update status post
     @PostMapping("/post/status")
-    public ResponseEntity<String> updatePostStatus(@RequestParam(name = "id" , required = true) Long id ,
+    public ResponseEntity updatePostStatus(@RequestParam(name = "id" , required = true) Long id ,
                                                  @RequestParam(name = "status" , required = true) String status){
         if (postService.updateStatus(id , status) ){
-            return ResponseEntity.ok("true");
-        } else return ResponseEntity.ok("false");
+            return ResponseEntity.status(HttpStatus.OK).body("success");
+        } else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("failed");
     }
 
     // Đăng bài nhưng set status pending
     @PostMapping("/post")
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
-        return ResponseEntity.ok(postService.save(post));
+    public ResponseEntity createPost(@RequestBody PostDto dto) {
+        try {
+            postService.save(dto);
+            return ResponseEntity.status(HttpStatus.OK).body("success");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("failed");
+        }
+
     }
 
     // Update nhưng set status pending
     @PutMapping
-    public ResponseEntity<Post> updatePost(@RequestBody Post post) {
-        return ResponseEntity.ok(postService.save(post));
+    public ResponseEntity updatePost(@RequestBody PostDto dto) {
+        try {
+            postService.save(dto);
+            return ResponseEntity.status(HttpStatus.OK).body("success");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("failed");
+        }
     }
 
 

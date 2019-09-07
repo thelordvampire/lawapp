@@ -45,7 +45,7 @@ public class User implements Serializable {
     private List<User_Specialization> listUserSpecialization;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<Post> listPost = new HashSet<>();
+    private List<Post> listPost ;
 
     @Transient
     private String token;
