@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @RestController
 public class AccountController {
@@ -104,6 +105,26 @@ public class AccountController {
         return ResponseEntity.status(status).body(message);
     }
 
+    @RequestMapping(value="/user/{userId}/image", method = RequestMethod.GET)
+    public ResponseEntity<String> getImagebyUserId(@PathVariable Integer userId) {
+        log.info("getImagebyUserId : {}", userId);
+
+        User user = userService.findUserById(userId);
+        if(user != null) {
+            return ResponseEntity.ok().body(user.getImage());
+        } else {
+            log.info("getImagebyUserId : user not found");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @RequestMapping(value="/user/get-lawer", method = RequestMethod.GET)
+    public ResponseEntity<List<UserDto>> getAllAvaiableLawer() {
+        log.info("getAllAvaiableLawer ");
+        List<UserDto> listLawer =  userService.getAllLawer();
+        return ResponseEntity.status(HttpStatus.OK).body(listLawer);
+    }
+
     @RequestMapping(value="/user/change_password", method = RequestMethod.POST)
     public ResponseEntity<String> changePassword(@RequestBody String new_password) throws URISyntaxException {
         log.info("change Password: {}", new_password);
@@ -122,7 +143,7 @@ public class AccountController {
 //        if(createdUser!=null)
 //            return ResponseEntity.created(new URI("res/")).headers(HttpHeaders.EMPTY).body(createdUser);
 
-        return ResponseEntity.created(new URI("res/")).headers(HttpHeaders.EMPTY).body("password not changed");
+        return ResponseEntity.created(new URI("res/")).body("password not changed");
     }
 
 

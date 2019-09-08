@@ -14,7 +14,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
@@ -44,6 +47,15 @@ public class UserService implements IUserService {
             logger.info("create user fail: {}", ex.getMessage());
         }
         return createdUser;
+    }
+
+    @Override
+    public List<UserDto> getAllLawer() {
+        return userRepo.findAll()
+        .stream()
+        .filter(user ->user.getRoleId() ==1 || user.getRoleId() == 2)
+        .map(userMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     @Override

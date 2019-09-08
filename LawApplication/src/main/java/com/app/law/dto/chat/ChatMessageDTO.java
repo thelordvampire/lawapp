@@ -26,5 +26,6 @@ public class ChatMessageDTO {
     private Integer roomId;
     private Integer serverUserId;
     private String serverUserName;
+    private String serverUserImage;
     
 }

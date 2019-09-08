@@ -52,8 +52,9 @@ export class AuthenticationService {
     }
 
     clearLocalStorage() {
-        localStorage.removeItem('UserRoom');
-        localStorage.removeItem('currentUser');
+      localStorage.clear();
+        // localStorage.removeItem('UserRoom');
+        // localStorage.removeItem('currentUser');
     }
 
   getCurrentUser() {
@@ -69,7 +70,10 @@ export class AuthenticationService {
 
     isAdmin() {
       const user = this.getCurrentUser();
-      return !!user.id;
+      if(user) {
+        return !!(user.id);
+      }
+      return null;
       // return user ? user.isAdmin : null;
     }
 }

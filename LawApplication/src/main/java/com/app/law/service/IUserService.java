@@ -22,4 +22,6 @@ public interface IUserService {
     User getLoginedUser();
 
     List<User> getAll();
+
+    List<UserDto> getAllLawer();
 }

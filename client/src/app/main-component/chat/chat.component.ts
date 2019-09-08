@@ -41,6 +41,17 @@ export class ChatComponent implements OnInit {
     ) {}
 
   ngOnInit() {
+    console.log('vao chat');
+    if(this.auth.isAdmin() == true || this.auth.isAdmin() == false) {
+      this.isShow = true;
+    }
+    if(this.auth.isAdmin() == false) {
+      const roomId = localStorage.getItem('UserRoom');
+      if(roomId)
+        this.enterRoom(roomId);
+      // check expired o day;
+
+    }
     this.chatForm = this.fb.group({
       Username: [''],
       Message: [''],
@@ -67,7 +78,7 @@ export class ChatComponent implements OnInit {
   getChatBoxUser() {
     if (localStorage.getItem('UserRoom')) {
       this.appService.GetListUserChat().subscribe(res => {
-        this.enterRoom(JSON.parse(localStorage.getItem('UserRoom')), res.reverse());
+        this.enterRoom(JSON.parse(localStorage.getItem('UserRoom')));
         this.isShowHeader = false;
       });
     }
@@ -88,11 +99,11 @@ export class ChatComponent implements OnInit {
    const data = { clientName: this.chatForm.controls.Username.value };
    this.appService.CreateRoom(data).subscribe((res: any) => {
      this.roomId = res.id;
+     localStorage.setItem("UserRoom", res.id);
      this.auth.createUser(res.clientName);
      this.enterRoom();
      this.isAdmin = this.auth.isAdmin();
      this.fakeMessage();
-
     });
 }
   fakeMessage() {
@@ -111,7 +122,7 @@ export class ChatComponent implements OnInit {
   }
 
 
-  enterRoom(roomId?, chatHistory?) {
+  enterRoom(roomId?) {
     console.log('enter room');
     this.roomId = roomId ? roomId : this.roomId;
     this.chatService.connect(this.onConnected.bind(this), this.onError.bind(this));
@@ -152,7 +163,7 @@ export class ChatComponent implements OnInit {
      // this.isAdmin = true;
      // this.chatForm.patchValue({ name: 'Quản trị viên'});
    }
-   localStorage.setItem('UserRoom', JSON.stringify(this.roomId));
+   localStorage.setItem('UserRoom', this.roomId as string);
    this.isShow = true;
 }
   getHistory(roomId) {
@@ -193,12 +204,21 @@ export class ChatComponent implements OnInit {
        messageElement.classList.add('chat-message');
        messageElement.classList.add(this.showRight(message.userId ? message.userId : message.serverUserId) ? 'right-text' : 'left-text');
 
-       const avatarElement = document.createElement('i');
-       const avatarText = document.createTextNode(message.sender[0]);
-       avatarElement.appendChild(avatarText);
-       avatarElement.style['background-color'] = this.getAvatarColor(message.sender);
+       if(message.serverUserId == null || message.serverUserId == undefined || message.serverUserId == -1) {
+         const avatarElement = document.createElement('i');
+         const avatarText = document.createTextNode(message.sender[0]);
+         avatarElement.appendChild(avatarText);
+         avatarElement.style['background-color'] = this.getAvatarColor(message.sender);
+         messageElement.appendChild(avatarElement);
+       } else {
+         const avatarElement = document.createElement('img');
+         avatarElement.src = this.chatService.getServerUserImage(message.serverUserId);
+         avatarElement.style['width'] = '50px';
+         avatarElement.style['height'] = '50px';
+         messageElement.appendChild(avatarElement);
+       }
 
-       messageElement.appendChild(avatarElement);
+
 
        const usernameElement = document.createElement('span');
        const usernameText = document.createTextNode(message.sender);

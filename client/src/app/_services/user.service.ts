@@ -21,4 +21,8 @@ export class UserService {
     getAllRole() {
         return this.http.get<any>(`${environment.apiUrl}/role/get-all`);
     }
+
+    getImageByUserId(userId) {
+      return this.http.get<any>(`${environment.apiUrl}/user/${userId}/image`);
+    }
 }

@@ -52,10 +52,9 @@ public class ChatController {
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
-
     @RequestMapping(value = "/chat/room/{roomId}/get-all")
-    public ResponseEntity<List<ChatMessage>> getAllChatMessage(@PathVariable Integer roomId) {
-        List<ChatMessage> allMessageByRoomID = chatMessageService.getAllMessageByRoomID(roomId);
+    public ResponseEntity<List<ChatMessageDTO>> getAllChatMessage(@PathVariable Integer roomId) {
+        List<ChatMessageDTO> allMessageByRoomID = chatMessageService.getAllMessageByRoomID(roomId);
         return ResponseEntity.status(HttpStatus.OK).body(allMessageByRoomID);
     }
     @MessageMapping("/chat/{roomId}/sendMessage")

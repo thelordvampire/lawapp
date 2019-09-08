@@ -66,7 +66,7 @@ public class PostController {
     }
 
     // Update nhưng set status pending
-    @PutMapping
+    @PutMapping("/post")
     public ResponseEntity updatePost(@RequestBody PostDto dto) {
         try {
             postService.save(dto);
