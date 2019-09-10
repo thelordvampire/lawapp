@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AppService } from '../../app.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +18,7 @@ export class ChatComponent implements OnInit {
   isShow = false;
   isShowHeader = true;
   isShowChatDialog = true;
-
+  isConfirm = false;
   isAdmin = false;
   usernamePage;
   chatPage;
@@ -172,8 +172,14 @@ export class ChatComponent implements OnInit {
     }
 
   }
-
+  @HostListener('window:beforeunload', ['$event'])
+  public doSomething($event) {
+    if(this.isConfirm) {
+      return $event.returnValue = "something";
+    }
+}
  onMessageReceived(payload) {
+   this.isConfirm = true;
    console.log('payload', payload);
    if (payload.body) {
      const message = JSON.parse(payload.body);
