@@ -20,6 +20,8 @@ public class PostDto {
 
     private String content;
 
+    private String image;
+
     private String tag;
 
     private Integer userId;

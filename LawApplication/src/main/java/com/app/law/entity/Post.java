@@ -26,6 +26,9 @@ public class Post implements Serializable {
     @NotNull
     private String title;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "content")
     @NotNull
     private String content;

@@ -13,6 +13,7 @@ public class PostMapper {
         Post post = new Post();
         post.setTitle(dto.getTitle());
         post.setContent(dto.getContent());
+        post.setImage(dto.getImage());
 
         User user = new User();
         user.setId(dto.getUserId());
@@ -25,6 +26,7 @@ public class PostMapper {
         PostDto dto = new PostDto();
         dto.setTitle(entity.getTitle());
         dto.setContent(entity.getContent());
+        dto.setImage(entity.getImage());
         dto.setId(entity.getId());
         dto.setUserId(entity.getUser().getId());
         dto.setTag(entity.getTag());
