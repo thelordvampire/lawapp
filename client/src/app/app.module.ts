@@ -31,6 +31,7 @@ import { NewsDetailComponent } from './main-component/news/component/news-detail
 import { AdminNewsComponent } from './admin/component/admin-news/admin-news.component';
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { NgxEditorModule } from 'ngx-editor';
+import { ProfileComponent } from './main-component/profile/profile.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -63,6 +64,7 @@ import { NgxEditorModule } from 'ngx-editor';
         ShareComponent,
         NewsDetailComponent,
         AdminNewsComponent,
+        ProfileComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
