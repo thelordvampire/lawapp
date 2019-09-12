@@ -35,6 +35,27 @@ public class User implements Serializable {
     @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
 
+    @Column(name = "introduce")
+    private String introduce;
+
+    @Column(name = "field")  //linh vuc
+    private String field;
+
+    @Column(name = "charges")  // muc phi
+    private String charges;
+
+    @Column(name = "infor_detail")
+    private String inforDetail;
+
+    @Column(name = "prize")
+    private String prize;
+
+    @Column(name = "experience")
+    private String experience;
+
+    @Column(name = "education")
+    private String education;
+
     @Column(name = "roleId")
     private Integer roleId;
 

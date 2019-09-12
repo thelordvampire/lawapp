@@ -1,6 +1,6 @@
 package com.app.law.entity.mapper;
 
-import com.app.law.dto.UserDto;
+import com.app.law.dto.user.UserDto;
 import com.app.law.entity.User;
 import com.app.law.entity.User_Privilege;
 import org.mapstruct.Mapper;
