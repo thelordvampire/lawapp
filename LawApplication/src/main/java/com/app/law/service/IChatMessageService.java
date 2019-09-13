@@ -8,5 +8,5 @@ public interface IChatMessageService {
 
     ChatMessageDTO saveMessage(ChatMessageDTO messageDTO);
 
-    List<ChatMessageDTO> getAllMessageByRoomID(Integer roomId);
+    List<ChatMessage> getAllMessageByRoomID(Integer roomId);
 }

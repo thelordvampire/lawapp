@@ -26,8 +26,3 @@ insert into specialization values(1, 'Thuế')
 insert into specialization values(2, 'Doanh nghiệp')
 insert into specialization values(3, 'Đất đai')
 insert into specialization values(4, 'Hôn nhân')
-
--- role id: 1- luat su
--- role id: 2- tro ly luat su
--- role id: 3- chuyen vien tu van
--- role id: 4- thuc tap sinh

@@ -29,8 +29,8 @@ export class AdminNewsComponent implements OnInit  {
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
-  ) {
-
+  ) { 
+    
   }
 
   ngOnInit() {
@@ -48,7 +48,6 @@ export class AdminNewsComponent implements OnInit  {
     }
   }
   get f() { return this.newsForm.controls; }
-
   createNews() {
     this.submitted = true;
 
@@ -61,7 +60,7 @@ export class AdminNewsComponent implements OnInit  {
     }
 
     this.loading = true;
-    console.log(this.newsForm);
+    console.log(this.newsForm)
   }
     // config: any = {
     //   "editable": true,
@@ -102,26 +101,58 @@ export class AdminNewsComponent implements OnInit  {
         // '//www.tinymce.com/css/codepen.min.css'
       ],
       file_picker_types: 'image',
-      file_picker_callback: function(cb, value, meta) {
-        let input = document.createElement('input');
+      file_picker_callback: function (cb, value, meta) {
+        var input = document.createElement('input');
         input.setAttribute('type', 'file');
         input.setAttribute('accept', 'image/*');
-        input.onchange = function() {
-          let file = this['files'][0];
-          let reader = new FileReader();
-          reader.onload = function() {
-            let id = 'blobid' + (new Date()).getTime();
-            let blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-            const base64 = String(reader.result).split(',')[1];
-            const blobInfo = blobCache.create(id, file, base64);
+        input.onchange = function () {
+          var file = this['files'][0];
+          var reader = new FileReader();
+          reader.onload = function () {
+            event.preventDefault()
+            var id = 'blobid' + (new Date()).getTime();
+            var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+            var base64 = String(reader.result).split(',')[1];
+            var blobInfo = blobCache.create(id, file, base64);
             blobCache.add(blobInfo);
-
             cb(blobInfo.blobUri(), { title: file.name });
           };
           reader.readAsDataURL(file);
         };
-
+    
         input.click();
       }
-    };
+      // file_picker_callback: function(cb, value, meta) {
+      //   var input = document.createElement('input');
+      //   input.setAttribute('type', 'file');
+      //   input.setAttribute('accept', 'image/*');
+  
+      //   // Note: In modern browsers input[type="file"] is functional without 
+      //   // even adding it to the DOM, but that might not be the case in some older
+      //   // or quirky browsers like IE, so you might want to add it to the DOM
+      //   // just in case, and visually hide it. And do not forget do remove it
+      //   // once you do not need it anymore.
+  
+      //   input.onchange = function() {
+      //     var file = this['files'][0];
+      //     var reader = new FileReader();
+      //     // Note: Now we need to register the blob in TinyMCEs image blob
+      //     // registry. In the next release this part hopefully won't be
+      //     // necessary, as we are looking to handle it internally.
+      //     var id = 'blobid' + (new Date()).getTime();
+      //     var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+      //     var base64 = String(reader.result).split(',')[1];
+      //     console.log('base64', base64);
+          
+      //     var blobInfo = blobCache.create(id, file, base64);
+      //     blobCache.add(blobInfo);
+          
+  
+      //     // call the callback and populate the Title field with the file name
+      //     cb(blobInfo.blobUri(), { title: file.name });
+      //   };
+  
+      //   input.click();
+      // }
+    }
 }

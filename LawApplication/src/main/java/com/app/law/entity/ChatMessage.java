@@ -22,7 +22,7 @@ public class ChatMessage implements Serializable {
     private String content;
 
     @Column(name = "type")
-    private String type;
+    private MessageType type;
 
     @Column(name = "createdDate")
     private Instant createdDate;
@@ -39,4 +39,7 @@ public class ChatMessage implements Serializable {
     @Column(name = "roomId")
     private Integer roomId;
 
+    enum MessageType {
+        TEXT, IMAGE
+    }
 }

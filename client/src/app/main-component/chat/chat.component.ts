@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AppService } from '../../app.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +18,7 @@ export class ChatComponent implements OnInit {
   isShow = false;
   isShowHeader: boolean;
   isShowChatDialog = true;
-
+  isConfirm = false;
   isAdmin = false;
   usernamePage;
   chatPage;
@@ -41,17 +41,6 @@ export class ChatComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    console.log('vao chat');
-    if(this.auth.isAdmin() == true || this.auth.isAdmin() == false) {
-      this.isShow = true;
-    }
-    if(this.auth.isAdmin() == false) {
-      const roomId = localStorage.getItem('UserRoom');
-      if(roomId)
-        this.enterRoom(roomId);
-      // check expired o day;
-
-    }
     this.chatForm = this.fb.group({
       Username: [''],
       Message: [''],
@@ -78,7 +67,7 @@ export class ChatComponent implements OnInit {
   getChatBoxUser() {
     if (localStorage.getItem('UserRoom')) {
       this.appService.GetListUserChat().subscribe(res => {
-        this.enterRoom(JSON.parse(localStorage.getItem('UserRoom')));
+        this.enterRoom(JSON.parse(localStorage.getItem('UserRoom')), res.reverse());
         this.isShowHeader = false;
       });
     }
@@ -99,11 +88,11 @@ export class ChatComponent implements OnInit {
    const data = { clientName: this.chatForm.controls.Username.value };
    this.appService.CreateRoom(data).subscribe((res: any) => {
      this.roomId = res.id;
-     localStorage.setItem("UserRoom", res.id);
      this.auth.createUser(res.clientName);
      this.enterRoom();
      this.isAdmin = this.auth.isAdmin();
      this.fakeMessage();
+
     });
 }
   fakeMessage() {
@@ -122,7 +111,7 @@ export class ChatComponent implements OnInit {
   }
 
 
-  enterRoom(roomId?) {
+  enterRoom(roomId?, chatHistory?) {
     console.log('enter room');
     this.roomId = roomId ? roomId : this.roomId;
     this.chatService.connect(this.onConnected.bind(this), this.onError.bind(this));
@@ -163,7 +152,7 @@ export class ChatComponent implements OnInit {
      // this.isAdmin = true;
      // this.chatForm.patchValue({ name: 'Quản trị viên'});
    }
-   localStorage.setItem('UserRoom', this.roomId as string);
+   localStorage.setItem('UserRoom', JSON.stringify(this.roomId));
    this.isShow = true;
 }
   getHistory(roomId) {
@@ -183,8 +172,14 @@ export class ChatComponent implements OnInit {
     }
 
   }
-
+  @HostListener('window:beforeunload', ['$event'])
+  public doSomething($event) {
+    if(this.isConfirm) {
+      return $event.returnValue = "something";
+    }
+}
  onMessageReceived(payload) {
+   this.isConfirm = true;
    console.log('payload', payload);
    if (payload.body) {
      const message = JSON.parse(payload.body);
@@ -204,21 +199,12 @@ export class ChatComponent implements OnInit {
        messageElement.classList.add('chat-message');
        messageElement.classList.add(this.showRight(message.userId ? message.userId : message.serverUserId) ? 'right-text' : 'left-text');
 
-       if(message.serverUserId == null || message.serverUserId == undefined || message.serverUserId == -1) {
-         const avatarElement = document.createElement('i');
-         const avatarText = document.createTextNode(message.sender[0]);
-         avatarElement.appendChild(avatarText);
-         avatarElement.style['background-color'] = this.getAvatarColor(message.sender);
-         messageElement.appendChild(avatarElement);
-       } else {
-         const avatarElement = document.createElement('img');
-         avatarElement.src = this.chatService.getServerUserImage(message.serverUserId);
-         avatarElement.style['width'] = '50px';
-         avatarElement.style['height'] = '50px';
-         messageElement.appendChild(avatarElement);
-       }
+       const avatarElement = document.createElement('i');
+       const avatarText = document.createTextNode(message.sender[0]);
+       avatarElement.appendChild(avatarText);
+       avatarElement.style['background-color'] = this.getAvatarColor(message.sender);
 
-
+       messageElement.appendChild(avatarElement);
 
        const usernameElement = document.createElement('span');
        const usernameText = document.createTextNode(message.sender);

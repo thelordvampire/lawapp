@@ -1,7 +1,10 @@
 package com.app.law.dto;
 
+import com.app.law.entity.Privilege;
+import com.app.law.entity.Specialization;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @Data
@@ -17,8 +20,8 @@ public class UserDto {
     private String roleName;
     private String token;
 
-    private List<UserSpecializationDto> listSpecialization;
-    private List<String> listPrivilege;
+    private List<Specialization> listSpecialization;
+    private List<Privilege> listPrivilege;
 
     @Override
     public String toString() {

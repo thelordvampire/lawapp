@@ -32,7 +32,7 @@ public class User implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "image", columnDefinition = "MEDIUMTEXT")
+    @Column(name = "image")
     private String image;
 
     @Column(name = "roleId")
@@ -45,7 +45,7 @@ public class User implements Serializable {
     private List<User_Specialization> listUserSpecialization;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Post> listPost ;
+    private Set<Post> listPost = new HashSet<>();
 
     @Transient
     private String token;

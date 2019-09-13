@@ -3,6 +3,7 @@ package com.app.law.controller;
 import com.app.law.auth.JwtProvider;
 import com.app.law.dto.UserDto;
 import com.app.law.entity.User;
+import com.app.law.entity.mapper.UserMapper;
 import com.app.law.service.IUserService;
 import com.app.law.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -13,9 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 
 @RestController
 public class AccountController {
@@ -27,7 +30,7 @@ public class AccountController {
 
 //    @RequestMapping(value="/user/login", method = RequestMethod.GET, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
 //    public ResponseEntity<Object> logina(@RequestParam(required = false) String username, @RequestParam(required = false) String password) throws URISyntaxException {
-//        log.info("login: {}, {}", username, password);
+//        log.debug("login: {}, {}", username, password);
 //
 //        return ResponseEntity.accepted().headers(HttpHeaders.EMPTY).body("no logined user found");
 //    }
@@ -61,17 +64,18 @@ public class AccountController {
     @RequestMapping(value="/user/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> login(@RequestBody User user) {
         //201 - ok()   202 - accept()
-        log.info("login: {}", user);
+        log.debug("login: {}", user);
         UserDto loginedUser = userService.login(user.getEmail(), user.getPassword());
         String result = "Login failed";
         try {
             if (loginedUser!= null) {
-                String token = jwtProvider.generateTokenLogin(loginedUser.getEmail());
-                loginedUser.setToken("Bearer "+ token);
-                return ResponseEntity.ok().body(loginedUser);
+                result = jwtProvider.generateTokenLogin(loginedUser.getEmail());
+                loginedUser.setToken("Bearer "+ result);
+
+                return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(loginedUser);
             }
         } catch (Exception ex) {
-            log.info("Login failed: {}", ex.getMessage());
+            log.debug("Login failed: {}", ex.getMessage());
             result = "Server Error";
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
@@ -79,15 +83,17 @@ public class AccountController {
 
     @RequestMapping(value="/user/autologin", method = RequestMethod.POST)
     public ResponseEntity<Object> autologin() {
-        log.info("autologin");
+        log.debug("autologin");
         User loginedUser = userService.getLoginedUser();
-        return ResponseEntity.status(loginedUser != null ?
-            HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR).body(loginedUser);
+        if (loginedUser!= null)
+            return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(loginedUser);
+        else
+            return ResponseEntity.ok().headers(HeaderUtil.createNotAuthenHeader()).body(null);
     }
 
     @RequestMapping(value="/user/create", method = RequestMethod.POST)
     public ResponseEntity<Object> createAccount(@RequestBody User user) {
-        log.info("create user: {}", user);
+        log.debug("create user: {}", user);
         HttpStatus status = HttpStatus.BAD_REQUEST;
         String message = "no user created";
 
@@ -96,38 +102,18 @@ public class AccountController {
         } else {
             User foundUser = userService.findUserByEmail(user.getEmail());
             if (foundUser != null)
-                return ResponseEntity.badRequest().body("username existed");
+                return ResponseEntity.badRequest().headers(HttpHeaders.EMPTY).body("username existed");
 
             User createdUser = userService.createUser(user);
             if(createdUser!=null)
-                return ResponseEntity.ok().body(createdUser);
+                return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(createdUser);
         }
         return ResponseEntity.status(status).body(message);
     }
 
-    @RequestMapping(value="/user/{userId}/image", method = RequestMethod.GET)
-    public ResponseEntity<String> getImagebyUserId(@PathVariable Integer userId) {
-        log.info("getImagebyUserId : {}", userId);
-
-        User user = userService.findUserById(userId);
-        if(user != null) {
-            return ResponseEntity.ok().body(user.getImage());
-        } else {
-            log.info("getImagebyUserId : user not found");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-
-    @RequestMapping(value="/user/get-lawer", method = RequestMethod.GET)
-    public ResponseEntity<List<UserDto>> getAllAvaiableLawer() {
-        log.info("getAllAvaiableLawer ");
-        List<UserDto> listLawer =  userService.getAllLawer();
-        return ResponseEntity.status(HttpStatus.OK).body(listLawer);
-    }
-
     @RequestMapping(value="/user/change_password", method = RequestMethod.POST)
-    public ResponseEntity<String> changePassword(@RequestBody String new_password) throws URISyntaxException {
-        log.info("change Password: {}", new_password);
+    public ResponseEntity<Object> changePassword(@RequestBody String new_password) throws URISyntaxException {
+        log.debug("change Password: {}", new_password);
 
         boolean isSuccess = userService.changePassword(new_password);
         if(isSuccess)
@@ -143,7 +129,7 @@ public class AccountController {
 //        if(createdUser!=null)
 //            return ResponseEntity.created(new URI("res/")).headers(HttpHeaders.EMPTY).body(createdUser);
 
-        return ResponseEntity.created(new URI("res/")).body("password not changed");
+        return ResponseEntity.created(new URI("res/")).headers(HttpHeaders.EMPTY).body("password not changed");
     }
 
 
