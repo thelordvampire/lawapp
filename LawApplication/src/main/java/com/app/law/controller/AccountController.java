@@ -87,28 +87,28 @@ public class AccountController {
             HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR).body(loginedUser);
     }
 
+//    @RequestMapping(value="/user/create", method = RequestMethod.POST)
+//    public ResponseEntity<Object> createAccount(@RequestBody User user) {
+//        log.info("create user: {}", user);
+//        HttpStatus status = HttpStatus.BAD_REQUEST;
+//        String message = "no user created";
+//
+//        if(user== null) {
+//            message = "user can not be null";
+//        } else {
+//            User foundUser = userService.findUserByEmail(user.getEmail());
+//            if (foundUser != null)
+//                return ResponseEntity.badRequest().body("username existed");
+//
+//            User createdUser = userService.createUser(user);
+//            if(createdUser!=null)
+//                return ResponseEntity.ok().body(createdUser);
+//        }
+//        return ResponseEntity.status(status).body(message);
+//    }
+
     @RequestMapping(value="/user/create", method = RequestMethod.POST)
-    public ResponseEntity<Object> createAccount(@RequestBody User user) {
-        log.info("create user: {}", user);
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        String message = "no user created";
-
-        if(user== null) {
-            message = "user can not be null";
-        } else {
-            User foundUser = userService.findUserByEmail(user.getEmail());
-            if (foundUser != null)
-                return ResponseEntity.badRequest().body("username existed");
-
-            User createdUser = userService.createUser(user);
-            if(createdUser!=null)
-                return ResponseEntity.ok().body(createdUser);
-        }
-        return ResponseEntity.status(status).body(message);
-    }
-
-    @RequestMapping(value="/user/create2", method = RequestMethod.POST)
-    public ResponseEntity<Object> createAccount2(@RequestBody @Valid UserDto dto , BindingResult bindingResult) {
+    public ResponseEntity<Object> createAccount(@RequestBody @Valid UserDto dto , BindingResult bindingResult) {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
         String message = "no user created";

@@ -1,10 +1,8 @@
 package com.app.law.config;
 
 import com.app.law.auth.CustomBasicAuthenticationFilter;
-import com.app.law.constant.Enviroment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

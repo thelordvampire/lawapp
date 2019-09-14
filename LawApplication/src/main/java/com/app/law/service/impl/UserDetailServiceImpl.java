@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
     private final Logger log = LoggerFactory.getLogger(UserDetailServiceImpl.class);

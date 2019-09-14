@@ -15,6 +15,7 @@ public class UserMapperCustom {
         user.setEmail(dto.getEmail());
         user.setName(dto.getName());
         user.setImage(dto.getName());
+        user.setPassword(dto.getPassword());
         user.setIntroduce(dto.getIntroduce());
         user.setCharges(dto.getCharges());
         user.setField(dto.getField());
@@ -22,6 +23,7 @@ public class UserMapperCustom {
         user.setPrize(gson.toJson(dto.getPrizes()));
         user.setEducation(gson.toJson(dto.getEducations()));
         user.setExperience(gson.toJson(dto.getExperiences()));
+        user.setRoleId(dto.getRoleId());
 
         return user;
     }

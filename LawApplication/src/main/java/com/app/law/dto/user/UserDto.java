@@ -1,6 +1,7 @@
 package com.app.law.dto.user;
 
 import com.app.law.dto.UserSpecializationDto;
+import com.google.gson.annotations.Expose;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -16,7 +17,10 @@ public class UserDto {
     @NonNull
     @Email
     private String email;
+    @NonNull
+    @Expose(serialize = false)
     private String password;
+    @Expose(serialize = false)
     private String repassword;
     @NonNull
     private String name;
@@ -28,7 +32,7 @@ public class UserDto {
     private Prize[] prizes;
     private Experience[] experiences;
     private Education[] educations;
-    private String roleName;
+    private Integer roleId;
     private String token;
 
     private List<UserSpecializationDto> listSpecialization;
