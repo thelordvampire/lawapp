@@ -14,6 +14,7 @@ import { ChatComponent } from './main-component/chat/chat.component';
 import { NewsComponent } from './main-component/news/news.component';
 import { NewsDetailComponent } from './main-component/news/component/news-detail/news-detail.component';
 import { AdminNewsComponent } from './admin/component/admin-news/admin-news.component';
+import { ProfileComponent } from './main-component/profile/profile.component';
 
 const routes: Routes = [
 
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'practice', component: PracticeComponent },
     { path: 'news', component: NewsComponent,},
     { path: 'news/:id', component: NewsDetailComponent },
+    { path: 'profile/:id', component: ProfileComponent },
     { path: 'resources', component: ResourcesComponent },
     { path: 'typo', component: TypoComponent },
     { path: 'contact', component: ContactComponent },

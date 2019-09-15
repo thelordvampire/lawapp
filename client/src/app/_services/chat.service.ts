@@ -4,7 +4,6 @@ import * as Stomp from 'stompjs';
 import {Subscription} from 'rxjs';
 import {AuthenticationService} from './authentication.service';
 import { environment } from '@environments/environment';
-import {UserService} from './user.service';
 
 @Injectable({providedIn: 'root'})
 export class ChatService {
@@ -13,7 +12,6 @@ export class ChatService {
   connectRoom: Subscription;
   constructor(
     private auth: AuthenticationService,
-    private userService: UserService,
   ) { }
 
   connect(onConnected, onError) {
@@ -55,20 +53,5 @@ export class ChatService {
       this.stompClient.send(`/app/chat/${roomId}/addUser`, {},
         JSON.stringify({sender: this.auth.getCurrentUser().name, type: 'JOIN'}));
     }
-  }
-
-  getServerUserImage(userId): string {
-    if(userId) {
-      let image = localStorage.getItem("image_user_" + userId);
-      if(!image) {
-        this.userService.getImageByUserId(userId)
-          .subscribe(data => {
-            image = data;
-            localStorage.setItem("image_user_" + userId, image);
-          });
-      }
-      return image;
-    }
-    return '';
   }
 }

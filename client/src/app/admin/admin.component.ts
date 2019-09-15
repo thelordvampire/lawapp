@@ -64,10 +64,10 @@ export class AdminComponent implements OnInit, AfterViewInit {
       this.appService.setOpenChatBox(id);
     }
     if (this.listEnterRoomId.find(item => item === id)) {
-      this.appChat.enterRoom(id);
+      this.appChat.enterRoom(id, this.data);
     } else {
       this.listEnterRoomId.push(id);
-      this.appChat.enterRoom(id);
+      this.appChat.enterRoom(id, this.data);
     }
 
     // this.appChat.disConnect();

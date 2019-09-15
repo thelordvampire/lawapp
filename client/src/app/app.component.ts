@@ -20,18 +20,13 @@ export class AppComponent implements OnInit {
         private appService: AppService,
     ) {
       //  this.router.navigate(['/home']);
-       this.auth.currentUser.subscribe(x => {
-         // console.log('vao day roi', x);
-         this.currentUser = x;
-       });
+       this.auth.currentUser.subscribe(x => this.currentUser = x);
     }
     ngOnInit() {
         this.appService.getHeader.pipe(debounceTime(100)).subscribe(output => {
             this.isLogin = output;
         });
         this.auth.validateTokenExpirationDate();
-
-        console.log('user', this.auth.getCurrentUser());
     }
     logout() {
         this.auth.logout();

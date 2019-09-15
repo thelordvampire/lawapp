@@ -1,0 +1,77 @@
+.form-left {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.text-center {
+    text-align: center;
+}
+.form-right {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    .form-right-menu {
+        cursor: pointer;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        a {
+            width: 25%;
+            border: 1px solid white;
+            border-top: 4px solid #eaeaea;
+            border-bottom: none;
+            background-color: #eaeaea;
+            color: #333333;
+            display: inline-block;
+            padding: 13px 0 10px;
+            white-space: nowrap;
+            text-align: center;
+        }
+    }
+    .form-right-infor {
+
+    }
+    .form-right-price {
+        .price-content{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .form-right-detail{
+        color: #333333;
+        table {border: 1px solid #fff;}
+        td {
+            border: 1px solid #fff;
+        }
+        .header-table {
+            font-weight: bold;
+        }
+    }
+    .form-right-prize{
+        color: #333333;
+        table {border: 1px solid #fff;}
+        td {
+            border: 1px solid #fff;
+        }
+        .header-table {
+            font-weight: bold;
+        }
+    }
+}
+
+.btn-contact{
+    text-align: center;
+    background-color: orange;
+    color: #fff;
+    padding: 5px;
+    cursor: pointer;
+    margin: 4px;
+}
+.btn-inbox {
+    margin: 4px;
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid #003594;
+}
