@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 import { AuthenticationService } from './_services';
 import { AppService } from './app.service';
@@ -27,9 +27,18 @@ export class AppComponent implements OnInit {
             this.isLogin = output;
         });
         this.auth.validateTokenExpirationDate();
+        this.appGoToTop();
     }
     logout() {
         this.auth.logout();
         this.router.navigate(['/login']);
+    }
+    appGoToTop() {
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
     }
 }

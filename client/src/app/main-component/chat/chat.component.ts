@@ -58,6 +58,7 @@ export class ChatComponent implements OnInit {
       // this.isAdmin = true;
       this.isShowChatDialog = false;
     }
+    this.onPressCloseHeader();
   }
     OpentChatBox() {
     this.appService.getChatBox.subscribe(res => {
