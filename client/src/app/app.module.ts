@@ -40,7 +40,7 @@ import { ProfileComponent } from './main-component/profile/profile.component';
         appRoutingModule,
         FormsModule,
         NgxCarouselModule,
-        NgxEditorModule,
+        // NgxEditorModule,
         NgxTinymceModule.forRoot({
             // or cdn
             baseURL: '//cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.0/'
