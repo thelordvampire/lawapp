@@ -15,6 +15,7 @@ import { NewsComponent } from './main-component/news/news.component';
 import { NewsDetailComponent } from './main-component/news/component/news-detail/news-detail.component';
 import { AdminNewsComponent } from './admin/component/admin-news/admin-news.component';
 import { ProfileComponent } from './main-component/profile/profile.component';
+import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
 
 const routes: Routes = [
 
@@ -29,6 +30,7 @@ const routes: Routes = [
     { path: 'resources', component: ResourcesComponent },
     { path: 'typo', component: TypoComponent },
     { path: 'contact', component: ContactComponent },
+    { path: 'lawyer-list', component: LawyerListComponent },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children: [
       {
         path: 'news',
