@@ -1,8 +1,9 @@
 package com.app.law.service.impl;
 
-import com.app.law.dto.UserDto;
+import com.app.law.dto.user.UserDto;
 import com.app.law.entity.User;
 import com.app.law.entity.mapper.UserMapper;
+import com.app.law.mapper.UserMapperCustom;
 import com.app.law.repository.UserRepository;
 import com.app.law.service.IUserService;
 import org.mapstruct.factory.Mappers;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
@@ -44,6 +46,30 @@ public class UserService implements IUserService {
             logger.info("create user fail: {}", ex.getMessage());
         }
         return createdUser;
+    }
+
+    @Override
+    public User createUser2(UserDto dto) {
+        User user = UserMapperCustom.dtoToEntity(dto);
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        User createdUser = null;
+        try {
+            createdUser = userRepo.saveAndFlush(user);
+            logger.info("create user success");
+        } catch(Exception ex) {
+            logger.info("create user fail: {}", ex.getMessage());
+        }
+        return createdUser;
+    }
+
+    @Override
+    public List<UserDto> getAllLawer() {
+        return userRepo.findAll()
+        .stream()
+        .filter(user ->user.getRoleId() ==1 || user.getRoleId() == 2)
+        .map(UserMapperCustom::entityToDto)
+        .collect(Collectors.toList());
     }
 
     @Override

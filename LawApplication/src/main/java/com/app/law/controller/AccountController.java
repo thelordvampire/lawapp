@@ -1,9 +1,8 @@
 package com.app.law.controller;
 
 import com.app.law.auth.JwtProvider;
-import com.app.law.dto.UserDto;
+import com.app.law.dto.user.UserDto;
 import com.app.law.entity.User;
-import com.app.law.entity.mapper.UserMapper;
 import com.app.law.service.IUserService;
 import com.app.law.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -13,10 +12,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -91,20 +89,39 @@ public class AccountController {
             return ResponseEntity.ok().headers(HeaderUtil.createNotAuthenHeader()).body(null);
     }
 
+//    @RequestMapping(value="/user/create", method = RequestMethod.POST)
+//    public ResponseEntity<Object> createAccount(@RequestBody User user) {
+//        log.info("create user: {}", user);
+//        HttpStatus status = HttpStatus.BAD_REQUEST;
+//        String message = "no user created";
+//
+//        if(user== null) {
+//            message = "user can not be null";
+//        } else {
+//            User foundUser = userService.findUserByEmail(user.getEmail());
+//            if (foundUser != null)
+//                return ResponseEntity.badRequest().body("username existed");
+//
+//            User createdUser = userService.createUser(user);
+//            if(createdUser!=null)
+//                return ResponseEntity.ok().body(createdUser);
+//        }
+//        return ResponseEntity.status(status).body(message);
+//    }
+
     @RequestMapping(value="/user/create", method = RequestMethod.POST)
-    public ResponseEntity<Object> createAccount(@RequestBody User user) {
-        log.debug("create user: {}", user);
+    public ResponseEntity<Object> createAccount(@RequestBody @Valid UserDto dto , BindingResult bindingResult) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         String message = "no user created";
 
-        if(user== null) {
+        if(bindingResult.hasErrors()) {
             message = "user can not be null";
         } else {
-            User foundUser = userService.findUserByEmail(user.getEmail());
+            User foundUser = userService.findUserByEmail(dto.getEmail());
             if (foundUser != null)
                 return ResponseEntity.badRequest().headers(HttpHeaders.EMPTY).body("username existed");
 
-            User createdUser = userService.createUser(user);
+            User createdUser = userService.createUser2(dto);
             if(createdUser!=null)
                 return ResponseEntity.ok().headers(HttpHeaders.EMPTY).body(createdUser);
         }
