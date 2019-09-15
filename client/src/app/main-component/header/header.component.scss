@@ -955,6 +955,7 @@ html {
     border: 1px solid #e6e5e5;
     padding: 25px;
   }
+  .navbar-nav 
   
   .theme-accordion-s1 .panel + .panel {
     margin-top: 15px;
@@ -1757,6 +1758,7 @@ html {
     }
     .site-header #navbar > ul > li {
       border-bottom: 1px solid #f2f2f2;
+      text-align: left;
     }
     .site-header #navbar > ul > li > a {
       padding: 10px 15px 10px 35px;
@@ -1954,7 +1956,7 @@ html {
     }
     .header-style-1 .navigation #navbar > ul > li > a, .header-style-2 .navigation #navbar > ul > li > a, .header-style-3 .navigation #navbar > ul > li > a {
       font-weight: 600;
-      padding: 40px 15px;
+      padding: 40px 10px;
       color: #565656;
     }
   }
@@ -3672,7 +3674,6 @@ html {
     border-color: #c83226;
     outline: none;
   }
-  
   /*--------------------------------------------------------------
   #1.0	case-studies-section
   --------------------------------------------------------------*/

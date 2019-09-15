@@ -3,7 +3,8 @@ import { first } from 'rxjs/operators';
 import { AuthenticationService, UserService } from 'src/app/_services';
 import { NgxCarousel } from 'ngx-carousel';
 import { IMAGE } from 'src/app/share/image-share';
-declare var $: any;
+// import * as $ from 'jquery';
+declare var $ :any;
 
 
 @Component({ selector: 'home',
@@ -166,19 +167,24 @@ export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
         loop: true,
         custom: 'banner'
       }
-      
+      function heroSlider() {
+        if ($(".hero-slider").length) {
+            $(".hero-slider").slick({
+                autoplay: true,
+                autoplaySpeed: 8000,
+                arrows: true,
+                prevArrow: '<button type="button" class="slick-prev">Previous</button>',
+                nextArrow: '<button type="button" class="slick-next">Next</button>',
+                dots: true,
+                fade: true,
+                cssEase: 'linear',
+            });
+        }
+      }
+      heroSlider();
     }
      ngAfterViewInit() {
-        setTimeout(() => {
-            $(window).load(function(){
-                $('.flexslider').flexslider({
-                  animation: "slide",
-                  start: function(slider){
-                    $('body').removeClass('loading');
-                  }
-                });
-              }); 
-        }, 100);  
+
      }
      ngDoCheck(){
      
