@@ -32,6 +32,7 @@ import { AdminNewsComponent } from './admin/component/admin-news/admin-news.comp
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { NgxEditorModule } from 'ngx-editor';
 import { ProfileComponent } from './main-component/profile/profile.component';
+import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -65,6 +66,7 @@ import { ProfileComponent } from './main-component/profile/profile.component';
         NewsDetailComponent,
         AdminNewsComponent,
         ProfileComponent,
+        LawyerListComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -72,6 +74,7 @@ import { ProfileComponent } from './main-component/profile/profile.component';
         // provider used to create fake backend
         fakeBackendProvider
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    
 })
 export class AppModule { };
