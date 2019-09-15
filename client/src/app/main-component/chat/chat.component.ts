@@ -16,7 +16,7 @@ export class ChatComponent implements OnInit {
   chatForm: FormGroup;
 
   isShow = false;
-  isShowHeader = true;
+  isShowHeader: boolean;
   isShowChatDialog = true;
   isConfirm = false;
   isAdmin = false;
@@ -231,12 +231,18 @@ export class ChatComponent implements OnInit {
   return this.colors[index];
 }
 onPressCloseHeader() {
+  if (this.isShowHeader == undefined) {
+    this.isShowHeader = true;
+  }
   this.isShowHeader = !this.isShowHeader;
   // if (this.isShowHeader == false) {
   //     // this.getChatBoxUser();
   //   } else {
   //     // this.disConnect();
   //   }
+  }
+  closeHeader() {
+    this.isShowHeader = false;
   }
 
   onError(error) {

@@ -5,8 +5,13 @@
 .text-center {
     text-align: center;
 }
+.profile-user h4{
+    margin-top: 0;
+}
 .form-right {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    & > div {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
     .form-right-menu {
         cursor: pointer;
         display: flex;
@@ -16,7 +21,8 @@
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
-        a {
+        border-bottom: 1px solid #aaa;
+        div {
             width: 25%;
             border: 1px solid white;
             border-top: 4px solid #eaeaea;
@@ -27,6 +33,12 @@
             padding: 13px 0 10px;
             white-space: nowrap;
             text-align: center;
+            font-weight: 600;
+            &.active{
+                background-color: #ffffff;
+                border: 1px solid FBC925;
+                border-top: 4px solid #FBC925;
+            }
         }
     }
     .form-right-infor {
@@ -36,6 +48,19 @@
         .price-content{
             display: flex;
             justify-content: space-between;
+            position: relative;
+            > div {
+                background-color: #fff;
+                position: relative;
+            }
+            &::before {
+                content: "";
+                border-bottom: 1px dotted #ddd;
+                position: absolute;
+                bottom: 5px;
+                width: calc(100% - 30px);
+                height: 1px;
+            }
         }
     }
     .form-right-detail{
@@ -74,4 +99,8 @@
     padding: 5px;
     cursor: pointer;
     border: 1px solid #003594;
+}
+
+@media (max-width: 992px) {
+
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { log } from 'util';
 
 declare const $: any;
 @Component({
@@ -38,6 +39,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
   onPressHashtag(hashtag, delay = 0, ) {
+    const elem = document.querySelectorAll('[title*="'+hashtag+'"]');
+    $('.form-right-menu div').removeClass('active');
+    $(elem).addClass('active');
     if (!$(hashtag).length) {
       return;
     }
