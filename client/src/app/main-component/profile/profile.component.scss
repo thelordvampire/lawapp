@@ -8,6 +8,10 @@
 .profile-user h4{
     margin-top: 0;
 }
+.section-site{
+    border-top: 4px solid #FBC925;
+}
+
 .form-right {
     & > div {
         border: 1px solid rgba(0, 0, 0, 0.1);
@@ -36,7 +40,7 @@
             font-weight: 600;
             &.active{
                 background-color: #ffffff;
-                border: 1px solid FBC925;
+                border: 1px solid #FBC925;
                 border-top: 4px solid #FBC925;
             }
         }
@@ -101,6 +105,77 @@
     border: 1px solid #003594;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 767px) {
+    .form-right .form-right-menu {
+        flex-wrap: wrap;
+        & > div {
+            width: 100%;
+            border: 2px solid white;
+            border-top: 4px solid #fff;
+        }
+    }
+    .form-right-detail {
+        tr.header-table{
+            display: none;
+        }
+        tr, td {
+            display: block;
+        }
+        tr {
+            border-bottom: 1px solid #ddd;
+            position: relative;
+            td {
+                padding-top: 24px;
+                position: relative;
+                &:nth-child(1) {
+                    &::before {
+                        content: "Tên chứng chỉ :";
+                        position: absolute;
+                        top: 0;
+                        left: 10px;
+                        font-weight: 700;
+                    }
+                }
+                &:nth-child(2) {
+                    &::before {
+                        content: "Nơi cấp :";
+                        position: absolute;
+                        top: 0;
+                        left: 10px;
+                        font-weight: 700;
+                    }
+                }
+                &:nth-child(3) {
+                    &::before {
+                        content: "Năm cấp :";
+                        position: absolute;
+                        top: 0;
+                        left: 10px;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+    .form-right-price .col-f-7 {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+    .profile-user {
+        flex-wrap: wrap;
+        > div {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-bottom: 15px;
+        }
+        .col-f-4 {
+            margin-bottom: 15px;
+            text-align: center;
+            img {
+                width: 200px;
+            }
+        }
+
+    }
 
 }
