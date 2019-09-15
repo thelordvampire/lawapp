@@ -1,12 +1,13 @@
 package com.app.law.dto;
 
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-
 import java.sql.Timestamp;
 
 /**
  * Created by https://github.com/kwanpham
  */
+@Data
 public class PostDto {
 
     private Long id;
