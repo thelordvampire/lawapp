@@ -4,9 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity(name = "user")
 @Table(name = "user")
@@ -38,9 +36,6 @@ public class User implements Serializable {
     @Column(name = "introduce")
     private String introduce;
 
-    @Column(name = "field")  //linh vuc
-    private String field;
-
     @Column(name = "charges")  // muc phi
     private String charges;
 
@@ -63,7 +58,7 @@ public class User implements Serializable {
     private List<User_Privilege> listUserPrivilege;
 
     @OneToMany(mappedBy = "userId")
-    private List<User_Specialization> listUserSpecialization;
+    private List<User_Field> listUserField;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Post> listPost ;

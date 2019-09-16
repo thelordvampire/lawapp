@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = {UserSpecializationMapper.class, UserPrivilegeMapper.class})
+@Mapper(uses = {UserFieldMapper.class, UserPrivilegeMapper.class})
 public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper( UserMapper.class );
@@ -16,7 +16,7 @@ public interface UserMapper {
     @Mappings({
             @Mapping(source = "email", target = "email"),
             @Mapping(source = "listUserPrivilege", target = "listPrivilege"),
-            @Mapping(source = "listUserSpecialization", target = "listSpecialization")
+            @Mapping(source = "listUserField", target = "listField")
     })
     UserDto toDTO(User user);
 

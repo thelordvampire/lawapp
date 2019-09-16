@@ -1,6 +1,6 @@
 package com.app.law.dto.user;
 
-import com.app.law.dto.UserSpecializationDto;
+import com.app.law.dto.UserFieldDto;
 import com.google.gson.annotations.Expose;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ public class UserDto {
     @NonNull
     private String name;
     private String image;
-    private String field;
+    private String field;// list field
     private String charges;
     private String introduce;
     private InforDetail[] inforDetails;
@@ -35,7 +35,7 @@ public class UserDto {
     private Integer roleId;
     private String token;
 
-    private List<UserSpecializationDto> listSpecialization;
+    private List<UserFieldDto> listField;
     private List<String> listPrivilege;
 
     @Override

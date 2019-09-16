@@ -6,9 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "specialization")
+@Table(name = "field")
 @Data
-public class Specialization implements Serializable {
+public class Field implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
