@@ -40,6 +40,7 @@ public class UserMapperCustom {
         dto.setImage(user.getImage());
         dto.setIntroduce(user.getIntroduce());
         dto.setCharges(user.getCharges());
+        dto.setPhone(user.getPhone());
 
         StringJoiner fieldJoin = new StringJoiner(",");
         for (User_Field user_field : user.getListUserField())

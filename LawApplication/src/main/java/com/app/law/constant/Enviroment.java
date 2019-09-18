@@ -5,5 +5,8 @@ import java.util.List;
 
 public class Enviroment {
 
-    public static List<String> cors = Arrays.asList("http://localhost:8080","http://103.28.39.169", "http://luatdanhviet.com", "http://localhost:4200");
+    public static List<String> cors = Arrays.asList("http://localhost:8080",
+            "http://103.28.39.169", "http://localhost:4200",
+            "https://localhost:4200", "http://luatdanhviet.com", "https://luatdanhviet.com");
+
 }

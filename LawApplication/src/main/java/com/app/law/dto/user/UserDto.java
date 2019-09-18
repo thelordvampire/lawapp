@@ -34,6 +34,7 @@ public class UserDto {
     private Education[] educations;
     private Integer roleId;
     private String token;
+    private String phone;
 
     private List<UserFieldDto> listField;
     private List<String> listPrivilege;

@@ -51,6 +51,9 @@ public class User implements Serializable {
     @Column(name = "education")
     private String education;
 
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "roleId")
     private Integer roleId;
 
