@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { AppService } from '../../app.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -13,8 +13,9 @@ declare var $: any;
   styleUrls: ['./chat.component.less']
 })
 export class ChatComponent implements OnInit {
+  @Input() isChatAdmin: boolean;
   chatForm: FormGroup;
-
+  isToogleChatBox = false;
   isShow = false;
   isShowHeader: boolean;
   isShowChatDialog = true;
@@ -41,6 +42,9 @@ export class ChatComponent implements OnInit {
     ) {}
 
   ngOnInit() {
+    if (this.isChatAdmin) {
+      this.isAdmin = true;
+    }
     this.chatForm = this.fb.group({
       Username: [''],
       Message: [''],
@@ -197,6 +201,7 @@ export class ChatComponent implements OnInit {
        // messageElement.classList.add('event-message');
        // message.content = message.sender + ' đã rời khỏi!';
      } else {
+       
        messageElement.classList.add('chat-message');
        messageElement.classList.add(this.showRight(message.userId ? message.userId : message.serverUserId) ? 'right-text' : 'left-text');
 
@@ -253,5 +258,9 @@ onPressCloseHeader() {
       this.connectingElement.textContent = 'Mất kết nối. Hãy tải lại trang và thử lại!';
       this.connectingElement.style.color = 'red';
     }
+  }
+
+  toogleChatBox() {
+    this.isToogleChatBox = !this.isToogleChatBox;
   }
 }

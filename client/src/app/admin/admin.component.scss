@@ -41,6 +41,20 @@
         }
     }
 }
+.img-user {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+  }
+}
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,400italic);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
@@ -77,16 +91,21 @@ header[role='banner'] {
   background: white;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
 }
-header[role='banner'] h1 {
+
+nav[role='navigation'] h1 {
+  font-size: 24px;
   margin: 0;
-  font-weight: 300;
-  padding: 1rem;
-}
-header[role='banner'] h1:before {
-  content: '\f248';
-  font-family: FontAwesome;
-  padding-right: 0.6em;
-  color: red;
+  background-color: #000;
+  color: #fff;
+  line-height: 75px;
+  text-align: center;
+  border-top: 1px solid #2e2a35;
+  &::before {
+    content: '\f248';
+    font-family: FontAwesome;
+    padding-right: 0.6em;
+    color: red;
+  }
 }
 header[role='banner'] .utilities {
   width: 100%;
@@ -120,7 +139,7 @@ header[role='banner'] .utilities li a {
 }
 
 nav[role='navigation'] {
-  background: #2a3542;
+  background: #191420;
   color: #ddd;
   /* icons */
 }
@@ -134,7 +153,7 @@ nav[role='navigation'] li a {
   padding: 0.7em;
 }
 nav[role='navigation'] li a:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 nav[role='navigation'] li a:before {
   content: '\f248';
@@ -399,13 +418,10 @@ td {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 99;
+    z-index: 9;
     height: 75px;
   }
   header[role='banner'] .utilities {
-    position: absolute;
-    top: 0;
-    right: 0;
     background: transparent;
     color: darkslategray;
     width: auto;
@@ -419,14 +435,16 @@ td {
 
   nav[role='navigation'] {
     position: fixed;
-    width: 200px;
-    top: 75px;
+    width: 227px;
+    top: 0;
     bottom: 0px;
     left: 0px;
+    z-index: 10;
   }
 
   main[role='main'] {
-    margin: 75px 0 40px 200px;
+    margin: 75px 0 40px 227px;
+    padding: 15px;
   }
   main[role='main']:after {
     content: '';

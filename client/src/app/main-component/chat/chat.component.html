@@ -1,4 +1,4 @@
-<form [formGroup]="chatForm" [class]="!isAdmin && isShowHeader == true ? 'formchat-wrap chatbox-bounce-in' :
+<!-- <form [formGroup]="chatForm" [class]="!isAdmin && isShowHeader == true ? 'formchat-wrap chatbox-bounce-in' :
     !isAdmin && isShowHeader == false ? 'formchat-wrap chatbox-bounce-out' : !isAdmin && isShowHeader == undefined ?
     'formchat-wrap' : isAdmin && isShowHeader == true ? 'formchat-admin chatbox-bounce-in' :
     isAdmin && isShowHeader == false ? 'formchat-admin chatbox-bounce-out' :
@@ -40,4 +40,81 @@
 
 <div class="icon-message" (click)="onPressCloseHeader()">
     <img src="../../../assets/images/icon-message.png" alt="message">
-</div>
+</div> -->
+
+<ng-container *ngIf="isAdmin">
+    <form [formGroup]="chatForm" class="formchat-admin" [hidden]="!isShowChatDialog">
+        <div class="chat-header" (click)="toogleChatBox()">
+            <div class="text-center">
+                <p>Danh Viet - Luật người Việt</p>
+                <p>Phản hồi trong vòng vài phút</p>
+            </div>
+        </div>
+        <div class="chatbox-content" [hidden] ="isToogleChatBox">
+            <div id="username-page" [hidden]="isShow">
+                <div class="username-page-container">
+                        <div class="form-group" style="margin-top: 80px;">
+                            <input type="text" id="name" placeholder="Nhập tên bạn..." autocomplete="off" class="form-control" formControlName="Username" maxlength="25" />
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="accent username-submit" (click)="createRoom()">Bắt đầu chat</button>
+                        </div>
+                </div>
+            </div>
+        
+            <div id="chat-page" [hidden]="!isShow">
+                <ul id="messageArea">
+
+                </ul>
+                <div class="form-group chat-content">
+                    <div class="input-group clearfix">
+                        <input type="text" id="message" formControlName="Message" placeholder="Nhập tin nhắn ..." autocomplete="off" class="form-control"/>
+                        <button type="submit" class="primary" (click)="sendMessage()">Gửi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-container>
+
+<ng-container *ngIf="!isAdmin">
+    <form [formGroup]="chatForm" [class]="isShowHeader == true ? 'formchat-wrap chatbox-bounce-in' : isShowHeader == false ? 'formchat-wrap chatbox-bounce-out' : 'formchat-wrap'" [hidden]="!isShowChatDialog">
+        <div class="chat-header">
+            <button class="chatbox-close" (click)="closeHeader()" type="button">
+                <svg width="10px" height="10px" viewBox="0 0 14 14"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-419.000000, -413.000000)"><g transform="translate(164.000000, 396.000000)"><g><g transform="translate(250.000000, 12.000000)"><g><g><rect opacity="0.200000003" x="0" y="0" width="24" height="24"></rect><g transform="translate(4.000000, 4.000000)" fill="#000000"><rect transform="translate(8.000000, 8.000000) rotate(45.000000) translate(-8.000000, -8.000000) " x="7" y="-1" width="2" height="18" rx="1"></rect><rect transform="translate(8.000000, 8.000000) rotate(135.000000) translate(-8.000000, -8.000000) " x="7" y="-1" width="2" height="18" rx="1"></rect></g></g></g></g></g></g></g></g></svg>
+            </button>
+            <div class="text-center">
+                <p>Danh Viet - Luật người Việt</p>
+                <p>Phản hồi trong vòng vài phút</p>
+            </div>
+        </div>
+        <div class="chatbox-content">
+            <div id="username-page" [hidden]="isShow">
+                <div class="username-page-container">
+                        <div class="form-group" style="margin-top: 80px;">
+                            <input type="text" id="name" placeholder="Nhập tên bạn..." autocomplete="off" class="form-control" formControlName="Username" maxlength="25" />
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="accent username-submit" (click)="createRoom()">Bắt đầu chat</button>
+                        </div>
+                </div>
+            </div>
+        
+            <div id="chat-page" [hidden]="!isShow">
+                <ul id="messageArea">
+
+                </ul>
+                <div class="form-group chat-content">
+                    <div class="input-group clearfix">
+                        <input type="text" id="message" formControlName="Message" placeholder="Nhập tin nhắn ..." autocomplete="off" class="form-control"/>
+                        <button type="submit" class="primary" (click)="sendMessage()">Gửi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="icon-message" (click)="onPressCloseHeader()">
+        <img src="../../../assets/images/icon-message.png" alt="message">
+    </div>
+</ng-container>

@@ -154,6 +154,7 @@ a {
 
 /deep/#chat-page .chat-message {
     padding-left: 40px;
+    padding-right: 0;
     position: relative;
 }
 
@@ -234,7 +235,7 @@ a {
         width: 300px;
         border: none;
         visibility: visible;
-        height: 408px;
+        height: 400px;
         border-radius: 10px;
         position: fixed;
         top: auto;
@@ -248,19 +249,18 @@ a {
     }
     &-admin{
         right: 300px;
-        bottom: 80px;
+        bottom: 15px;
         background: #fff;
         box-shadow: 0 4px 10px #666;
         width: 300px;
         border: none;
-        visibility: visible;
-        height: 408px;
+        // visibility: visible;
+        // height: 400px;
         border-radius: 10px;
         position: fixed;
         top: auto;
         z-index: 15;
         max-height: 100%;
-        animation-fill-mode: forwards;
         & > div + div{
             height: 360px;
             position: relative;
@@ -356,22 +356,18 @@ a {
 }
 /deep/#chat-page .chat-message.right-text{
     padding-right: 50px;
-    padding-left: unset;
+    padding-left: 0;
     text-align: right;
+   
     i{
         right: 5px;
         left: unset;
     }
-    span {
-        display: none;
-    }
     p {
         background-color: #128ff2;
-        border-radius: 10px;
-        padding: 6px 10px;
-        color: white;
-        text-align: left;
-        line-height: 1.4;
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px;
     }
 
 }
