@@ -3,6 +3,7 @@ package com.app.law.controller;
 import com.app.law.auth.JwtProvider;
 import com.app.law.dto.user.UserDto;
 import com.app.law.entity.User;
+import com.app.law.mapper.UserMapperCustom;
 import com.app.law.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,6 +140,21 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
+    @RequestMapping(value="/user/{userId}", method = RequestMethod.GET)
+    public ResponseEntity<UserDto> getUserById(@PathVariable Integer userId) {
+        log.info("getUserById : {}", userId);
+        User user = userService.findUserById(userId);
+        if(user != null) {
+            UserDto userDto = UserMapperCustom.entityToDto(user);
+            return ResponseEntity.ok().body(userDto);
+        } else {
+            log.info("getUserById : user not found");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+
 
     @RequestMapping(value="/user/get-lawer", method = RequestMethod.GET)
     public ResponseEntity<List<UserDto>> getAllAvaiableLawer() {
