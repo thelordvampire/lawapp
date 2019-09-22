@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { log } from 'util';
 import {UserService} from '../../_services';
 import {ActivatedRoute} from '@angular/router';
 
@@ -32,7 +31,7 @@ export class ProfileComponent implements OnInit {
       placeOfIssue: 'Liên đoàn Luật sư Việt Nam',
       yearOfIssue: '2002',
     },
-  ]
+  ];
   prize = [
     {
       id: 1,

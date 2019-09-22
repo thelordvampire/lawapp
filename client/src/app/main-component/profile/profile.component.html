@@ -5,16 +5,16 @@
         <div class="form-left pt-3">
           <div class="d-flex profile-user">
             <div class="col-f-4">
-                <img src="{{user.image}}" alt="" width="100px" height="auto" style="min-height: 100px;">
+                <img src="{{user? user.image : ''}}" alt="" width="100px" height="auto" style="min-height: 100px;">
             </div>
             <div class="col-f-8">
-              <h4>{{user.name}}</h4>
+              <h4>{{user? user.name : ''}}</h4>
             </div>
           </div>
           <hr>
           <div>
             <div class="btn-contact">
-                <div>{{user.phone}}</div>
+                <div>{{user ? user.phone : ''}}</div>
             </div>
             <!-- <span class="hidden-xs visible-sm visible-md visible-lg">
                 <div class="row">
@@ -54,27 +54,18 @@
           <div class="form-right-infor pxb-3 mb-4" id="infor">
             <h4><b>Giới thiệu về Luật sư</b></h4>
             <span>
-              {{user.description}}
+              {{user? user.introduce : ''}}
             </span>
           </div>
-          <div class="form-right-price px-3 mb-4" id="price">
+          <div class="form-right-price px-3 mb-4" id="price" *ngIf="!!user">
               <div class="card"><h4><b>Mức phí</b></h4></div>
-              <div class="col-f-7 price-content mb-3">
-                <div>Giá trực tiếp</div>
-                <div><b>300,000 VND</b></div>
+              <div class="col-f-7 price-content mb-3"  *ngFor="let item of user.charges">
+                <div>{{item.chargeName}}</div>
+                <div><b>{{item.price}} VND</b></div>
               </div>
-              <div class="col-f-7 price-content mb-3">
-                  <div>Giá trực tiếp</div>
-                  <div><b>300,000 VND</b></div>
-                </div>
-                <div class="col-f-7 price-content mb-3">
-                    <div>Giá trực tiếp</div>
-                    <div><b>300,000 VND</b></div>
-                </div>
           </div>
           <div class="form-right-contact pxb-3 mb-4" id="contact">
           <div><h4><b>Liên hệ</b></h4></div>
-
            <div class="row">
               <div class="col-md-6">
                   <iframe src="https://maps.google.com/maps?q=%20Thanh%20Xu%C3%A2n%20Trung%2C%20H%C3%A0%20N%E1%BB%99i&t=k&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300px"></iframe>
@@ -86,20 +77,17 @@
                       </span></span>
                 </div>
                 <div class="mb-2">
-                    <span>Điện thoại: {{user.phone}}</span>
+                    <span>Điện thoại: {{user? user.phone : ''}}</span>
                 </div>
                 <div class="mb-2">
-                    Email: {{user.email}}
+                    Email: {{user? user.email : ''}}
                 </div>
-                <!-- <div class="btn-inbox">
-                    0903328166
-                </div> -->
               </div>
            </div>
           </div>
 
 
-          <div class="form-right-detail pxb-3 mb-4" id="detail">
+          <div class="form-right-detail pxb-3 mb-4" id="detail" *ngIf="!!user">
               <div class="col-md-12"><h4><b>Thông tin chi tiết</b></h4></div>
               <table>
                 <tr class="header-table">
@@ -107,7 +95,7 @@
                   <td>Nơi cấp</td>
                   <td>Năm cấp</td>
                 </tr>
-                <tr *ngFor="let item of inforDetail">
+                <tr *ngFor="let item of user.inforDetails">
                     <td>{{item.certificate}}</td>
                     <td>{{item.placeOfIssue}}</td>
                     <td>{{item.yearOfIssue}}</td>
@@ -116,13 +104,17 @@
           </div>
 
           <div class="form-right-prize pxb-3 mb-4">
-              <div class="col-md-12"><h4><b>Giải thưởng</b></h4></div>
+              <div class="col-md-12"><h4><b>Học vấn</b></h4></div>
               <table>
                 <tr class="header-table">
-                  <td>Tên chứng chỉ</td>
+                  <td>Tên trường</td>
+                  <td>Trình độ</td>
+                  <td>Năm cấp</td>
                 </tr>
-                <tr *ngFor="let item of prize">
-                    <td>{{item.name}}</td>
+                <tr *ngFor="let item of user.educations">
+                    <td>{{item.place}}</td>
+                    <td>{{item.level}}</td>
+                    <td>{{item.time}}</td>
                 </tr>
               </table>
           </div>
