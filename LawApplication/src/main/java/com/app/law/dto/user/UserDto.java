@@ -31,8 +31,8 @@ public class UserDto {
 
     private String image;
     private String field;// list field
-    private String charges;
     private String introduce;
+    private Charge[] charges;
     private InforDetail[] inforDetails;
     private Prize[] prizes;
     private Experience[] experiences;
@@ -40,7 +40,6 @@ public class UserDto {
     private Integer roleId;
     private String token;
     private String phone;
-    private String description;
 
     private List<UserFieldDto> listField;
     private List<String> listPrivilege;

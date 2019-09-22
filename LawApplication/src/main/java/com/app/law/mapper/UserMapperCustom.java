@@ -20,8 +20,7 @@ public class UserMapperCustom {
         user.setImage(dto.getName());
         user.setPassword(dto.getPassword());
         user.setIntroduce(dto.getIntroduce());
-        user.setCharges(dto.getCharges());
-        user.setDescription(dto.getDescription());
+        user.setCharge(gson.toJson(dto.getCharges()));
 //        user.setField(dto.getField());
         user.setInforDetail(gson.toJson(dto.getInforDetails()));
         user.setPrize(gson.toJson(dto.getPrizes()));
@@ -40,9 +39,10 @@ public class UserMapperCustom {
         dto.setName(user.getName());
         dto.setImage(user.getImage());
         dto.setIntroduce(user.getIntroduce());
-        dto.setCharges(user.getCharges());
+//        dto.setCharges(user.getCharges());
+        dto.setCharges(gson.fromJson(user.getCharge() , Charge[].class));
+        dto.setInforDetails(gson.fromJson(user.getInforDetail() , InforDetail[].class));
         dto.setPhone(user.getPhone());
-        dto.setDescription(user.getDescription());
 
         StringJoiner fieldJoin = new StringJoiner(",");
         for (User_Field user_field : user.getListUserField())

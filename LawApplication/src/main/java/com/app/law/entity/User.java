@@ -30,17 +30,14 @@ public class User implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description", columnDefinition = "TEXT")
-    private String description;
-
     @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
 
     @Column(name = "introduce", columnDefinition = "TEXT")
     private String introduce;
 
-    @Column(name = "charges", columnDefinition = "TEXT")  // muc phi
-    private String charges;
+    @Column(name = "charge", columnDefinition = "TEXT")  // muc phi
+    private String charge;
 
     @Column(name = "infor_detail", columnDefinition = "TEXT")
     private String inforDetail;

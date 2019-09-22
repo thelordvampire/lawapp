@@ -36,7 +36,7 @@ public class ChatMessageService implements IChatMessageService {
             User user = userService.findUserById(messageDTO.getServerUserId());
             message.setUser(user);
             message.setSender(user.getName());
-            messageDTO.setServerUserImage(user.getImage());
+//            messageDTO.setServerUserImage(user.getImage());
         } else {
             message.setSender(messageDTO.getSender());
         }
