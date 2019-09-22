@@ -35,6 +35,7 @@ public class UserDto {
     private Integer roleId;
     private String token;
     private String phone;
+    private String description;
 
     private List<UserFieldDto> listField;
     private List<String> listPrivilege;
