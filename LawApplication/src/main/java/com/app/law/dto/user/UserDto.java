@@ -14,16 +14,21 @@ import java.util.List;
 public class UserDto {
 
     private Integer id;
+
     @NonNull
     @Email
     private String email;
+
     @NonNull
     @Expose(serialize = false)
     private String password;
+
     @Expose(serialize = false)
     private String repassword;
+
     @NonNull
     private String name;
+
     private String image;
     private String field;// list field
     private String charges;

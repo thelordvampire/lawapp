@@ -1,15 +1,17 @@
 <div class ="admin-page">
     <div class ="admin-content">
-          <header role="banner" style="vertical-align: middle">
-                <h1>Trang quản trị</h1>
-                <ul class="utilities" style="vertical-align: middle">
-                  <img class="rounded" alt="Cinque Terre" width="50" height="50" src="{{currentUser.image}}"/>
-                  <li>{{currentUser.name}}</li>
+          <header class="justify-content-flex-end d-flex align-items-center" role="banner" style="vertical-align: middle">
+                <ul class="utilities d-flex align-items-center">
+                  <li class="img-user mr-2">
+                    <img class="rounded" alt="Cinque Terre" width="50" height="50" src="{{currentUser.image}}"/>
+                  </li>
+                  <li class="mr-3">{{currentUser.name}}</li>
                   <li class="logout warn"><a (click) ="logout()">Đăng xuất</a></li>
                 </ul>
               </header>
 
               <nav role='navigation'>
+                <h1>Trang quản trị</h1>
                 <ul class="main">
                   <li class="dashboard"><a href="admindashboard">Dashboard</a></li>
                   <li class="edit"><a href="#">Edit Website</a></li>
@@ -45,4 +47,4 @@
             </div>
         </div>
     </div>
-    <app-chat #appChat class="admin-content__message"></app-chat>
+    <app-chat #appChat class="admin-content__message" isChatAdmin='true'></app-chat>

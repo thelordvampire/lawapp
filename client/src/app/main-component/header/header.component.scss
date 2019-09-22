@@ -1514,6 +1514,7 @@ html {
       top: 0;
     }
     .site-header #navbar > ul > li > .sub-menu > .menu-item-has-children > a {
+      cursor: pointer;
       position: relative;
     }
     .site-header #navbar > ul > li > .sub-menu > .menu-item-has-children > a:before {
@@ -1561,6 +1562,7 @@ html {
       padding: 8px 15px 8px 65px;
     }
     .site-header #navbar > ul .menu-item-has-children > a {
+      cursor: pointer;
       position: relative;
     }
     .site-header #navbar > ul .menu-item-has-children > a:before {

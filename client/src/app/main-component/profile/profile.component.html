@@ -1,136 +1,133 @@
-<div class="container">
-  <div class="">
-    <div class="col-md-4">
-      <div class="form-left pt-3">
-        <div class="d-flex profile-user">
-          <div class="col-f-4">
-              <img src="{{user.image}}" alt="" width="100px" height="auto" style="min-height: 100px;">
+<div class="section-site pt-5">
+  <div class="container">
+    <div class="">
+      <div class="col-md-4">
+        <div class="form-left pt-3">
+          <div class="d-flex profile-user">
+            <div class="col-f-4">
+                <img src="{{user.image}}" alt="" width="100px" height="auto" style="min-height: 100px;">
+            </div>
+            <div class="col-f-8">
+              <h4>{{user.name}}</h4>
+            </div>
           </div>
-          <div class="col-f-8">
-            <h4>{{user.name}}</h4>
-          </div>
-        </div>
-        <hr>
-        <div>
-          <div class="btn-contact">
-              <div>{{user.phone}}</div>
-          </div>
-          <!-- <span class="hidden-xs visible-sm visible-md visible-lg">
-              <div class="row">
-                  <div class="col-sm-6 col-md-12">
-                      <div class="btn-contact">
-                      </div>
-                      <div class="messaging-error-message-container">
+          <hr>
+          <div>
+            <div class="btn-contact">
+                <div>{{user.phone}}</div>
+            </div>
+            <!-- <span class="hidden-xs visible-sm visible-md visible-lg">
+                <div class="row">
+                    <div class="col-sm-6 col-md-12">
+                        <div class="btn-contact">
+                        </div>
+                        <div class="messaging-error-message-container">
 
-                      </div>
-                      <div class="row hidden-sm">
-                          <div class="col-xs-12 u-spacer-0"></div>
-                      </div>
-                  </div>
-                  <div class="col-xs-6">
-                      <span class="js-v-phone-replace">
-                          <a href="/luat-su/doan-van-nen-295/luat-su-gui-tin-nhan" class="btn btn-block js-v-profile-card-cta-message  "><i class="far fa-comment"></i> <span class="message-cta">Nhắn tin</span></a>
-                      </span>
-                  </div>
-                  <div class="col-xs-6">
-                      <a  rel="nofollow" class="btn btn-block " href="/luat-su/doan-van-nen-295#payments">Mức phí
-                          <span aria-hidden="true" class="icon fas fa-external-link-alt icon-blue"></span>
-                      </a>
-                  </div>
-              </div>
-          </span> -->
+                        </div>
+                        <div class="row hidden-sm">
+                            <div class="col-xs-12 u-spacer-0"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <span class="js-v-phone-replace">
+                            <a href="/luat-su/doan-van-nen-295/luat-su-gui-tin-nhan" class="btn btn-block js-v-profile-card-cta-message  "><i class="far fa-comment"></i> <span class="message-cta">Nhắn tin</span></a>
+                        </span>
+                    </div>
+                    <div class="col-xs-6">
+                        <a  rel="nofollow" class="btn btn-block " href="/luat-su/doan-van-nen-295#payments">Mức phí
+                            <span aria-hidden="true" class="icon fas fa-external-link-alt icon-blue"></span>
+                        </a>
+                    </div>
+                </div>
+            </span> -->
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-8">
-      <div class="form-right">
-        <div class="form-right-menu">
-            <div title="#infor" (click)="onPressHashtag('#infor', 200)">Thông tin</div>
-            <div title="#price" (click)="onPressHashtag('#price', 200)">Mức phí</div>
-            <div title="#contact" (click)="onPressHashtag('#contact', 200)">Liên hệ</div>
-            <div title="#detail" (click)="onPressHashtag('#detail', 200)">Chi tiết</div>
-        </div>
-        <div class="form-right-infor pxb-3 mb-4" id="infor">
-          <h4><b>Giới thiệu về Luật sư</b></h4>
-          <span>
-            {{user.description}}
-          </span>
-        </div>
-        <div class="form-right-price px-3 mb-4" id="price">
-            <div class="card"><h4><b>Mức phí</b></h4></div>
-            <div class="col-f-7 price-content mb-3">
-              <div>Giá trực tiếp</div>
-              <div><b>300,000 VND</b></div>
-            </div>
-            <div class="col-f-7 price-content mb-3">
+      <div class="col-md-8">
+        <div class="form-right">
+          <div class="form-right-menu">
+              <div title="#infor" (click)="onPressHashtag('#infor', 200)">Thông tin</div>
+              <div title="#price" (click)="onPressHashtag('#price', 200)">Mức phí</div>
+              <div title="#contact" (click)="onPressHashtag('#contact', 200)">Liên hệ</div>
+              <div title="#detail" (click)="onPressHashtag('#detail', 200)">Chi tiết</div>
+          </div>
+          <div class="form-right-infor pxb-3 mb-4" id="infor">
+            <h4><b>Giới thiệu về Luật sư</b></h4>
+            <span>
+              {{user.description}}
+            </span>
+          </div>
+          <div class="form-right-price px-3 mb-4" id="price">
+              <div class="card"><h4><b>Mức phí</b></h4></div>
+              <div class="col-f-7 price-content mb-3">
                 <div>Giá trực tiếp</div>
                 <div><b>300,000 VND</b></div>
               </div>
               <div class="col-f-7 price-content mb-3">
                   <div>Giá trực tiếp</div>
                   <div><b>300,000 VND</b></div>
+                </div>
+                <div class="col-f-7 price-content mb-3">
+                    <div>Giá trực tiếp</div>
+                    <div><b>300,000 VND</b></div>
+                </div>
+          </div>
+          <div class="form-right-contact pxb-3 mb-4" id="contact">
+          <div><h4><b>Liên hệ</b></h4></div>
+
+           <div class="row">
+              <div class="col-md-6">
+                  <iframe src="https://maps.google.com/maps?q=%20Thanh%20Xu%C3%A2n%20Trung%2C%20H%C3%A0%20N%E1%BB%99i&t=k&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300px"></iframe>
               </div>
-        </div>
-        <div class="form-right-contact pxb-3 mb-4" id="contact">
-        <div><h4><b>Liên hệ</b></h4></div>
-
-         <div class="row">
-            <div class="col-md-6">
-                <iframe src="https://maps.google.com/maps?q=%20Thanh%20Xu%C3%A2n%20Trung%2C%20H%C3%A0%20N%E1%BB%99i&t=k&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300px"></iframe>
-            </div>
-            <div class="col-md-6">
-              <div class="mb-2">
-                  <span class="font-weight-bold">Địa chỉ văn phòng/ Công ty:
-                    <span class="font-weight-default">
-                      Số 262 Thượng Đình, phương Khương Mai, Thanh Xuân, Ha Nội
-                    </span></span>
+              <div class="col-md-6">
+                <div class="mb-2">
+                    <span class="font-weight-bold">Địa chỉ văn phòng/ Công ty:
+                      <span class="font-weight-default">Số 262 Thượng Đình, phương Khương Mai, Thanh Xuân, Ha Nội
+                      </span></span>
+                </div>
+                <div class="mb-2">
+                    <span>Điện thoại: {{user.phone}}</span>
+                </div>
+                <div class="mb-2">
+                    Email: {{user.email}}
+                </div>
+                <!-- <div class="btn-inbox">
+                    0903328166
+                </div> -->
               </div>
-              <div class="mb-2">
-                  <span>Điện thoại: {{user.phone}}</span>
-              </div>
-              <div class="mb-2">
-                  Email: {{user.email}}
-              </div>
-
-<!--              <div class="btn-contact md">-->
-<!--                  {{user.phone}}-->
-<!--              </div>-->
-              <!-- <div class="btn-inbox">
-                  0903328166
-              </div> -->
-            </div>
-         </div>
-        </div>
+           </div>
+          </div>
 
 
-        <div class="form-right-detail pxb-3 mb-4" id="detail">
-            <div class="col-md-12"><h4><b>Thông tin chi tiết</b></h4></div>
-            <table>
-              <tr class="header-table">
-                <td>Tên chứng chỉ</td>
-                <td>Nơi cấp</td>
-                <td>Năm cấp</td>
-              </tr>
-              <tr *ngFor="let item of inforDetail">
-                  <td>{{item.certificate}}</td>
-                  <td>{{item.placeOfIssue}}</td>
-                  <td>{{item.yearOfIssue}}</td>
-              </tr>
-            </table>
-        </div>
+          <div class="form-right-detail pxb-3 mb-4" id="detail">
+              <div class="col-md-12"><h4><b>Thông tin chi tiết</b></h4></div>
+              <table>
+                <tr class="header-table">
+                  <td>Tên chứng chỉ</td>
+                  <td>Nơi cấp</td>
+                  <td>Năm cấp</td>
+                </tr>
+                <tr *ngFor="let item of inforDetail">
+                    <td>{{item.certificate}}</td>
+                    <td>{{item.placeOfIssue}}</td>
+                    <td>{{item.yearOfIssue}}</td>
+                </tr>
+              </table>
+          </div>
 
-        <div class="form-right-prize pxb-3 mb-4">
-            <div class="col-md-12"><h4><b>Giải thưởng</b></h4></div>
-            <table>
-              <tr class="header-table">
-                <td>Tên chứng chỉ</td>
-              </tr>
-              <tr *ngFor="let item of prize">
-                  <td>{{item.name}}</td>
-              </tr>
-            </table>
-        </div>
+          <div class="form-right-prize pxb-3 mb-4">
+              <div class="col-md-12"><h4><b>Giải thưởng</b></h4></div>
+              <table>
+                <tr class="header-table">
+                  <td>Tên chứng chỉ</td>
+                </tr>
+                <tr *ngFor="let item of prize">
+                    <td>{{item.name}}</td>
+                </tr>
+              </table>
+          </div>
+      </div>
     </div>
-  </div>
+    </div>
   </div>
 </div>
