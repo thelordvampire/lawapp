@@ -8,7 +8,11 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<any[]>(`${environment.apiUrl}/users`);
+        return this.http.get<any[]>(`${environment.apiUrl}/user/get-lawer`);
+    }
+
+    getById(id) {
+      return this.http.get<any[]>(`${environment.apiUrl}/user/${id}`);
     }
 
     register(user) {
@@ -16,7 +20,7 @@ export class UserService {
     }
 
     delete(id) {
-        return this.http.delete(`${environment.apiUrl}/users/${id}`);
+        return this.http.delete(`${environment.apiUrl}/user/${id}`);
     }
     getAllRole() {
         return this.http.get<any>(`${environment.apiUrl}/role/get-all`);

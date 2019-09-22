@@ -7,7 +7,7 @@
                         <ul>
                             <li><i class="ti-location-pin"></i>Hà Nội, Việt Nam</li>
                             <li><i class="ti-mobile"></i>1254-145(25455)</li>
-                            <li><i class="ti-email"></i>Aequity@example.com</li>
+                            <li><i class="ti-email"></i>luatdanhviet@gmail.com</li>
                         </ul>
                     </div>
                 </div>
@@ -17,7 +17,6 @@
                             <li><a ><i class="ti-facebook" style=""></i></a></li>
                             <li><a ><i class="ti-twitter-alt" style=""></i></a></li>
                             <li><a ><i class="ti-linkedin" style=""></i></a></li>
-                            <li><a ><i class="ti-pinterest" style=""></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,24 +58,31 @@
                     <li id="menu-item-17"
                         class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-17">
                         <a >Lĩnh vực hoạt động</a>
-                        <ul class="sub-menu">
-                            <li id="menu-item-101"
-                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101"><a
-                                    href="">Tư vấn pháp luật</a></li>
-                            <li id="menu-item-102"
-                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-102"><a
-                                    href="">Tham gia tố tụng</a></li>
-                            <li id="menu-item-103"
-                                class="menu-item menu-item-type-post_type menu-item-object-practice menu-item-103"><a
-                                    href="">Đại diện ngoài tố tụng cho khách hàng</a></li>
-                            <li id="menu-item-104"
-                                class="menu-item menu-item-type-post_type menu-item-object-practice menu-item-104"><a
-                                    href="">Thực hiện các dịch vụ pháp lý khác</a></li>
+                        <ul class="sub-menu" >
+
+                          <li id="menu-item-" *ngFor="let field of listField"
+                              class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101"><a
+                            href="">{{field.name}}</a></li>
+
+
+
+<!--                            <li id="menu-item-101"-->
+<!--                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101"><a-->
+<!--                                    href="">Tư vấn pháp luật</a></li>-->
+<!--                            <li id="menu-item-102"-->
+<!--                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-102"><a-->
+<!--                                    href="">Tham gia tố tụng</a></li>-->
+<!--                            <li id="menu-item-103"-->
+<!--                                class="menu-item menu-item-type-post_type menu-item-object-practice menu-item-103"><a-->
+<!--                                    href="">Đại diện ngoài tố tụng cho khách hàng</a></li>-->
+<!--                            <li id="menu-item-104"-->
+<!--                                class="menu-item menu-item-type-post_type menu-item-object-practice menu-item-104"><a-->
+<!--                                    href="">Thực hiện các dịch vụ pháp lý khác</a></li>-->
                         </ul>
                     </li>
                     <li id="menu-item-18"
                         class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-18">
-                        <a>Nhân sự đội ngũ</a>
+                        <a>Đội ngũ luật sư</a>
                         <ul class="sub-menu">
                             <li id="menu-item-105"
                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-105"><a
@@ -95,7 +101,7 @@
                     </li>
                     <li id="menu-item-19"
                         class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-19">
-                        <a >Tin tức luật pháp</a>
+                        <a >Tin tức</a>
                         <ul class="sub-menu">
                             <li id="menu-item-109"
                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109"><a
@@ -130,7 +136,7 @@
                   </div>
               </div>
                    <div class="quote">
-                    <a href="/tf/wp1/aequity/contact/" class=" theme-btn ">Tư vấn miễn phí</a>
+                    <a href="#" class=" theme-btn ">Đặt lịch hẹn</a>
                 </div>
                 </div>
         </div><!-- end of container -->
@@ -243,7 +249,7 @@
                       </div>
                   </div>
                        <div class="quote">
-                        <a href="/tf/wp1/aequity/contact/" class=" theme-btn ">Tư vấn miễn phí</a>
+                        <a href="/tf/wp1/aequity/contact/" class=" theme-btn ">Đặt lịch hẹn</a>
                     </div>
                     </div>
         </div><!-- end of container -->

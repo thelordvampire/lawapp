@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewInit, DoCheck, Output, EventEmitter } from '@angular/core';
-import { first } from 'rxjs/operators';
 import { AuthenticationService, UserService } from 'src/app/_services';
 import { NgxCarousel } from 'ngx-carousel';
 import { IMAGE } from 'src/app/share/image-share';
+import {FieldService} from '../../_services/field.service';
 // import * as $ from 'jquery';
 declare var $ :any;
 
@@ -19,18 +19,18 @@ export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
     {
     id: 1,
     title: 'Vì: Quyền, lợi ích hợp pháp của khách hàng,',
-    content: 'Nên: sẵn sàng tận tâm vì khách hàng, tận tụy với công việc, hoàn thành dịch vụ đúng tiến độ, đáp ứng chính xác yêu cầu của khách hàng.' 
-   }, 
+    content: 'Nên: sẵn sàng tận tâm vì khách hàng, tận tụy với công việc, hoàn thành dịch vụ đúng tiến độ, đáp ứng chính xác yêu cầu của khách hàng.'
+   },
    {
     id: 2,
     title: 'Vì: Quyền, lợi ích hợp pháp của khách hàng,',
-    content: 'Nên: sẵn sàng tận tâm vì khách hàng, tận tụy với công việc, hoàn thành dịch vụ đúng tiến độ, đáp ứng chính xác yêu cầu của khách hàng.' 
-   }, 
+    content: 'Nên: sẵn sàng tận tâm vì khách hàng, tận tụy với công việc, hoàn thành dịch vụ đúng tiến độ, đáp ứng chính xác yêu cầu của khách hàng.'
+   },
    {
     id: 3,
     title: 'Vì: Quyền, lợi ích hợp pháp của khách hàng,',
-    content: 'Nên: sẵn sàng tận tâm vì khách hàng, tận tụy với công việc, hoàn thành dịch vụ đúng tiến độ, đáp ứng chính xác yêu cầu của khách hàng.' 
-   }, 
+    content: 'Nên: sẵn sàng tận tâm vì khách hàng, tận tụy với công việc, hoàn thành dịch vụ đúng tiến độ, đáp ứng chính xác yêu cầu của khách hàng.'
+   },
 ]
 
     users = [];
@@ -73,42 +73,7 @@ export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
       }
     ]
 
-    fieldList = [
-      {
-        id: 1,
-        fieldName: 'Tư vấn pháp luật',
-      },
-      {
-        id: 2,
-        fieldName: 'Tham gia tố tụng',
-      },
-      {
-        id: 3,
-        fieldName: 'Đại diện ngoài tố tụng cho khách hàng',
-      },
-      {
-        id: 4,
-        fieldName: 'Thực hiện các dịch vụ pháp lý khác',
-      },
-      {
-        id: 5,
-        fieldName: 'Thuế',
-      },
-      {
-        id: 6,
-        fieldName: 'Doanh nghiệp',
-      },
-      {
-        id: 7,
-        fieldName: 'Đất đai',
-      },
-      {
-        id: 8,
-        fieldName: 'Hôn nhân',
-      },
-
-
-    ]
+    listField;
 
     tagList = [
       {
@@ -148,12 +113,17 @@ export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
     public carouselOne: NgxCarousel;
     constructor(
         private authenticationService: AuthenticationService,
-        private userService: UserService
+        private userService: UserService,
+        private fieldService: FieldService,
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
     }
 
     ngOnInit() {
+      this.fieldService.getAll().subscribe(res => {
+        this.listField = res;
+      });
+
       this.carouselOne = {
         grid: {xs: 1, sm: 1, md: 1, lg: 3, all: 0},
         slide: 1,
@@ -187,7 +157,7 @@ export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
 
      }
      ngDoCheck(){
-     
+
     }
     onPressImage(event) {
       this.imageId = event.id - 1;

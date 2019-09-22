@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { log } from 'util';
+import {UserService} from '../../_services';
+import {ActivatedRoute} from '@angular/router';
 
 declare const $: any;
 @Component({
@@ -8,7 +10,12 @@ declare const $: any;
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  constructor() { }
+
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+  ) { }
+
   inforDetail = [
     {
       certificate: 'Khóa đào tạo kỹ năng hành nghề Luật sư',
@@ -30,14 +37,24 @@ export class ProfileComponent implements OnInit {
     {
       id: 1,
       name: 'đào tạo kỹ năng hành nghề Luật sư'
-    }, 
+    },
     {
       id: 2,
       name: 'đào tạo kỹ năng hành nghề Luật sư'
     }
-  ]
+  ];
+
+  user;
+  userId;
   ngOnInit() {
+    if (this.route.snapshot && this.route.snapshot.params.id) {
+      this.userId = this.route.snapshot.params.id;
+      this.userService.getById(this.userId).subscribe(res => {
+        this.user = res;
+      });
+    }
   }
+
   onPressHashtag(hashtag, delay = 0, ) {
     const elem = document.querySelectorAll('[title*="'+hashtag+'"]');
     $('.form-right-menu div').removeClass('active');

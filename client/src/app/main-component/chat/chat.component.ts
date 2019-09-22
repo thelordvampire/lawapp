@@ -101,8 +101,8 @@ export class ChatComponent implements OnInit {
       this.onMessageReceived({
         body:  JSON.stringify(
           {
-            content: `Xin chào ${this.auth.getCurrentUser().name}. Tôi có thể giúp gì cho bạn`,
-            sender: 'Trợ lý ảo',
+            content: `Xin chào ${this.auth.getCurrentUser().name}. Xin hãy để lại lời nhắn`,
+            sender: 'Trợ lý',
             serverUserId: -1
           }
         )});

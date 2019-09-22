@@ -69,7 +69,7 @@ export class AuthenticationService {
 
     isAdmin() {
       const user = this.getCurrentUser();
-      return !!user.id;
-      // return user ? user.isAdmin : null;
+      // return !!user.id;
+      return user ? !!user.id : false;
     }
 }
