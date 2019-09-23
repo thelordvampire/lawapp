@@ -4199,14 +4199,14 @@ img {
 }
 
 .blog-section .grid .details {
-  padding: 35px 25px;
+  padding: 30px 15px;
   -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 1199px) {
   .blog-section .grid .details {
-    padding: 20px;
+    padding: 20px 15px;
   }
 }
 

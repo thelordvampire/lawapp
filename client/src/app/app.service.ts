@@ -32,6 +32,16 @@ export class AppService {
         return this.$dataChatBox.asObservable();
     }
 
+    GetPostGetAll():any {
+        const url = `${environment.apiUrl}/post/get-all`;
+        return this.http.get(url);
+    }
+    GetPaging(data):any {
+        const url = `${environment.apiUrl}/posts/paging`;
+        return this.http.get(url, data);
+    }
+
+
     CreateRoom(data) {
         const url = `${environment.apiUrl}/chat/room/create/`;
         return this.http.post(url, data);
