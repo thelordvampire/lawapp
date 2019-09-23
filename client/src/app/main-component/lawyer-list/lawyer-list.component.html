@@ -22,134 +22,52 @@
                         </div>
                     </div>
 
-                
+
                 </div>
             </div>
         </div>
     </div>
 </section> -->
 <div class="team-section  team-section-5d6f89e70ee24 container">
-  <div class="row">
-      <div class="col col-xs-12">
-          <div class="team-grids">
-              <div class="grid">
-                  <div class="member-pic">
-                      <img src="../../../assets/images/team-1-min.jpg" alt="">
+  <div style=" display: flex; justify-content: center;">
+      <ul style="width: 80%; margin: 0; padding: 0; display: flex; flex-direction: row; flex-wrap: wrap;
+        justify-content: flex-start;">
+          <li style="padding: 5px; margin: 15px; border: solid rgb(44, 44, 44, 0.2) 1px" *ngFor="let user of listUser">
+              <div style="text-align: -webkit-center; max-width: 250px;">
+                  <div class="member-pic" style="height: 200px; max-width: 200px;">
+                      <img src="{{user.image}}" alt="" style="height: 200px;">
                   </div>
-                  <div class="info">
-                      <h3><a  routerLink="/profile/1">
+                  <div class="info" style="padding-top: 20px;">
+                      <h3 style="text-align: center;"><a routerLink="{{'/profile/' + user.id}}">
                               <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">Jhon Bredmen</font>
+                                  <font style="vertical-align: inherit;
+                                  color: #c83226; font-weight: bold">{{user.name}}</font>
                               </font>
                           </a></h3>
-                      <span>
-                          <font style="vertical-align: inherit;">
-                              <font style="vertical-align: inherit;">Luật sư dân sự</font>
-                          </font>
-                      </span>
-                      <ul>
-                          <li><i class="ti-mobile"></i>
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">+021 135 03250</font>
-                              </font>
+                      <div style="word-break: break-word">
+                          <font style="vertical-align: inherit; color: #5d6d7a">Lĩnh vực: {{user.field}}</font>
+                      </div>
+                      <ul style="text-align: left; word-break: break-all">
+                          <li>
+<!--                            <i class="ti-mobile"></i>-->
+                            <font style="vertical-align: inherit">
+                              <font style="vertical-align: inherit;">{{user.phone}}</font>
+                            </font>
+
+                            <span style="border-left: solid red 1px;">
+                              <font style="vertical-align: inherit;">{{user.email + '@gmail.com'}}</font>
+                            </span>
                           </li>
-                          <li><i class="ti-email"></i>
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">demo@example.com</font>
-                              </font>
-                          </li>
+<!--                          <li>-->
+<!--&lt;!&ndash;                            <i class="ti-email"></i>&ndash;&gt;-->
+<!--                              <font style="vertical-align: inherit;">-->
+<!--                                  <font style="vertical-align: inherit;">{{user.email + '@gmail.com'}}</font>-->
+<!--                              </font>-->
+<!--                          </li>-->
                       </ul>
                   </div>
               </div>
-              <div class="grid">
-                  <div class="member-pic">
-                      <img src="../../../assets/images/team-2-min.jpg" alt="">
-                  </div>
-                  <div class="info">
-                      <h3><a routerLink="/profile/1">
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">Jhon Deno</font>
-                              </font>
-                          </a></h3>
-                      <span>
-                          <font style="vertical-align: inherit;">
-                              <font style="vertical-align: inherit;">Luật sư gia đình</font>
-                          </font>
-                      </span>
-                      <ul>
-                          <li><i class="ti-mobile"></i>
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">+021 135 03250</font>
-                              </font>
-                          </li>
-                          <li><i class="ti-email"></i>
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">demo@example.com</font>
-                              </font>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-              <div class="grid">
-                  <div class="member-pic">
-                      <img src="../../../assets/images/team-3-min.jpg" alt="">
-                  </div>
-                  <div class="info">
-                      <h3><a routerLink="/profile/1">
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">Fela lớn</font>
-                              </font>
-                          </a></h3>
-                      <span>
-                          <font style="vertical-align: inherit;">
-                              <font style="vertical-align: inherit;">Luật sư hình sự</font>
-                          </font>
-                      </span>
-                      <ul>
-                          <li><i class="ti-mobile"></i>
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">+021 135 03250</font>
-                              </font>
-                          </li>
-                          <li><i class="ti-email"></i>
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">demo@example.com</font>
-                              </font>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-              <div class="grid">
-                  <div class="member-pic">
-                      <img src="../../../assets/images/attorney-4-min.jpg"
-                          alt="">
-                  </div>
-                  <div class="info">
-                      <h3><a routerLink="/profile/1">
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">Bredmen Jhon</font>
-                              </font>
-                          </a></h3>
-                      <span>
-                          <font style="vertical-align: inherit;">
-                              <font style="vertical-align: inherit;">Luật sư gia đình</font>
-                          </font>
-                      </span>
-                      <ul>
-                          <li><i class="ti-mobile"></i>
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">+021 135 03250</font>
-                              </font>
-                          </li>
-                          <li><i class="ti-email"></i>
-                              <font style="vertical-align: inherit;">
-                                  <font style="vertical-align: inherit;">demo@example.com</font>
-                              </font>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-      </div>
+          </li>
+      </ul>
   </div>
 </div>

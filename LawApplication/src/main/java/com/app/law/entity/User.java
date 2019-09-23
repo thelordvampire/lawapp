@@ -4,9 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity(name = "user")
 @Table(name = "user")
@@ -32,29 +30,29 @@ public class User implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
 
-    @Column(name = "introduce")
+    @Column(name = "introduce", columnDefinition = "TEXT")
     private String introduce;
 
-    @Column(name = "field")  //linh vuc
-    private String field;
+    @Column(name = "charge", columnDefinition = "TEXT")  // muc phi
+    private String charge;
 
-    @Column(name = "charges")  // muc phi
-    private String charges;
-
-    @Column(name = "infor_detail")
+    @Column(name = "infor_detail", columnDefinition = "TEXT")
     private String inforDetail;
 
     @Column(name = "prize")
     private String prize;
 
-    @Column(name = "experience")
+    @Column(name = "experience", columnDefinition = "TEXT")
     private String experience;
 
-    @Column(name = "education")
+    @Column(name = "education", columnDefinition = "TEXT")
     private String education;
+
+    @Column(name = "phone")
+    private String phone;
 
     @Column(name = "roleId")
     private Integer roleId;
@@ -63,10 +61,10 @@ public class User implements Serializable {
     private List<User_Privilege> listUserPrivilege;
 
     @OneToMany(mappedBy = "userId")
-    private List<User_Specialization> listUserSpecialization;
+    private List<User_Field> listUserField;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<Post> listPost = new HashSet<>();
+    private List<Post> listPost ;
 
     @Transient
     private String token;

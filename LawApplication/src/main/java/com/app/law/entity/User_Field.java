@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "user_specialization")
+@Table(name = "user_field")
 @Data
-public class User_Specialization implements Serializable {
+public class User_Field implements Serializable {
 
     private static final long serialVersionUID = 5393126870159716461L;
 
@@ -21,9 +21,9 @@ public class User_Specialization implements Serializable {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "specialization_id", insertable = false, updatable = false)
-    private Integer specializationId;
+    @Column(name = "field_id", insertable = false, updatable = false)
+    private Integer fieldId;
 
     @OneToOne
-    private Specialization specialization;
+    private Field field;
 }

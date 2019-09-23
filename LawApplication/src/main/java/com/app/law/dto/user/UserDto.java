@@ -1,11 +1,11 @@
 package com.app.law.dto.user;
 
-import com.app.law.entity.Privilege;
-import com.app.law.entity.Specialization;
+import com.app.law.dto.UserFieldDto;
+import com.google.gson.annotations.Expose;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.google.gson.annotations.Expose;
 import lombok.NonNull;
+
 import javax.validation.constraints.Email;
 import java.util.List;
 
@@ -30,18 +30,19 @@ public class UserDto {
     private String name;
 
     private String image;
-    private String field;
-    private String charges;
+    private String field;// list field
     private String introduce;
+    private Charge[] charges;
     private InforDetail[] inforDetails;
     private Prize[] prizes;
     private Experience[] experiences;
     private Education[] educations;
     private Integer roleId;
     private String token;
+    private String phone;
 
-    private List<Specialization> listSpecialization;
-    private List<Privilege> listPrivilege;
+    private List<UserFieldDto> listField;
+    private List<String> listPrivilege;
 
     @Override
     public String toString() {

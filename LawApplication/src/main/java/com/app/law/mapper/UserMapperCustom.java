@@ -2,9 +2,12 @@ package com.app.law.mapper;
 
 import com.app.law.dto.user.*;
 import com.app.law.entity.User;
+import com.app.law.entity.User_Field;
 import com.google.gson.Gson;
+import com.sun.org.apache.xpath.internal.operations.String;
 
 import java.lang.reflect.Type;
+import java.util.StringJoiner;
 
 public class UserMapperCustom {
 
@@ -17,8 +20,8 @@ public class UserMapperCustom {
         user.setImage(dto.getName());
         user.setPassword(dto.getPassword());
         user.setIntroduce(dto.getIntroduce());
-        user.setCharges(dto.getCharges());
-        user.setField(dto.getField());
+        user.setCharge(gson.toJson(dto.getCharges()));
+//        user.setField(dto.getField());
         user.setInforDetail(gson.toJson(dto.getInforDetails()));
         user.setPrize(gson.toJson(dto.getPrizes()));
         user.setEducation(gson.toJson(dto.getEducations()));
@@ -36,8 +39,16 @@ public class UserMapperCustom {
         dto.setName(user.getName());
         dto.setImage(user.getImage());
         dto.setIntroduce(user.getIntroduce());
-        dto.setCharges(user.getCharges());
-        dto.setField(user.getField());
+//        dto.setCharges(user.getCharges());
+        dto.setCharges(gson.fromJson(user.getCharge() , Charge[].class));
+        dto.setInforDetails(gson.fromJson(user.getInforDetail() , InforDetail[].class));
+        dto.setPhone(user.getPhone());
+
+        StringJoiner fieldJoin = new StringJoiner(",");
+        for (User_Field user_field : user.getListUserField())
+            fieldJoin.add(user_field.getField().getName());
+        dto.setField(fieldJoin.toString());
+
         dto.setInforDetails(gson.fromJson(user.getInforDetail() , InforDetail[].class));
         dto.setPrizes(gson.fromJson(user.getPrize() , Prize[].class));
         dto.setEducations(gson.fromJson(user.getEducation() , Education[].class));

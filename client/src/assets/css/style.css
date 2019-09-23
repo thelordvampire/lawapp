@@ -59,6 +59,15 @@ Tags: one-column, two-columns, left-sidebar, right-sidebar, custom-menu, feature
 .align-items-center{
     align-items: center;
 }
+.align-items-center {
+    align-items: center;
+}
+.justify-content-between {
+    justify-content: space-between;
+}
+.justify-content-flex-end {
+    justify-content: flex-end;
+}
 .alignleft {
     display: inline;
     float: left;

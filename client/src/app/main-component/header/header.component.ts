@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import {AlertService} from '../../_services';
+import {FieldService} from '../../_services/field.service';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +10,17 @@ import * as $ from 'jquery';
 })
 export class HeaderComponent implements OnInit {
   isShowResources = false;
-  constructor() {
-   }
+
+  listField;
+
+  constructor(
+    private fieldService: FieldService
+  ) { }
 
   ngOnInit() {
     $(window).on('load', function() {
       smallNavFunctionality();
-  });
+    });
    $(window).on("resize", function() {
         toggleClassForSmallNav();
         // smallNavFunctionality();
@@ -25,10 +31,9 @@ export class HeaderComponent implements OnInit {
         }, 200));
     });
     $("span.menu").click(function(){
-      $(" ul.navig").slideToggle("slow" , function(){
-      });
+      $(" ul.navig").slideToggle("slow" , function(){});
     });
-        
+
     if ($(".header-search-area").length) {
       console.log('sadassdsdas');
       var serachFormBox = $(".header-search-area .header-search-form");
@@ -86,6 +91,10 @@ export class HeaderComponent implements OnInit {
     }
 }
 
-toggleClassForSmallNav();
+  toggleClassForSmallNav();
+
+    this.fieldService.getAll().subscribe(res => {
+      this.listField = res;
+    });
   }
 }

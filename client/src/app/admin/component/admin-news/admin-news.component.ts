@@ -2,8 +2,6 @@ import { Component, OnInit, AfterContentInit, AfterViewInit, ViewChild, ChangeDe
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/_services';
-// import { MdbTablePaginationComponent, MdbTableDirective } from 'PATH-TO-MDB-ANGULAR-HERE';
-import { environment } from '@environments/environment';
 
 declare var tinymce: any;
 
@@ -29,8 +27,8 @@ export class AdminNewsComponent implements OnInit  {
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
-  ) { 
-    
+  ) {
+
   }
 
   ngOnInit() {
@@ -119,20 +117,20 @@ export class AdminNewsComponent implements OnInit  {
           };
           reader.readAsDataURL(file);
         };
-    
+
         input.click();
       }
       // file_picker_callback: function(cb, value, meta) {
       //   var input = document.createElement('input');
       //   input.setAttribute('type', 'file');
       //   input.setAttribute('accept', 'image/*');
-  
-      //   // Note: In modern browsers input[type="file"] is functional without 
+
+      //   // Note: In modern browsers input[type="file"] is functional without
       //   // even adding it to the DOM, but that might not be the case in some older
       //   // or quirky browsers like IE, so you might want to add it to the DOM
       //   // just in case, and visually hide it. And do not forget do remove it
       //   // once you do not need it anymore.
-  
+
       //   input.onchange = function() {
       //     var file = this['files'][0];
       //     var reader = new FileReader();
@@ -143,15 +141,15 @@ export class AdminNewsComponent implements OnInit  {
       //     var blobCache = tinymce.activeEditor.editorUpload.blobCache;
       //     var base64 = String(reader.result).split(',')[1];
       //     console.log('base64', base64);
-          
+
       //     var blobInfo = blobCache.create(id, file, base64);
       //     blobCache.add(blobInfo);
-          
-  
+
+
       //     // call the callback and populate the Title field with the file name
       //     cb(blobInfo.blobUri(), { title: file.name });
       //   };
-  
+
       //   input.click();
       // }
     }

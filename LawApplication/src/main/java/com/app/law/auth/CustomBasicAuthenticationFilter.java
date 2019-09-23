@@ -82,10 +82,5 @@ public class CustomBasicAuthenticationFilter extends BasicAuthenticationFilter {
     protected void onUnsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
         System.out.println("unsuccess");
     }
-    
-    
-    
-    
-    
-    
+
 }

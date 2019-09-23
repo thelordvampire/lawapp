@@ -98,12 +98,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
             CorsConfiguration config = new CorsConfiguration();
             config.setAllowCredentials(true);
-//        config.addExposedHeader("Set-Cookie xsrf-token");
             config.addExposedHeader("Set-Cookie");
             config.addExposedHeader("xsrf-token");
-            if(Enviroment.cors != null) {
-                Enviroment.cors.forEach(config::addAllowedOrigin);
-            }
+//            if(Enviroment.cors != null) {
+//                Enviroment.cors.forEach(config::addAllowedOrigin);
+//            }
+            config.addAllowedOrigin("*");
 
             config.setAllowedMethods(Arrays.asList("POST", "OPTIONS", "GET", "DELETE", "PUT"));
             config.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization", "xsrf-token", "x-csrf-token", "credentials"));
@@ -170,12 +170,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 //                .and().httpBasic();
 
             http
-                    .csrf().disable()
+                .csrf()
+                .disable()
 //            .ignoringAntMatchers("/user/login")
 //            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //            .and()
                     .cors().and()
-
 //                    .authorizeRequests()
 //                    .antMatchers("/user/login", "/user/sign_up")
 //                    .permitAll()
@@ -193,19 +193,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 
             http.sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-//        http.authorizeRequests()
-//                .antMatchers("/user/login")
-//                .permitAll();
-
-
-
-
-
-
-
-
-
 
 
 

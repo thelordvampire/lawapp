@@ -5,22 +5,16 @@
         <div class="form-left pt-3">
           <div class="d-flex profile-user">
             <div class="col-f-4">
-                <img src="https://znews-photo.zadn.vn/w660/Uploaded/ofh_fdmzsofw/2017_05_09/18386481_437476439951053_1928659744_n.jpg" alt="" width="100px" height="auto">
+                <img src="{{user? user.image : ''}}" alt="" width="100px" height="auto" style="min-height: 100px;">
             </div>
             <div class="col-f-8">
-              <h4>Nguyễn Văn A</h4>
-              <p>
-                Địa chỉ: 
-              </p>
-              <p>
-                Mức phí:
-              </p>
+              <h4>{{user? user.name : ''}}</h4>
             </div>
           </div>
           <hr>
           <div>
             <div class="btn-contact">
-                <div>0903328166</div>
+                <div>{{user ? user.phone : ''}}</div>
             </div>
             <!-- <span class="hidden-xs visible-sm visible-md visible-lg">
                 <div class="row">
@@ -28,7 +22,7 @@
                         <div class="btn-contact">
                         </div>
                         <div class="messaging-error-message-container">
-  
+
                         </div>
                         <div class="row hidden-sm">
                             <div class="col-xs-12 u-spacer-0"></div>
@@ -40,7 +34,7 @@
                         </span>
                     </div>
                     <div class="col-xs-6">
-                        <a  rel="nofollow" class="btn btn-block " href="/luat-su/doan-van-nen-295#payments">Mức phí 
+                        <a  rel="nofollow" class="btn btn-block " href="/luat-su/doan-van-nen-295#payments">Mức phí
                             <span aria-hidden="true" class="icon fas fa-external-link-alt icon-blue"></span>
                         </a>
                     </div>
@@ -60,79 +54,67 @@
           <div class="form-right-infor pxb-3 mb-4" id="infor">
             <h4><b>Giới thiệu về Luật sư</b></h4>
             <span>
-                Luật sư Đoàn Văn A hiện đang là Luật sư thuộc Đoàn Luật sư thành phố Hồ Chí Minh. Với hơn 10 năm kinh nghiệm hành nghề, Luật sư Đoàn Văn Nên đã hỗ trợ thành công nhiều vụ việc cho khách hàng là cá nhân và doanh nghiệp. Luật sư có kinh nghiệm chuyên môn trong các lĩnh vực như Dân sự, Hình sự, Hành chính, Hôn nhân Gia đình, Nhà đất - Xây dựng, Hộ tịch - Tư pháp, Di chúc - Thừa kế, Lao động - Bảo hiểm xã hội... 
-  
-                Với sự tận tâm và nhiệt tình, kiến thức chuyên môn cao, Luật sư Đoàn Văn Nên luôn cố gắng mang lại cho khách hàng giải pháp pháp lý tốt nhất. Bên cạnh đó, Luật sư còn tham gia cố vấn Luật cho các đội tình nguyện, hỗ trợ tư vấn pháp luật miễn phí cho người nghèo và đối tượng chính sách.
+              {{user? user.introduce : ''}}
             </span>
           </div>
-          <div class="form-right-price px-3 mb-4" id="price">
+          <div class="form-right-price px-3 mb-4" id="price" *ngIf="!!user">
               <div class="card"><h4><b>Mức phí</b></h4></div>
-              <div class="col-f-7 price-content mb-3">
-                <div>Giá trực tiếp</div>
-                <div><b>300,000 VND</b></div>
+              <div class="col-f-7 price-content mb-3"  *ngFor="let item of user.charges">
+                <div>{{item.chargeName}}</div>
+                <div><b>{{item.price}} VND</b></div>
               </div>
-              <div class="col-f-7 price-content mb-3">
-                  <div>Giá trực tiếp</div>
-                  <div><b>300,000 VND</b></div>
-                </div>
-                <div class="col-f-7 price-content mb-3">
-                    <div>Giá trực tiếp</div>
-                    <div><b>300,000 VND</b></div>
-                </div>
           </div>
           <div class="form-right-contact pxb-3 mb-4" id="contact">
           <div><h4><b>Liên hệ</b></h4></div>
-  
            <div class="row">
               <div class="col-md-6">
                   <iframe src="https://maps.google.com/maps?q=%20Thanh%20Xu%C3%A2n%20Trung%2C%20H%C3%A0%20N%E1%BB%99i&t=k&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300px"></iframe>
               </div>
               <div class="col-md-6">
                 <div class="mb-2">
-                    <span class="font-weight-bold">Địa chỉ văn phòng/ Công ty: <span class="font-weight-default">Số 5 Đường 84, Phường 10, Quận 6</span></span>
+                    <span class="font-weight-bold">Địa chỉ văn phòng/ Công ty:
+                      <span class="font-weight-default">Số 262 Thượng Đình, phương Khương Mai, Thanh Xuân, Ha Nội
+                      </span></span>
                 </div>
                 <div class="mb-2">
-                    <span>Điện thoại: 0903328166</span>
+                    <span>Điện thoại: {{user? user.phone : ''}}</span>
                 </div>
                 <div class="mb-2">
-                    Email: luatsunen@gmail.com
+                    Email: {{user? user.email : ''}}
                 </div>
-  
-                <div class="btn-contact md">
-                    0903328166
-                </div>
-                <!-- <div class="btn-inbox">
-                    0903328166
-                </div> -->
               </div>
            </div>
           </div>
-  
-  
-          <div class="form-right-detail pxb-3 mb-4" id="detail">
+
+
+          <div class="form-right-detail pxb-3 mb-4" id="detail" *ngIf="!!user">
               <div class="col-md-12"><h4><b>Thông tin chi tiết</b></h4></div>
-              <table> 
+              <table>
                 <tr class="header-table">
                   <td>Tên chứng chỉ</td>
                   <td>Nơi cấp</td>
                   <td>Năm cấp</td>
                 </tr>
-                <tr *ngFor="let item of inforDetail">
+                <tr *ngFor="let item of user.inforDetails">
                     <td>{{item.certificate}}</td>
                     <td>{{item.placeOfIssue}}</td>
                     <td>{{item.yearOfIssue}}</td>
                 </tr>
               </table>
           </div>
-  
-          <div class="form-right-prize pxb-3 mb-4">
-              <div class="col-md-12"><h4><b>Giải thưởng</b></h4></div>
-              <table> 
+
+          <div class="form-right-prize pxb-3 mb-4" *ngIf="!!user">
+              <div class="col-md-12"><h4><b>Học vấn</b></h4></div>
+              <table>
                 <tr class="header-table">
-                  <td>Tên chứng chỉ</td>
+                  <td>Tên trường</td>
+                  <td>Trình độ</td>
+                  <td>Năm cấp</td>
                 </tr>
-                <tr *ngFor="let item of prize">
-                    <td>{{item.name}}</td>
+                <tr *ngFor="let item of user.educations">
+                    <td>{{item.place}}</td>
+                    <td>{{item.level}}</td>
+                    <td>{{item.time}}</td>
                 </tr>
               </table>
           </div>
