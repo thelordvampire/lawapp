@@ -1,3 +1,26 @@
-<p>
-  news-detail works!
-</p>
+<div class="page-title crumbs-area-5d8bb8500d7f4" style="background-image: url(../../../../assets/images/slide-2-min.jpg)">
+  <div class="page-title-container">
+    <div class="page-title-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col col-xs-12">
+            <div class="title">
+              <h2>Tin Tức</h2>
+            </div>
+          </div> <!-- end row -->
+        </div> <!-- end container -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container py-5">
+  <div
+    class="post clearfix post-163 type-post status-publish format-video has-post-thumbnail hentry category-law-services tag-attorney tag-crime tag-family-lawyer tag-law-firm post_format-post-format-video">
+    <div class="entry-media">
+      <img *ngIf="dataPost.image" src={{dataPost.image}} alt="image">
+    </div>
+    <h3 *ngIf="dataPost.title"> {{dataPost.title}} </h3>
+    <div class="entry-details" *ngIf="dataPost.content" [innerHTML]="dataPost.content">
+    </div>
+  </div>
+</div>

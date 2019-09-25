@@ -146,6 +146,9 @@ button:focus {
 .d-line {
   border: 1px solid #ddd;
 }
+button:disabled, html input:disabled {
+  opacity: 0.5;
+}
 
 .m-1 {margin: 0.25rem !important}
 .m-2 {margin: 0.5rem !important}

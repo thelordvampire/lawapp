@@ -40,6 +40,10 @@ export class AppService {
         const url = `${environment.apiUrl}/posts/paging`;
         return this.http.get(url, data);
     }
+    GetPostId(data): Observable<any> {
+        const url = `${environment.apiUrl}/post/${data}`;
+        return this.http.get(url, data);
+    }
 
 
     CreateRoom(data) {
