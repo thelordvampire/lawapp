@@ -44,6 +44,11 @@ export class AppService {
         const url = `${environment.apiUrl}/post/${data}`;
         return this.http.get(url, data);
     }
+    GetPostLimit(data): Observable<any> {
+        const url = `${environment.apiUrl}/post/get-limit/${data}`;
+        return this.http.get(url, data);
+    }
+
 
 
     CreateRoom(data) {

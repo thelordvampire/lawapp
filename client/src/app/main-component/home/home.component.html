@@ -85,19 +85,17 @@
                             <div class="row">
                                 <div class="col col-xs-12">
                                     <div class="blog-grids">
-                                        <div class="grid">
+                                        <div class="grid" *ngFor="let item of listPost">
                                             <div class="entry-media">
-                                                <img src="../../../assets/images/post-grid-1-min.jpg" alt="">
+                                                <img src="{{item.image}}" alt="">
                                                 <div class="date">
-                                                    <p>02<span>Tháng 2</span></p>
+                                                    <p>{{item.day}}<span>Tháng {{item.months}}</span></p>
                                                 </div>
                                             </div>
                                             <div class="details">
-                                                <h3><a
-                                                        href="/tf/wp1/aequity/amy-meselson-lawyer-who-fought-for-the-right-of-vulnerable/">Amy
-                                                        Meselson: Luật sư người đấu tranh cho quyền của người yếu thế.</a>
-                                                </h3>
-                                                <ul>
+                                                <h3><a [routerLink]="['/news', item.id]">{{item.title}}</a></h3>
+                                                <p>{{item.shortContent}}</p>
+                                                <!-- <ul>
                                                     <li>
                                                         <i class="ti-user"></i>
                                                         By: <a href="/tf/wp1/aequity/author/themegeniuslab-admin/"
@@ -108,58 +106,7 @@
                                                             <i class="ti-comment-alt"></i>
                                                             Comments (<span class="comment">0</span>) </a>
                                                     </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="grid">
-                                            <div class="entry-media">
-                                                <img src="../../../assets/images/post-grid-2-min.jpg" alt="">
-                                                <div class="date">
-                                                    <p>02<span>Tháng 2</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="details">
-                                                <h3><a
-                                                        href="/tf/wp1/aequity/how-can-you-treat-someone-who-insists-they-are-not-ill/">Làm
-                                                        thế nào bạn có thể đối xử với một người khăng khăng?</a></h3>
-                                                <ul>
-                                                    <li>
-                                                        <i class="ti-user"></i>
-                                                        By: <a href="/tf/wp1/aequity/author/themegeniuslab-admin/"
-                                                            rel="author">Admin</a> </li>
-                                                    <li>
-                                                        <a class="aequity-comment"
-                                                            href="/tf/wp1/aequity/how-can-you-treat-someone-who-insists-they-are-not-ill/#respond">
-                                                            <i class="ti-comment-alt"></i>
-                                                            Comments (<span class="comment">0</span>) </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="grid">
-                                            <div class="entry-media">
-                                                <img src="../../../assets/images/grid-post-3-min.jpg" alt="">
-                                                <div class="date">
-                                                    <p>02<span>Tháng 2</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="details">
-                                                <h3><a
-                                                        href="/tf/wp1/aequity/theres-a-troubling-inequality-at-the-heart-of-our-justice-system/">Có
-                                                        một sự bất bình đẳng đáng lo ngại ở trung tâm của hệ thống tư pháp
-                                                        của chúng ta</a></h3>
-                                                <ul>
-                                                    <li>
-                                                        <i class="ti-user"></i>
-                                                        By: <a href="/tf/wp1/aequity/author/themegeniuslab-admin/"
-                                                            rel="author">Admin</a> </li>
-                                                    <li>
-                                                        <a class="aequity-comment"
-                                                            href="/tf/wp1/aequity/theres-a-troubling-inequality-at-the-heart-of-our-justice-system/#respond">
-                                                            <i class="ti-comment-alt"></i>
-                                                            Comments (<span class="comment">0</span>) </a>
-                                                    </li>
-                                                </ul>
+                                                </ul> -->
                                             </div>
                                         </div>
                                     </div>

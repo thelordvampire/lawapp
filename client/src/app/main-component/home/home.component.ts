@@ -3,6 +3,7 @@ import { AuthenticationService, UserService } from 'src/app/_services';
 import { NgxCarousel } from 'ngx-carousel';
 import { IMAGE } from 'src/app/share/image-share';
 import {FieldService} from '../../_services/field.service';
+import { AppService } from 'src/app/app.service';
 // import * as $ from 'jquery';
 declare var $ :any;
 
@@ -11,6 +12,7 @@ declare var $ :any;
 templateUrl: 'home.component.html',
 styleUrls: ['./home.component.scss'] })
 export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
+  listPost: any[] = [];
   @Output('currentSlide') _currentSlide: EventEmitter<any> = new EventEmitter();
   imageId: number;
     currentUser: any;
@@ -115,6 +117,7 @@ export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
         private authenticationService: AuthenticationService,
         private userService: UserService,
         private fieldService: FieldService,
+        private appService: AppService,
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
     }
@@ -152,6 +155,22 @@ export class HomeComponent implements OnInit, AfterViewInit,  DoCheck {
         }
       }
       heroSlider();
+      this.getListPost();
+    }
+    getListPost() {
+      this.appService.GetPostLimit(3).subscribe(res => {
+        if(res.length > 0) {
+          this.listPost = res.map(el => {
+            const months = new Date(el.createdDatetime).getMonth() + 1;
+            const day = new Date(el.createdDatetime).getDate();
+            return {
+              ...el,
+              months: months,
+              day: day,
+            }
+          });
+        }
+      })
     }
      ngAfterViewInit() {
 

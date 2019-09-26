@@ -49,7 +49,6 @@ export class NewsComponent implements OnInit {
           const day = new Date(el.createdDatetime).getDate();
           return {
             ...el,
-            shortContent: 'Cần dữ liệu ngắn để cho vào đây, cái dữ liệu đầy đủ ko hiển thị hết được',
             months: months,
             day: day,
           }
