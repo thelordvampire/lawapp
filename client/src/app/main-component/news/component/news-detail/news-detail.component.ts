@@ -24,7 +24,6 @@ export class NewsDetailComponent implements OnInit {
 
   getPost(id) {
     this.sevice.GetPostId(id).subscribe(data => {
-      console.log(data);
       this.dataPost = data;
     })
   }

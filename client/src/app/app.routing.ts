@@ -16,6 +16,7 @@ import { NewsDetailComponent } from './main-component/news/component/news-detail
 import { AdminNewsComponent } from './admin/component/admin-news/admin-news.component';
 import { ProfileComponent } from './main-component/profile/profile.component';
 import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
+import { FieldComponent } from './main-component/field/field.component';
 
 const routes: Routes = [
 
@@ -26,6 +27,7 @@ const routes: Routes = [
     { path: 'practice', component: PracticeComponent },
     { path: 'news', component: NewsComponent,},
     { path: 'news/:id', component: NewsDetailComponent },
+    { path: 'field/:id', component: FieldComponent },
     { path: 'profile/:id', component: ProfileComponent },
     { path: 'resources', component: ResourcesComponent },
     { path: 'typo', component: TypoComponent },

@@ -48,6 +48,11 @@ export class AppService {
         const url = `${environment.apiUrl}/post/get-limit/${data}`;
         return this.http.get(url, data);
     }
+    // Filed
+    GetFieldId(data): Observable<any> {
+        const url = `${environment.apiUrl}/field/${data}`;
+        return this.http.get(url, data);
+    }
 
 
 

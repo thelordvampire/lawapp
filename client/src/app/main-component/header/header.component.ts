@@ -94,6 +94,7 @@ export class HeaderComponent implements OnInit {
   toggleClassForSmallNav();
 
     this.fieldService.getAll().subscribe(res => {
+      console.log(res);
       this.listField = res;
     });
   }
