@@ -39,7 +39,7 @@ public class LawApplicationTests {
 		File file =new File("a.jpg");
 		//dto.setImage(encodeFileToBase64Binary(file));
 		dto.setField("Kinh tế , Hôn nhân");
-		dto.setCharges("34.000.00đ - 70.000.00đ");
+//		dto.setCharges("34.000.00đ - 70.000.00đ");
 
 		InforDetail detail1 = new InforDetail();
 		detail1.setCertificate("Chứng chỉ luật sư ");

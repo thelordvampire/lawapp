@@ -17,6 +17,10 @@ public class PostDto {
 
     private String content;
 
+    private String shortContent;
+
+    private Boolean owner;
+
     private String image;
 
     private String tag;

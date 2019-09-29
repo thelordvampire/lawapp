@@ -14,9 +14,11 @@ import java.sql.Timestamp;
  * Created by https://github.com/kwanpham
  */
 @Data
-@Entity
+@Entity(name = "post")
 @Table(name = "post")
 public class Post implements Serializable {
+
+    private static final long serialVersionUID = 153887L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,18 +28,31 @@ public class Post implements Serializable {
     @NotNull
     private String title;
 
-    @Column(name = "image")
+    @NotNull
+    @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
 
-    @Column(name = "content")
     @NotNull
+    @Column(name = "content", columnDefinition = "LONGTEXT")
     private String content;
+
+    @NotNull
+    @Column(name = "short_content")
+    private String shortContent;
+
+    @NotNull
+    @Column(name = "user_id")
+    private Integer userId;
+
+    @NotNull
+    @Column(name = "is_own")
+    private Boolean owner;
 
     @Column(name = "tag")
     private String tag;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REFRESH)
+    @Transient
     private User user;
 
     @Column(name =  "post_status")
@@ -46,6 +61,7 @@ public class Post implements Serializable {
     @Column(name = "created_datetime")
     @CreationTimestamp
     private Timestamp createdDatetime;
+
     @Column(name = "updated_datetime")
     @UpdateTimestamp
     private Timestamp updatedDatetime;

@@ -63,7 +63,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "userId")
     private List<User_Field> listUserField;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Post> listPost ;
 
     @Transient

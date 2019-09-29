@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from 'src/app/_services';
-
+import {AlertService, AuthenticationService} from 'src/app/_services';
+import {PostService} from '../../../_services/post.service';
 declare var tinymce: any;
 
 @Component({
@@ -27,6 +27,8 @@ export class AdminNewsComponent implements OnInit  {
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
+    private postService: PostService,
+    private auth: AuthenticationService,
   ) {
 
   }
@@ -38,27 +40,38 @@ export class AdminNewsComponent implements OnInit  {
       image: ['', Validators.required],
   });
   }
+  image;
   onFileChange(event?) {
     var file = event.target.files[0];
     var reader = new FileReader();
-    reader.onloadend = function() {
-      console.log('RESULT', reader.result)
-    }
+    reader.onloadend = () => {
+      // console.log('RESULT', reader.result);
+      this.image = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
   get f() { return this.newsForm.controls; }
   createNews() {
     this.submitted = true;
-
     // reset alerts on submit
     this.alertService.clear();
-
     // stop here if form is invalid
     if (this.newsForm.invalid) {
-        return;
+      return;
     }
-
     this.loading = true;
-    console.log(this.newsForm)
+    const post = this.newsForm.value;
+    post.image = this.image;
+    post.userId = this.auth.getCurrentUser().id;
+    post.shortContent = '';// sửa sau
+    post.owner = true;// sửa sau
+    // console.log(post);
+    this.postService.create(post).subscribe(res => {
+      console.log(res);
+      this.loading = false;
+    }, error => {
+      this.loading = false;
+    });
   }
     // config: any = {
     //   "editable": true,
@@ -107,7 +120,7 @@ export class AdminNewsComponent implements OnInit  {
           var file = this['files'][0];
           var reader = new FileReader();
           reader.onload = function () {
-            event.preventDefault()
+            event.preventDefault();
             var id = 'blobid' + (new Date()).getTime();
             var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
             var base64 = String(reader.result).split(',')[1];

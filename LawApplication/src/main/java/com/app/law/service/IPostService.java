@@ -19,9 +19,15 @@ public interface IPostService {
 
     List<PostDto> findAllByStatus(String status);
 
+    List<PostDto> getPostByLimit(Integer limit);
+
     Post findById(long id);
 
     List<PostDto> findAll();
+
+    List<PostDto> findPostOwner();
+
+    List<PostDto> findPostOther();
 
     Page<PostDto> findAll(Pageable pageable);
 

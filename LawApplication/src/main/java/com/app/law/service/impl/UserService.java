@@ -49,18 +49,31 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User createUser2(UserDto dto) {
+    public UserDto createUser2(UserDto dto) {
         User user = UserMapperCustom.dtoToEntity(dto);
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        User createdUser = null;
         try {
-            createdUser = userRepo.saveAndFlush(user);
+            User createdUser = userRepo.saveAndFlush(user);
             logger.info("create user success");
+            return UserMapperCustom.entityToDto(createdUser);
         } catch(Exception ex) {
             logger.info("create user fail: {}", ex.getMessage());
         }
-        return createdUser;
+        return null;
+    }
+
+    @Override
+    public UserDto updateUser(UserDto userDto) {
+        User user = UserMapperCustom.dtoToEntity(userDto);
+        try {
+            User createdUser = userRepo.saveAndFlush(user);
+            logger.info("update user success");
+            return UserMapperCustom.entityToDto(createdUser);
+        } catch(Exception ex) {
+            logger.info("update user fail: {}", ex.getMessage());
+        }
+        return null;
     }
 
     @Override
@@ -107,11 +120,6 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean changePassword(String newPassword) {
         User loginedUser = getLoginedUser();
         String encodedPassword = passwordEncoder.encode(newPassword);
@@ -120,8 +128,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepo.findAll();
+    public List<UserDto> getAll() {
+        return userRepo.findAll().stream()
+            .map(UserMapperCustom::entityToDto)
+            .collect(Collectors.toList());
     }
 
 

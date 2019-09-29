@@ -119,7 +119,22 @@ public class AccountController {
             if (foundUser != null)
                 return ResponseEntity.badRequest().body("username existed");
 
-            User createdUser = userService.createUser2(dto);
+            UserDto createdUser = userService.createUser2(dto);
+            if(createdUser!=null)
+                return ResponseEntity.ok().body(createdUser);
+        }
+        return ResponseEntity.status(status).body(message);
+    }
+
+    @RequestMapping(value="/user/update", method = RequestMethod.PUT)
+    public ResponseEntity<Object> updateAccount(@RequestBody @Valid UserDto dto , BindingResult bindingResult) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        String message = "no user updated";
+
+        if(bindingResult.hasErrors()) {
+            message = "user can not be null";
+        } else {
+            UserDto createdUser = userService.updateUser(dto);
             if(createdUser!=null)
                 return ResponseEntity.ok().body(createdUser);
         }
@@ -152,7 +167,12 @@ public class AccountController {
         }
     }
 
-
+    @RequestMapping(value="/user/get-all", method = RequestMethod.GET)
+    public ResponseEntity<List<UserDto>> getAllLawer() {
+        log.info("getAll");
+        List<UserDto> listLawer =  userService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(listLawer);
+    }
 
     @RequestMapping(value="/user/get-lawer", method = RequestMethod.GET)
     public ResponseEntity<List<UserDto>> getAllAvaiableLawer() {
