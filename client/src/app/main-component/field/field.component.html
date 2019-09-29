@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col col-xs-12">
             <div class="title">
-              <h2>Tin Tức</h2>
+              <h2>{{data.name}}</h2>
             </div>
           </div> <!-- end row -->
         </div> <!-- end container -->
@@ -17,10 +17,10 @@
   <div
     class="post clearfix post-163 type-post status-publish format-video has-post-thumbnail hentry category-law-services tag-attorney tag-crime tag-family-lawyer tag-law-firm post_format-post-format-video">
     <div class="entry-media">
-      <img *ngIf="dataPost.image" src="{{dataPost.image}}" alt="image">
+      <img src="../../../assets/images/practice-single-min.jpg" alt="image">
     </div>
-    <h3 *ngIf="dataPost.title"> {{dataPost.title}} </h3>
-    <div class="entry-details" *ngIf="dataPost.content" [innerHTML]="dataPost.content">
+    <h3 *ngIf="data.name"> {{data.name}} </h3>
+    <div class="entry-details" *ngIf="data.description" [innerHTML]="data.description">
     </div>
   </div>
 </div>

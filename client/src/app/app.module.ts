@@ -33,6 +33,7 @@ import { NgxTinymceModule } from 'ngx-tinymce';
 import { NgxEditorModule } from 'ngx-editor';
 import { ProfileComponent } from './main-component/profile/profile.component';
 import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
+import { FieldComponent } from './main-component/field/field.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -67,6 +68,7 @@ import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.co
         AdminNewsComponent,
         ProfileComponent,
         LawyerListComponent,
+        FieldComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

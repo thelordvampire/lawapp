@@ -64,8 +64,8 @@
                         <ul class="sub-menu" >
 
                           <li id="menu-item-" *ngFor="let field of listField"
-                              class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101"><a
-                            href="">{{field.name}}</a></li>
+                              class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101">
+                              <a [routerLink]="['/field', field.id]">{{field.name}}</a></li>
 
 
 
