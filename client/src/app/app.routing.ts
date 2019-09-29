@@ -32,12 +32,12 @@ const routes: Routes = [
     { path: 'resources', component: ResourcesComponent },
     { path: 'typo', component: TypoComponent },
     { path: 'contact', component: ContactComponent },
-    { path: 'lawyer-list', component: LawyerListComponent },
+    { path: 'lawyer-list/:type', component: LawyerListComponent },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children: [
       {
         path: 'news',
         component: AdminNewsComponent
-      }] 
+      }]
     },
   //  { path: 'chat', component: ChatComponent },
 
@@ -47,7 +47,7 @@ const routes: Routes = [
 ];
 
 const adminRouter: Routes = [
-    
+
 ]
 
 export const appRoutingModule = RouterModule.forRoot(routes);

@@ -14,13 +14,13 @@ export class AdminNewsComponent implements OnInit  {
   newsForm: FormGroup;
   submitted = false;
   loading = false;
-  tableData: object[] = [
-    { stt: '1', title: 'Mark', content: 'Otto', createAt: '@mdo'  },
-    { stt: '2', title: 'Jacob', content: 'Thornton', createAt: '@fat' },
-    { stt: '3', title: 'Larry', content: 'the Bird', createAt: '@twitter' },
-    { stt: '4', title: 'Paul', content: 'Topolski', createAt: '@P_Topolski' },
-    { stt: '5',  title: 'Anna', content: 'Doe', createAt: '@andy'}
-  ];
+  // tableData: object[] = [
+  //   { stt: '1', title: 'Mark', content: 'Otto', createAt: '@mdo'  },
+  //   { stt: '2', title: 'Jacob', content: 'Thornton', createAt: '@fat' },
+  //   { stt: '3', title: 'Larry', content: 'the Bird', createAt: '@twitter' },
+  //   { stt: '4', title: 'Paul', content: 'Topolski', createAt: '@P_Topolski' },
+  //   { stt: '5',  title: 'Anna', content: 'Doe', createAt: '@andy'}
+  // ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,9 +36,11 @@ export class AdminNewsComponent implements OnInit  {
   ngOnInit() {
     this.newsForm = this.formBuilder.group({
       title: ['', Validators.required],
+      shortContent: ['', Validators.required],
       content: ['', Validators.required],
       image: ['', Validators.required],
-  });
+      owner: ['0', Validators.required]
+    });
   }
   image;
   onFileChange(event?) {
@@ -63,8 +65,7 @@ export class AdminNewsComponent implements OnInit  {
     const post = this.newsForm.value;
     post.image = this.image;
     post.userId = this.auth.getCurrentUser().id;
-    post.shortContent = '';// sửa sau
-    post.owner = true;// sửa sau
+    post.owner = !(post.owner == '0');
     // console.log(post);
     this.postService.create(post).subscribe(res => {
       console.log(res);

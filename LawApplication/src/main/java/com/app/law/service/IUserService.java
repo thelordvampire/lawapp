@@ -26,4 +26,5 @@ public interface IUserService {
     List<UserDto> getAll();
 
     List<UserDto> getAllLawer();
+    List<UserDto> getLawerByType(Integer type);
 }

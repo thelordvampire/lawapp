@@ -54,7 +54,7 @@ public class User implements Serializable {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "roleId")
+    @Column(name = "role_id")
     private Integer roleId;
 
     @OneToMany(mappedBy = "userId")

@@ -1,5 +1,6 @@
 package com.app.law.service.impl;
 
+import com.app.law.constant.RoleConstant;
 import com.app.law.dto.user.UserDto;
 import com.app.law.entity.User;
 import com.app.law.entity.mapper.UserMapper;
@@ -80,9 +81,17 @@ public class UserService implements IUserService {
     public List<UserDto> getAllLawer() {
         return userRepo.findAll()
         .stream()
-        .filter(user ->user.getRoleId() ==1 || user.getRoleId() == 2)
+        .filter(user ->user.getRoleId().equals(RoleConstant.LUAT_SU) || user.getRoleId().equals(RoleConstant.TRO_LY_LUAT_SU))
         .map(UserMapperCustom::entityToDto)
         .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserDto> getLawerByType(Integer type) {
+        return userRepo.findByType(type)
+            .stream()
+            .map(UserMapperCustom::entityToDto)
+            .collect(Collectors.toList());
     }
 
     @Override

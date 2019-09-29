@@ -7,6 +7,20 @@
       </div>
   </div>
   <div class="form-group">
+    <label for="shortContent">Nội dung tóm tắt</label>
+    <textarea formControlName="shortContent" class="form-control" maxlength="500"
+              [ngClass]="{ 'is-invalid': submitted && f.shortContent.errors }" rows="3">
+      </textarea>
+    <div *ngIf="submitted && f.shortContent.errors" class="invalid-feedback">
+      <div *ngIf="f.shortContent.errors.required" style="color:red">Bạn bắt buộc phải nhập nội dung tóm tắt</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="owner" style="margin-right: 10px;">Kiểu bài viết</label>
+    <label class="radio-inline"><input type="radio" formControlName="owner" value="0" name="optradio" checked>Trang khác</label>
+    <label class="radio-inline"><input type="radio" formControlName="owner" value="1" name="optradio">Tự viết</label>
+  </div>
+  <div class="form-group">
       <label for="content">Nội dung</label>
       <tinymce [config]="config" formControlName="content" [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></tinymce>
       <!-- <textarea id="editor"></textarea> -->
@@ -39,22 +53,22 @@
 
 
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Content</th>
-      <th scope="col">Create At</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor ="let item of tableData">
-      <th scope="row">{{item.stt}}</th>
-      <td>{{item.title}}</td>
-      <td>{{item.content}}</td>
-      <td>@{{item.createAt}}</td>
-    </tr>
+<!--<table class="table">-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th scope="col">#</th>-->
+<!--      <th scope="col">Title</th>-->
+<!--      <th scope="col">Content</th>-->
+<!--      <th scope="col">Create At</th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--    <tr *ngFor ="let item of tableData">-->
+<!--      <th scope="row">{{item.stt}}</th>-->
+<!--      <td>{{item.title}}</td>-->
+<!--      <td>{{item.content}}</td>-->
+<!--      <td>@{{item.createAt}}</td>-->
+<!--    </tr>-->
 
-  </tbody>
-</table>
+<!--  </tbody>-->
+<!--</table>-->

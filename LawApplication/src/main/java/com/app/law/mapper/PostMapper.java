@@ -33,6 +33,7 @@ public class PostMapper {
         dto.setOwner(entity.getOwner());
 //        dto.setTag(entity.getTag());
         dto.setCreatedDatetime(entity.getCreatedDatetime());
+        dto.setUpdatedDatetime(entity.getUpdatedDatetime());
         dto.setStatus(entity.getStatus());
         return dto;
     }

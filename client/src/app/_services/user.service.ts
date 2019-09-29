@@ -11,6 +11,10 @@ export class UserService {
         return this.http.get<any[]>(`${environment.apiUrl}/user/get-lawer`);
     }
 
+    getByType(type) {
+      return this.http.get<any[]>(`${environment.apiUrl}/user/get-lawer/${type}`);
+    }
+
     getById(id) {
       return this.http.get<any[]>(`${environment.apiUrl}/user/${id}`);
     }

@@ -176,8 +176,15 @@ public class AccountController {
 
     @RequestMapping(value="/user/get-lawer", method = RequestMethod.GET)
     public ResponseEntity<List<UserDto>> getAllAvaiableLawer() {
-        log.info("getAllAvaiableLawer ");
+        log.info("get all avaiable lawer ");
         List<UserDto> listLawer =  userService.getAllLawer();
+        return ResponseEntity.status(HttpStatus.OK).body(listLawer);
+    }
+
+    @RequestMapping(value="/user/get-lawer/{type}", method = RequestMethod.GET)
+    public ResponseEntity<List<UserDto>> getLawerByType(@PathVariable Integer type) {
+        log.info("get lawer by type");
+        List<UserDto> listLawer =  userService.getLawerByType(type);
         return ResponseEntity.status(HttpStatus.OK).body(listLawer);
     }
 
