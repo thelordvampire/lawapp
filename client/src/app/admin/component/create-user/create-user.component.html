@@ -1,0 +1,12 @@
+<h2 class="text-center">Tạo Tài khoản nhân viên</h2>
+<form [formGroup]="createUser" class="admin-form">
+  <div class="form-group d-flex align-items-center">
+    <label for="name" class="col-f-4">Tên tài khoản: </label><input formControlName="userName" class="col-f-8" type="text" id="name" placeholder=".......">
+  </div>
+  <div class="form-group d-flex align-items-center mt-3">
+    <label for="pass" class="col-f-4">Mật khẩu:</label><input formControlName="passWord" class="col-f-8" type="text" id="pass" placeholder=".......">
+  </div>
+  <div class="form-group text-center">        
+    <button type="submit" class="btn btn-default" (click)="onSubmit()">Tạo mới</button>
+  </div>
+</form>

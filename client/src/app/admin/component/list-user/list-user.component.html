@@ -1,0 +1,32 @@
+<h1 class="text-center">Danh sách nhân viên</h1>
+<table class="table-wrap">
+  <thead>
+    <tr>
+      <th>STT</th>
+      <th>Tên NV</th>
+      <th>Gmail</th>
+      <th>SĐT</th>
+      <th>Lĩnh vực</th>
+      <th class="fix-w-100"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let item of dataTable, let i = index">
+      <tr>
+        <td>{{i+1}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.field}}</td>
+        <td class="table-button">
+          <button class="btn-primary text-white" [routerLink]="['/admin/user', item.id]">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </button>
+          <button class="btn-danger text-white ml-2">
+              <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

@@ -34,6 +34,9 @@ import { NgxEditorModule } from 'ngx-editor';
 import { ProfileComponent } from './main-component/profile/profile.component';
 import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
 import { FieldComponent } from './main-component/field/field.component';
+import { CreateUserComponent } from './admin/component/create-user/create-user.component';
+import { ListUserComponent } from './admin/component/list-user/list-user.component';
+import { DetailUserComponent } from './admin/component/list-user/detail-user/detail-user.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -69,6 +72,9 @@ import { FieldComponent } from './main-component/field/field.component';
         ProfileComponent,
         LawyerListComponent,
         FieldComponent,
+        CreateUserComponent,
+        ListUserComponent,
+        DetailUserComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

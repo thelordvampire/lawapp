@@ -1,0 +1,12 @@
+.table{
+  &-button {
+    button{
+      min-height: auto;
+      font-size: 20px;
+      padding: 5px 6px;
+    }
+  }
+}
+.fix-w-100{
+  width: 100px;
+}
