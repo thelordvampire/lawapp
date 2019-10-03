@@ -20,6 +20,11 @@
       <img *ngIf="dataPost.image" src="{{dataPost.image}}" alt="image">
     </div>
     <h3 *ngIf="dataPost.title"> {{dataPost.title}} </h3>
+    <h5 *ngIf="dataPost.updatedDatetime"
+      style="margin: 0; padding: 0;">
+      Ngày đăng: {{dataPost.updatedDatetime |date: 'dd/MM/yyyy'}}
+    </h5>
+    <hr/>
     <div class="entry-details" *ngIf="dataPost.content" [innerHTML]="dataPost.content">
     </div>
   </div>

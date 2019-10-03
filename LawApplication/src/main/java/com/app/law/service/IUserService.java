@@ -15,15 +15,16 @@ public interface IUserService {
 
     User createUser(User user);
 
-    User createUser2(UserDto dto);
+    UserDto createUser2(UserDto dto);
 
-    User updateUser(User user);
+    UserDto updateUser(UserDto user);
 
     boolean changePassword(String newPassword);
 
     User getLoginedUser();
 
-    List<User> getAll();
+    List<UserDto> getAll();
 
     List<UserDto> getAllLawer();
+    List<UserDto> getLawerByType(Integer type);
 }

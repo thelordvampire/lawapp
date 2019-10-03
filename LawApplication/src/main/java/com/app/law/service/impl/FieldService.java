@@ -18,4 +18,26 @@ public class FieldService implements IFieldService {
     public List<Field> getAll() {
         return fieldRepo.findAll();
     }
+
+    @Override
+    public Field getById(Integer fieldId) {
+        return fieldRepo.getOne(fieldId);
+    }
+
+    @Override
+    public Field create(Field field) {
+        return fieldRepo.save(field);
+    }
+
+    @Override
+    public Field update(Field field) {
+        return fieldRepo.save(field);
+    }
+
+    @Override
+    public Field delete(Integer fieldId) {
+        Field field = getById(fieldId);
+        fieldRepo.deleteById(fieldId);
+        return field;
+    }
 }

@@ -4,6 +4,8 @@ import com.app.law.dto.PostDto;
 import com.app.law.entity.Post;
 import com.app.law.mapper.PostMapper;
 import com.app.law.service.IPostService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,8 @@ import java.util.List;
 @RestController
 public class PostController {
 
+    private final Logger log = LoggerFactory.getLogger(PostController.class);
+
     @Autowired
     private IPostService postService;
 
@@ -32,8 +36,23 @@ public class PostController {
     }
 
     //Lất tất cả bài viết
-    @GetMapping("/posts")
+    @GetMapping("/post/get-all")
     public ResponseEntity<List> getAllPost() {
+        return ResponseEntity.ok(postService.findAll());
+    }
+
+    @GetMapping("/post/get-limit/{limit}")
+    public ResponseEntity<List> getPostByLimit(@PathVariable Integer limit) {
+        return ResponseEntity.ok(postService.getPostByLimit(limit));
+    }
+
+    @GetMapping("/post/owner")
+    public ResponseEntity<List> getAllPostOnwer() {
+        return ResponseEntity.ok(postService.findAll());
+    }
+
+    @GetMapping("/post/other")
+    public ResponseEntity<List> getAllPostOther() {
         return ResponseEntity.ok(postService.findAll());
     }
 
@@ -54,12 +73,14 @@ public class PostController {
     }
 
     // Đăng bài nhưng set status pending
-    @PostMapping("/post")
+    @PostMapping("/post/create")
     public ResponseEntity createPost(@RequestBody PostDto dto) {
         try {
-            postService.save(dto);
+            this.postService.save(dto);
+            log.info("post create success");
             return ResponseEntity.status(HttpStatus.OK).body("success");
         } catch (Exception e) {
+            log.info("post create failed: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("failed");
         }
 

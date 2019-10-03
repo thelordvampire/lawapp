@@ -1,5 +1,6 @@
 package com.app.law.service.impl;
 
+import com.app.law.constant.RoleConstant;
 import com.app.law.dto.user.UserDto;
 import com.app.law.entity.User;
 import com.app.law.entity.mapper.UserMapper;
@@ -49,27 +50,48 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User createUser2(UserDto dto) {
+    public UserDto createUser2(UserDto dto) {
         User user = UserMapperCustom.dtoToEntity(dto);
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        User createdUser = null;
         try {
-            createdUser = userRepo.saveAndFlush(user);
+            User createdUser = userRepo.saveAndFlush(user);
             logger.info("create user success");
+            return UserMapperCustom.entityToDto(createdUser);
         } catch(Exception ex) {
             logger.info("create user fail: {}", ex.getMessage());
         }
-        return createdUser;
+        return null;
+    }
+
+    @Override
+    public UserDto updateUser(UserDto userDto) {
+        User user = UserMapperCustom.dtoToEntity(userDto);
+        try {
+            User createdUser = userRepo.saveAndFlush(user);
+            logger.info("update user success");
+            return UserMapperCustom.entityToDto(createdUser);
+        } catch(Exception ex) {
+            logger.info("update user fail: {}", ex.getMessage());
+        }
+        return null;
     }
 
     @Override
     public List<UserDto> getAllLawer() {
         return userRepo.findAll()
         .stream()
-        .filter(user ->user.getRoleId() ==1 || user.getRoleId() == 2)
+        .filter(user ->user.getRoleId().equals(RoleConstant.LUAT_SU) || user.getRoleId().equals(RoleConstant.TRO_LY_LUAT_SU))
         .map(UserMapperCustom::entityToDto)
         .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserDto> getLawerByType(Integer type) {
+        return userRepo.findByType(type)
+            .stream()
+            .map(UserMapperCustom::entityToDto)
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -107,11 +129,6 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean changePassword(String newPassword) {
         User loginedUser = getLoginedUser();
         String encodedPassword = passwordEncoder.encode(newPassword);
@@ -120,8 +137,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepo.findAll();
+    public List<UserDto> getAll() {
+        return userRepo.findAll().stream()
+            .map(UserMapperCustom::entityToDto)
+            .collect(Collectors.toList());
     }
 
 

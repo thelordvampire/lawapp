@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../_services';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-lawyer-list',
@@ -9,14 +10,20 @@ import {UserService} from '../../_services';
 export class LawyerListComponent implements OnInit {
 
   constructor(
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
+  }
 
   listUser;
 
   ngOnInit() {
-    this.userService.getAll().subscribe(res => {
-      console.log(res);
+    const type = this.route.snapshot.paramMap.get('type');
+    this.userService.getByType(type).subscribe(res => {
       this.listUser = res;
     });
   }

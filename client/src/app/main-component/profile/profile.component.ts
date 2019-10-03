@@ -15,34 +15,6 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  inforDetail = [
-    {
-      certificate: 'Khóa đào tạo kỹ năng hành nghề Luật sư',
-      placeOfIssue: 'Học viện tư pháp Việt Nam',
-      yearOfIssue: '2001',
-    },
-    {
-      certificate: 'Chứng chỉ hành nghề Luật sư',
-      placeOfIssue: 'Bộ Tư pháp',
-      yearOfIssue: '2005',
-    },
-    {
-      certificate: 'Thẻ Luật sư',
-      placeOfIssue: 'Liên đoàn Luật sư Việt Nam',
-      yearOfIssue: '2002',
-    },
-  ];
-  prize = [
-    {
-      id: 1,
-      name: 'đào tạo kỹ năng hành nghề Luật sư'
-    },
-    {
-      id: 2,
-      name: 'đào tạo kỹ năng hành nghề Luật sư'
-    }
-  ];
-
   user;
   userId;
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
+import { PostService } from 'src/app/_services/post.service';
 
 @Component({
   selector: 'app-news-detail',
@@ -13,6 +14,7 @@ export class NewsDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private sevice: AppService,
+    private postService: PostService,
   ) { }
 
   ngOnInit() {
@@ -22,6 +24,7 @@ export class NewsDetailComponent implements OnInit {
 
   getPost(id) {
     this.sevice.GetPostId(id).subscribe(data => {
+      console.log(data.updatedDatetime);
       this.dataPost = data;
     })
   }

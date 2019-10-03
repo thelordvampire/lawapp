@@ -13,12 +13,11 @@ public class PostMapper {
         Post post = new Post();
         post.setTitle(dto.getTitle());
         post.setContent(dto.getContent());
+        post.setShortContent(dto.getShortContent());
         post.setImage(dto.getImage());
-
-        User user = new User();
-        user.setId(dto.getUserId());
-        post.setUser(user);
-        post.setTag(dto.getTag());
+        post.setUserId(dto.getUserId());
+        post.setOwner(dto.getOwner());
+//        post.setTag(dto.getTag());
         return post;
     }
 
@@ -26,11 +25,15 @@ public class PostMapper {
         PostDto dto = new PostDto();
         dto.setTitle(entity.getTitle());
         dto.setContent(entity.getContent());
+        System.out.println(entity.getContent());
+        dto.setShortContent(entity.getShortContent());
         dto.setImage(entity.getImage());
         dto.setId(entity.getId());
-        dto.setUserId(entity.getUser().getId());
-        dto.setTag(entity.getTag());
+        dto.setUserId(entity.getUserId());
+        dto.setOwner(entity.getOwner());
+//        dto.setTag(entity.getTag());
         dto.setCreatedDatetime(entity.getCreatedDatetime());
+        dto.setUpdatedDatetime(entity.getUpdatedDatetime());
         dto.setStatus(entity.getStatus());
         return dto;
     }
