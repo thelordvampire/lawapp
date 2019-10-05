@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
-
 import { appRoutingModule } from './app.routing';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
@@ -20,7 +19,6 @@ import { ContactComponent } from './main-component/contact/contact.component';
 import { HeaderComponent } from './main-component/header/header.component';
 import { FooterComponent } from './main-component/footer/footer.component';
 import { AdminComponent } from './admin/admin.component';
-import { AppService } from './app.service';
 import { ChatComponent } from './main-component/chat/chat.component';
 import { FormsModule } from '@angular/forms';
 import { NgxCarouselModule } from 'ngx-carousel';
@@ -30,12 +28,14 @@ import { NewsComponent } from './main-component/news/news.component';
 import { NewsDetailComponent } from './main-component/news/component/news-detail/news-detail.component';
 import { AdminNewsComponent } from './admin/component/admin-news/admin-news.component';
 import { NgxTinymceModule } from 'ngx-tinymce';
-import { NgxEditorModule } from 'ngx-editor';
 import { ProfileComponent } from './main-component/profile/profile.component';
 import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
 import { FieldComponent } from './main-component/field/field.component';
 import { AdminNewsMyComponent } from './admin/component/admin-news-my/admin-news-my.component';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import { CreateUserComponent } from './admin/component/create-user/create-user.component';
+import { ListUserComponent } from './admin/component/list-user/list-user.component';
+import { DetailUserComponent } from './admin/component/list-user/detail-user/detail-user.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -73,6 +73,9 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
         LawyerListComponent,
         FieldComponent,
         AdminNewsMyComponent,
+        CreateUserComponent,
+        ListUserComponent,
+        DetailUserComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

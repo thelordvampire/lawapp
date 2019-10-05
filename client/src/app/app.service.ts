@@ -54,8 +54,24 @@ export class AppService {
         return this.http.get(url, data);
     }
 
+    // user
+    DetailUser(data): Observable<any> {
+        const url = `${environment.apiUrl}/user/${data.userId}`;
+        return this.http.get(url, data);
+    }
+
+    CreateUser(data): Observable<any> {
+        const url = `${environment.apiUrl}/user/create`;
+        return this.http.post(url, data);
+    }
+
+    GetUser(): Observable<any> {
+        const url = `${environment.apiUrl}/user/get-all`;
+        return this.http.get(url);
+    }
 
 
+    // chat
     CreateRoom(data) {
         const url = `${environment.apiUrl}/chat/room/create/`;
         return this.http.post(url, data);

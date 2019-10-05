@@ -18,6 +18,9 @@ import { ProfileComponent } from './main-component/profile/profile.component';
 import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
 import { FieldComponent } from './main-component/field/field.component';
 import {AdminNewsMyComponent} from './admin/component/admin-news-my/admin-news-my.component';
+import { CreateUserComponent } from './admin/component/create-user/create-user.component';
+import { ListUserComponent } from './admin/component/list-user/list-user.component';
+import { DetailUserComponent } from './admin/component/list-user/detail-user/detail-user.component';
 
 const routes: Routes = [
 
@@ -34,17 +37,28 @@ const routes: Routes = [
     { path: 'typo', component: TypoComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'lawyer-list/:type', component: LawyerListComponent },
-    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children:
-      [
-        {
-          path: 'news',
-          component: AdminNewsComponent
-        },
-        {
-          path: 'news/my',
-          component: AdminNewsMyComponent
-        },
-      ]
+    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children: [
+      {
+        path: 'news',
+        component: AdminNewsComponent
+      },
+      {
+        path: 'news/my',
+        component: AdminNewsMyComponent
+      },
+      {
+        path: 'create-user',
+        component: CreateUserComponent
+      },
+      {
+        path: 'list-user',
+        component: ListUserComponent,
+      },
+      {
+        path: 'user/:id',
+        component: DetailUserComponent,
+      }
+    ]
     },
   //  { path: 'chat', component: ChatComponent },
 

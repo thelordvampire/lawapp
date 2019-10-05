@@ -1,0 +1,19 @@
+<h1 class="text-center">Chi tiết nhân viên</h1>
+<form [formGroup]="userForm" class="admin-form">
+  <div class="form-group d-flex align-items-center">
+    <label for="name" class="col-f-4">Tên nhân viên: </label><input formControlName="name" class="col-f-8" type="text" id="name" placeholder=".......">
+  </div>
+  <div class="form-group d-flex align-items-center">
+    <label for="email" class="col-f-4">Email: </label><input formControlName="email" class="col-f-8" type="text" id="email" placeholder=".......">
+  </div>
+  <div class="form-group d-flex align-items-center">
+    <label for="phone" class="col-f-4">Số điện thoại: </label><input formControlName="phone" class="col-f-8" type="text" id="phone" placeholder=".......">
+  </div>
+  <div class="form-group d-flex align-items-center">
+    <label for="introduce" class="col-f-4">Giới thiệu: </label><textarea formControlName="introduce" class="col-f-8" rows="3" id="introduce" placeholder="......."></textarea>
+  </div>
+  <div class="form-group text-center">        
+    <button type="button" class="btn btn-default" (click)="onSubmit()">Cập nhật</button>
+    <button type="button" class="btn btn-default ml-3">Đóng</button>
+  </div>
+</form>
