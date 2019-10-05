@@ -13,6 +13,11 @@ export class PostService {
     return this.http.get<any[]>(`${environment.apiUrl}/post/${postId}`);
   }
 
+  getMyPost(page) {
+    console.log(page);
+    return this.http.get<any[]>(`${environment.apiUrl}/post/my`, page);
+  }
+
   update(post) {
     return this.http.put<any[]>(`${environment.apiUrl}/post/update`, post);
   }

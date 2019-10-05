@@ -17,6 +17,7 @@ import { AdminNewsComponent } from './admin/component/admin-news/admin-news.comp
 import { ProfileComponent } from './main-component/profile/profile.component';
 import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
 import { FieldComponent } from './main-component/field/field.component';
+import {AdminNewsMyComponent} from './admin/component/admin-news-my/admin-news-my.component';
 
 const routes: Routes = [
 
@@ -33,11 +34,17 @@ const routes: Routes = [
     { path: 'typo', component: TypoComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'lawyer-list/:type', component: LawyerListComponent },
-    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children: [
-      {
-        path: 'news',
-        component: AdminNewsComponent
-      }]
+    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children:
+      [
+        {
+          path: 'news',
+          component: AdminNewsComponent
+        },
+        {
+          path: 'news/my',
+          component: AdminNewsMyComponent
+        },
+      ]
     },
   //  { path: 'chat', component: ChatComponent },
 

@@ -34,6 +34,8 @@ import { NgxEditorModule } from 'ngx-editor';
 import { ProfileComponent } from './main-component/profile/profile.component';
 import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
 import { FieldComponent } from './main-component/field/field.component';
+import { AdminNewsMyComponent } from './admin/component/admin-news-my/admin-news-my.component';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 @NgModule({
     imports: [
         BrowserModule,
@@ -42,6 +44,7 @@ import { FieldComponent } from './main-component/field/field.component';
         appRoutingModule,
         FormsModule,
         NgxCarouselModule,
+        NgMultiSelectDropDownModule.forRoot(),
         // NgxEditorModule,
         NgxTinymceModule.forRoot({
             // or cdn
@@ -69,6 +72,7 @@ import { FieldComponent } from './main-component/field/field.component';
         ProfileComponent,
         LawyerListComponent,
         FieldComponent,
+        AdminNewsMyComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -77,6 +81,6 @@ import { FieldComponent } from './main-component/field/field.component';
         fakeBackendProvider
     ],
     bootstrap: [AppComponent],
-    
+
 })
 export class AppModule { };

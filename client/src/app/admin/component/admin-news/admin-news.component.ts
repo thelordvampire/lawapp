@@ -3,6 +3,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {AlertService, AuthenticationService} from 'src/app/_services';
 import {PostService} from '../../../_services/post.service';
+import {IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
+import {FieldService} from '../../../_services/field.service';
 declare var tinymce: any;
 
 @Component({
@@ -29,9 +31,13 @@ export class AdminNewsComponent implements OnInit  {
     private alertService: AlertService,
     private postService: PostService,
     private auth: AuthenticationService,
+    private fieldService: FieldService,
   ) {
 
   }
+
+  dropdownList = [];
+  dropdownSettings: IDropdownSettings = {};
 
   ngOnInit() {
     this.newsForm = this.formBuilder.group({
@@ -39,41 +45,66 @@ export class AdminNewsComponent implements OnInit  {
       shortContent: ['', Validators.required],
       content: ['', Validators.required],
       image: ['', Validators.required],
-      owner: ['0', Validators.required]
+      owner: ['0', Validators.required],
+      listField: [[]]
     });
-  }
-  image;
-  onFileChange(event?) {
-    var file = event.target.files[0];
-    var reader = new FileReader();
-    reader.onloadend = () => {
-      // console.log('RESULT', reader.result);
-      this.image = reader.result;
-    };
-    reader.readAsDataURL(file);
-  }
-  get f() { return this.newsForm.controls; }
-  createNews() {
-    this.submitted = true;
-    // reset alerts on submit
-    this.alertService.clear();
-    // stop here if form is invalid
-    if (this.newsForm.invalid) {
-      return;
-    }
-    this.loading = true;
-    const post = this.newsForm.value;
-    post.image = this.image;
-    post.userId = this.auth.getCurrentUser().id;
-    post.owner = !(post.owner == '0');
-    // console.log(post);
-    this.postService.create(post).subscribe(res => {
+
+    this.fieldService.getAll().subscribe(res => {
+      this.dropdownList = res;
       console.log(res);
-      this.loading = false;
-    }, error => {
-      this.loading = false;
     });
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+
   }
+      image;
+      onFileChange(event?) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onloadend = () => {
+          // console.log('RESULT', reader.result);
+          this.image = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+      get f() { return this.newsForm.controls; }
+
+      createNews() {
+        this.submitted = true;
+        // reset alerts on submit
+        this.alertService.clear();
+        // stop here if form is invalid
+        if (this.newsForm.invalid) {
+          return;
+        }
+        this.loading = true;
+        const post = this.newsForm.value;
+        if(post.listField && post.listField.length > 0) {
+          post.listField = post.listField.map(item => item.id);
+        }
+        post.image = this.image;
+        post.userId = this.auth.getCurrentUser().id;
+        post.owner = !(post.owner == '0');
+        // console.log(post);
+        this.postService.create(post).subscribe(res => {
+          console.log(res);
+          this.loading = false;
+        }, error => {
+          this.loading = false;
+        });
+      }
+
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+
     // config: any = {
     //   "editable": true,
     //   "spellcheck": true,
@@ -100,8 +131,8 @@ export class AdminNewsComponent implements OnInit  {
       height: 'auto',
       minHeight: 450,
       theme: 'modern',
-      plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image imagetools link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists textcolor wordcount contextmenu colorpicker textpattern autoresize',
-      toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | link image',
+      plugins: 'textcolor print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image imagetools link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists textcolor wordcount contextmenu colorpicker textpattern autoresize',
+      toolbar: 'formatselect | fontselect fontsizeselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | link image | preview ',
       image_advtab: true,
       imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
       templates: [

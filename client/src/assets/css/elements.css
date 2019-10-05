@@ -56,19 +56,18 @@ table {
     width: 100%;
 }
 
-table th {
-    background: #d86f67;
-    color: #fff;
-    transition: .3s;
-    font-weight: 500;
-}
+/*table th {*/
+/*    background: #d86f67;*/
+/*    color: #fff;*/
+/*    transition: .3s;*/
+/*    font-weight: 500;*/
+/*}*/
 
-table th:hover {
-    background:#c83226;
-}
+/*table th:hover {*/
+/*    background:#c83226;*/
+/*}*/
 
-td,
-th {
+td, th {
     border: 1px solid #ebebf1;
     padding: 10px;
     font-size: 15px;
@@ -687,7 +686,7 @@ ul.page-numbers li span.page-numbers.current {
     width: 50px;
     height: 50px;
     line-height: 45px;
-    font-size: 20px; 
+    font-size: 20px;
     font-size: 1.25rem;
     font-weight: 600;
     border: 2px solid #c83226;
@@ -701,7 +700,7 @@ ul.page-numbers li a {
     width: 50px;
     height: 50px;
     line-height: 45px;
-    font-size: 20px; 
+    font-size: 20px;
     font-size: 1.25rem;
     font-weight: 600;
     color: #a9b8c4;
@@ -2749,7 +2748,7 @@ h2.woocommerce-order-details__title {
         float: none;
         display: block;
         margin: 0;
-    } 
+    }
     .blog-pg-section .entry-meta > li + li {
         padding-left: 0;
         margin-left: 0px;
@@ -2829,7 +2828,7 @@ h2.aequity-screen-reader-text {
     padding-right: 0px;
  }
 
- @media (max-width: 991px) { 
+ @media (max-width: 991px) {
 .blog-pg-section .left-sidebar .blog-content {
     padding-left: 0px;
     padding-right: 0px;
@@ -2850,13 +2849,13 @@ h2.aequity-screen-reader-text {
     margin-left: 0px;
 }
 
-@media screen and (min-width: 1200px) { 
+@media screen and (min-width: 1200px) {
     .site-header .navigation #navbar.not-has-cta  {
         margin-right: 50px;
     }
 }
 
-@media (max-width:1199px) and (min-width:992px) { 
+@media (max-width:1199px) and (min-width:992px) {
     .site-header .navigation #navbar.not-has-cta > ul > li > a {
          padding: 40px 10px;
     }
@@ -2869,7 +2868,7 @@ h2.aequity-screen-reader-text {
     .site-header #navbar ul {
         list-style: none;
         padding-left: 0;
-    }    
+    }
 }
 
 
@@ -3028,12 +3027,12 @@ Comming Soon page
 }
 
 .wpcf7-form input::-webkit-input-placeholder,
-.wpcf7-form textarea::-webkit-input-placeholder { 
+.wpcf7-form textarea::-webkit-input-placeholder {
   font-style: normal !important;
 }
 
 .wpcf7-form input::-ms-input-placeholder ,
-.wpcf7-form textarea::-ms-input-placeholder { 
+.wpcf7-form textarea::-ms-input-placeholder {
    font-style: normal !important;
 }
 
@@ -3101,7 +3100,7 @@ Comming Soon page
     color: #5d6d7a;
     padding: 14px 0;
 }
-.practice-single-sidebar .service-list-widget ul li, 
+.practice-single-sidebar .service-list-widget ul li,
 .practice-single-sidebar .attorney-list-widget ul li {
     border-bottom: 1px solid #f1f1f1;
 }
@@ -3146,7 +3145,7 @@ Comming Soon page
 .site-footer .lower-footer .site-map li {
     line-height: 20px;
 }
-@media (max-width: 767px) { 
+@media (max-width: 767px) {
     .site-footer .lower-footer .site-map {
         display: block;
         float: none;
@@ -3212,7 +3211,7 @@ Comming Soon page
 	.site-header #navbar > ul > li .sub-menu a {
 		padding: 9px 20px;
 	}
-	
+
 	#navbar > ul > li > .sub-menu {
 		border-top: 2px solid #c83226;
 	}
@@ -3251,7 +3250,7 @@ Comming Soon page
 	margin: 0 0 5px;
 }
 
-.case-studies-section .hover-content h4 a:hover, 
+.case-studies-section .hover-content h4 a:hover,
 .case-studies-section-s2 .hover-content h4 a:hover {
 	color: #fff;
 }
@@ -3303,7 +3302,7 @@ p.comment-form-cookies-consent {
 .blog-single-section .tag-share .tag a:after {
 	position:absolute;
 	content:',';
-	
+
 }
 .blog-single-section .tag-share .share ul li {
     margin-bottom: 0px;
