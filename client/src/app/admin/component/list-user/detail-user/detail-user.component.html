@@ -16,4 +16,25 @@
     <button type="button" class="btn btn-default" (click)="onSubmit()">Cập nhật</button>
     <button type="button" class="btn btn-default ml-3">Đóng</button>
   </div>
+  <h3 class="text-center">Mức phí</h3>
+  <table mat-table class="table-wrap" [dataSource]="dataSource" formArrayName="charges">
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; let i = index; columns: displayColumns;" [formGroupName]="i"></tr>
+
+    <!-- Column definitions -->
+    <ng-container matColumnDef="chargeName">
+      <th mat-header-cell *matHeaderCellDef> charges </th>
+      <td mat-cell *matCellDef="let row"> 
+        <input type="text" formControlName="charges" placeholder="From date">
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> price </th>
+      <td mat-cell *matCellDef="let row">
+        <input type="text" formControlName="price" placeholder="To date">
+      </td>
+    </ng-container>
+  </table>
 </form>
+

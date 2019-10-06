@@ -17,7 +17,7 @@ import { AdminNewsComponent } from './admin/component/admin-news/admin-news.comp
 import { ProfileComponent } from './main-component/profile/profile.component';
 import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
 import { FieldComponent } from './main-component/field/field.component';
-import {AdminNewsMyComponent} from './admin/component/admin-news-my/admin-news-my.component';
+// import {AdminNewsMyComponent} from './admin/component/admin-news-my/admin-news-my.component';
 import { CreateUserComponent } from './admin/component/create-user/create-user.component';
 import { ListUserComponent } from './admin/component/list-user/list-user.component';
 import { DetailUserComponent } from './admin/component/list-user/detail-user/detail-user.component';
@@ -42,10 +42,10 @@ const routes: Routes = [
         path: 'news',
         component: AdminNewsComponent
       },
-      {
-        path: 'news/my',
-        component: AdminNewsMyComponent
-      },
+      // {
+      //   path: 'news/my',
+      //   component: AdminNewsMyComponent
+      // },
       {
         path: 'create-user',
         component: CreateUserComponent

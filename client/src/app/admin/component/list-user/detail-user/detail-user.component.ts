@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-detail-user',
@@ -10,6 +11,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class DetailUserComponent implements OnInit {
   userForm: FormGroup;
+  dataSource = new BehaviorSubject<AbstractControl[]>([]);
+  displayColumns = ['chargeName', 'price'];
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -23,16 +26,43 @@ export class DetailUserComponent implements OnInit {
       email: [''],
       phone: [''],
       introduce: [''],
-      inforDetails: [null],
-      educations: [null],
-      charges: [null],
+      id: [null],
+      educations: this.fb.array([ this.thongTinChinhChi() ]),
+      inforDetails: this.fb.array([ this.hocvan() ]),
+      charges: this.fb.array([ this.mucphi() ]),
     });
     this.service.DetailUser({userId: id}).subscribe(res => {
       console.log(res);
+      this.userForm.patchValue(res);
+      this.userForm.setControl('charges', this.fb.array(res.charges || []));
+      this.userForm.setControl('inforDetails', this.fb.array(res.inforDetails || []));
+      this.userForm.setControl('educations', this.fb.array(res.educations || []));
+      console.log(this.userForm);
+      // this.dataSource.next(this.userForm.get('charges').contro);
+      console.log(this.userForm.get('charges'));
       
     })
   }
-
+  mucphi() {
+    return this.fb.group({
+      chargeName: [null],
+      price: [null],
+    })
+  }
+  thongTinChinhChi() {
+    return this.fb.group({
+      level: [null],
+      place:[null],
+      time: [null],
+    })
+  }
+  hocvan() {
+    return this.fb.group({
+      certificate: [null],
+      placeOfIssue: [null],
+      yearOfIssue: [null],
+    })
+  }
   onSubmit() {
 
   }

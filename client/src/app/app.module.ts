@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
 import { appRoutingModule } from './app.routing';
@@ -31,13 +30,16 @@ import { NgxTinymceModule } from 'ngx-tinymce';
 import { ProfileComponent } from './main-component/profile/profile.component';
 import { LawyerListComponent } from './main-component/lawyer-list/lawyer-list.component';
 import { FieldComponent } from './main-component/field/field.component';
-import { AdminNewsMyComponent } from './admin/component/admin-news-my/admin-news-my.component';
+// import { AdminNewsMyComponent } from './admin/component/admin-news-my/admin-news-my.component';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import { CreateUserComponent } from './admin/component/create-user/create-user.component';
 import { ListUserComponent } from './admin/component/list-user/list-user.component';
 import { DetailUserComponent } from './admin/component/list-user/detail-user/detail-user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
     imports: [
+        MatTableModule,
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
@@ -49,7 +51,8 @@ import { DetailUserComponent } from './admin/component/list-user/detail-user/det
         NgxTinymceModule.forRoot({
             // or cdn
             baseURL: '//cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.0/'
-          })
+          }),
+        BrowserAnimationsModule
     ],
     declarations: [
         AppComponent,
@@ -72,7 +75,7 @@ import { DetailUserComponent } from './admin/component/list-user/detail-user/det
         ProfileComponent,
         LawyerListComponent,
         FieldComponent,
-        AdminNewsMyComponent,
+        // AdminNewsMyComponent,
         CreateUserComponent,
         ListUserComponent,
         DetailUserComponent,
