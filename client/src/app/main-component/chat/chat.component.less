@@ -1,0 +1,445 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html,body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.58;
+    color: #333;
+    background-color: #f4f4f4;
+    height: 100%;
+}
+
+body:before {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #128ff2;
+    content: "";
+    z-index: 0;
+}
+
+/deep/.clearfix:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+.hidden {
+    display: none;
+}
+
+/deep/.form-control {
+    width: 100%;
+    min-height: 38px;
+    font-size: 15px;
+    border: 1px solid #c8c8c8;
+}
+
+input {
+    padding-left: 10px;
+    outline: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 1.7em;
+}
+
+a {
+    color: #128ff2;
+}
+
+/deep/button {
+    box-shadow: none;
+    border: 1px solid transparent;
+    font-size: 14px;
+    outline: none;
+    line-height: 100%;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 0.6rem 1rem;
+    border-radius: 2px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    min-height: 38px;
+}
+
+/deep/button.default {
+    background-color: #e8e8e8;
+    color: #333;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+/deep/button.primary {
+    background-color: #128ff2;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    color: #fff;
+}
+
+/deep/button.accent {
+    background-color: #ff4743;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    color: #fff;
+}
+
+/deep/#username-page {
+    text-align: center;
+}
+
+/deep/.username-page-container {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    min-height: 250px;
+}
+
+/deep/.username-page-container .username-submit {
+    margin-top: 10px;
+}
+
+
+/deep/#chat-page ul {
+    list-style-type: none;
+    background-color: #FFF;
+    margin: 0;
+    overflow: auto;
+    overflow-y: scroll;
+    padding: 0 5px 0px 5px;
+    height: calc(100% - 150px);
+}
+
+/deep/#chat-page #messageForm {
+    padding: 20px;
+}
+
+/deep/#chat-page ul li {
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+}
+
+/deep/#chat-page ul li p {
+    margin: 0;
+}
+
+/deep/#chat-page .event-message {
+    width: 100%;
+    text-align: center;
+    clear: both;
+}
+
+/deep/#chat-page .event-message p {
+    color: #777;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+/deep/#chat-page .chat-message {
+    padding-left: 40px;
+    position: relative;
+}
+
+
+/deep/#chat-page .chat-message i {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    left: 1px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 16px;
+    line-height: 34px;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+/deep/#chat-page .chat-message span {
+    color: #333;
+    font-weight: 600;
+}
+
+/deep/#chat-page .chat-message p {
+    color: #43464b;
+}
+
+/deep/#messageForm .input-group input {
+    float: left;
+    width: calc(100% - 85px);
+}
+
+/deep/#messageForm .input-group button {
+    float: left;
+    width: 80px;
+    height: 38px;
+    margin-left: 5px;
+}
+
+/deep/.chat-header {
+    padding: 0 15px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/deep/.chat-header h2 {
+    margin: 0;
+    font-weight: 500;
+}
+
+/deep/.connecting {
+    padding-top: 5px;
+    text-align: center;
+    color: #777;
+    position: absolute;
+    top: 65px;
+    width: 100%;
+}
+
+
+.chat-container{
+    position: relative;
+    height: 100%;
+}
+
+.formchat{
+    &-wrap{
+        right: 10px;
+        bottom: 80px;
+        background: #fff;
+        box-shadow: 0 4px 10px #666;
+        width: 300px;
+        border: none;
+        visibility: visible;
+        height: 408px;
+        border-radius: 10px;
+        position: fixed;
+        top: auto;
+        z-index: 15;
+        max-height: 100%;
+        animation-fill-mode: forwards;
+        & > div + div{
+            height: 360px;
+            position: relative;
+        }
+    }
+    &-admin{
+        right: 300px;
+        bottom: 80px;
+        background: #fff;
+        box-shadow: 0 4px 10px #666;
+        width: 300px;
+        border: none;
+        visibility: visible;
+        height: 408px;
+        border-radius: 10px;
+        position: fixed;
+        top: auto;
+        z-index: 15;
+        max-height: 100%;
+        animation-fill-mode: forwards;
+        & > div + div{
+            height: 360px;
+            position: relative;
+        }
+    }
+}
+
+.icon-message {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #666;
+    z-index: 15;
+    img {
+        height: 50px;
+        border-radius: 50%;
+    }
+}
+.btn-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    outline: 0;
+}
+.chat-header{
+    cursor: pointer;
+    height: 40px;
+    position: relative;
+
+    button {
+        width: 27px;
+        cursor: pointer;
+        position: absolute;
+        left: 15px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        outline: none;
+        padding: 0.5rem;
+        height: 27px;
+        display: flex;
+        border-radius: 50%;
+        min-height: unset;
+        justify-content: center;
+        align-items: center;
+    }
+    p{
+        color: #000;
+        margin: 0;
+        font-size: 0.95rem;
+        & + p{
+            color: #555;
+            font-size: 12px;
+            line-height: 13px;
+        }
+    }
+    button{
+        line-height: auto;
+    }
+}
+.input-group{
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    height: 36px;
+    margin: 0;
+    input {
+        width: 80%;
+        height: 100%;
+        outline: none;
+    }
+    button {
+        width: 20%;
+        height: 100%;
+    }
+}
+#messageArea{
+    height: 320px;
+    width: 100% !important;
+    word-wrap: break-word !important;
+}
+.chat-content{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    margin: 0;
+}
+/deep/#chat-page .chat-message.right-text{
+    padding-right: 50px;
+    padding-left: unset;
+    text-align: right;
+    i{
+        right: 5px;
+        left: unset;
+    }
+    span {
+        display: none;
+    }
+    p {
+        background-color: #128ff2;
+        border-radius: 10px;
+        padding: 6px 10px;
+        color: white;
+        text-align: left;
+        line-height: 1.4;
+    }
+
+}
+/deep/#chat-page .chat-message.left-text{
+    p {
+        background-color: #F2F3F5;
+        border-radius: 5px;
+        padding: 5px;
+    }
+}
+@media screen and (max-width: 730px) {
+
+    .chat-container {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .formchat-wrap {
+        width: 100%;
+        right: 0;
+    }
+    .chat-container {
+        height: calc(100% - 30px);
+    }
+
+    .username-page-container {
+        width: auto;
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 25px;
+    }
+
+    #chat-page ul {
+        height: calc(100% - 120px);
+    }
+
+    #messageForm .input-group button {
+        width: 65px;
+    }
+
+    #messageForm .input-group input {
+        width: calc(100% - 70px);
+    }
+
+
+    .connecting {
+        top: 60px;
+    }
+
+    .chat-header h2 {
+        font-size: 1.1em;
+    }
+}
+.chatbox-bounce-in{
+    animation-duration: 300ms;
+    animation-name: fb_bounce_in_v2;
+    transition-timing-function: ease-in;
+}
+
+.chatbox-bounce-out{
+    animation-duration: 300ms;
+    animation-name: fb_bounce_out_v2;
+    transition-timing-function: ease-in;
+}
+
+
+@keyframes fb_bounce_in_v2{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}50%{transform:scale(1.03, 1.03);transform-origin:bottom right}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}}
+@keyframes fb_bounce_out_v2{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}}

@@ -1,0 +1,48 @@
+<div class ="admin-page">
+    <div class ="admin-content">
+          <header role="banner" style="vertical-align: middle">
+                <h1>Trang quản trị</h1>
+                <ul class="utilities" style="vertical-align: middle">
+                  <img class="rounded" alt="Cinque Terre" width="50" height="50" src="{{currentUser.image}}"/>
+                  <li>{{currentUser.name}}</li>
+                  <li class="logout warn"><a (click) ="logout()">Đăng xuất</a></li>
+                </ul>
+              </header>
+
+              <nav role='navigation'>
+                <ul class="main">
+                  <li class="dashboard"><a href="admindashboard">Dashboard</a></li>
+                  <li class="edit"><a href="#">Edit Website</a></li>
+                  <li class="write"><a href="#">Write news</a></li>
+                  <li class="comments"><a href="#">Ads</a></li>
+                  <li class="users"><a routerLink="/admin/news">News Controller</a></li>
+                </ul>
+              </nav>
+
+              <main role="main">
+
+                <!-- <section class="panel important">
+                  <h2>Viết tin tức</h2>
+                  <ul>
+                    <li>Khung thông tin chung</li>
+                  </ul>
+                </section> -->
+                <router-outlet></router-outlet>
+              </main>
+        
+        </div>
+        <div class = "user-list">
+            <div class="content">
+                <ul *ngFor="let item of data">
+                    <li (click)="onPressOpenChatBox(item.id)" [class.active]="item.id == selectedId" style="vertical-align: center;">
+                      <span class = "avatar">{{item.clientName[0]}}</span>
+                      <span style="font-weight: bold">{{item.clientName}}</span>
+                      <div class="close" aria-label="Close" style="font-size: 30px" (click)="closeRoom(item.id, $event)">
+                        <span style="color: red">&times;</span>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <app-chat #appChat class="admin-content__message"></app-chat>

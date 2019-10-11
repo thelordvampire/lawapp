@@ -5,7 +5,9 @@
  */
 package com.app.law.config;
 
-import com.app.law.model.ChatMessage;
+import com.app.law.constant.MessageType;
+import com.app.law.dto.chat.ChatMessageDTO;
+import com.app.law.service.IChatRoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class WebSocketEventListener {
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
+    @Autowired
+    private IChatRoomService roomService;
+
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
         logger.info("Received a new web socket connection");
@@ -36,16 +41,23 @@ public class WebSocketEventListener {
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-
         String username = (String) headerAccessor.getSessionAttributes().get("username");
+        Integer roomId = (Integer) headerAccessor.getSessionAttributes().get("room_id");
+
+        logger.info("socket Disconnected: username: {}, roomId: {}, sessionId: {}", username, roomId, event.getSessionId());
+        logger.info("socket Disconnected: close: {}", event.getCloseStatus().getReason());
+//        if(roomId != null) {
+//            roomService.closeRoom(roomId);
+//        }
+
         if(username != null) {
             logger.info("User Disconnected : " + username);
 
-            ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setType(ChatMessage.MessageType.LEAVE);
-            chatMessage.setSender(username);
+            ChatMessageDTO chatMessageDTO = new ChatMessageDTO();
+            chatMessageDTO.setType(MessageType.LEAVE);
+            chatMessageDTO.setSender(username);
 
-            messagingTemplate.convertAndSend("/topic/public", chatMessage);
+            messagingTemplate.convertAndSend(String.format("/topic/%d", roomId), chatMessageDTO);
         }
     }
 }

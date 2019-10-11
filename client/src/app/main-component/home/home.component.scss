@@ -1,0 +1,136 @@
+/deep/.welcome h3 {
+    font-size: 2.0em;
+}
+.main-content {
+    .main-content__left {
+        text-align: center;
+        padding: 10px;
+        .main-content__left__image {
+            img {
+                width: 100%;
+                margin: 3px 0px;
+                cursor: pointer;
+                padding: 4px;
+                line-height: 1.42857143;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                transition: border .2s ease-in-out;
+            }
+            img:hover {
+                opacity: 0.5;
+             }
+            img:active {
+               filter: brightness(30%);
+            }
+        }
+    }
+    .main-content__right {
+        padding: 35px;
+        img {
+            width: 100%;
+        }
+    }
+}
+::ng-deep .leftRs {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    left: -40px;
+    cursor: pointer;
+}
+.leftRs:hover {
+    opacity: 0.5;
+ }
+ .leftRs:active {
+   filter: brightness(30%);
+}
+
+::ng-deep  .rightRs {
+    cursor: pointer;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    right: -40px;
+}
+.rightRs:hover {
+    opacity: 0.5;
+ }
+ .rightRs:active {
+   filter: brightness(30%);
+}
+@media only screen and (max-width: 768px) {
+    .main-content {
+        font-size: 9px;
+    }
+ }
+/deep/ .slide-carousel {
+         background: none;
+         min-height: auto;
+ }
+//  img {
+//     -webkit-touch-callout: none; /* iOS Safari */
+//     -webkit-user-select: none; /* Safari */
+//      -khtml-user-select: none; /* Konqueror HTML */
+//        -moz-user-select: none; /* Firefox */
+//         -ms-user-select: none; /* Internet Explorer/Edge */
+//             user-select: none; /* Non-prefixed version, currently
+//                                   supported by Chrome and Opera */
+//  }
+/deep/ngx-item {
+    background-color: #ddd;
+    display: flex;
+    border: 1px solid gray;
+    width: 100%;
+    margin: 5px;
+    background: #fff;
+    box-shadow: 0 4px 10px #ccc;
+    border: 6px;
+    padding: 15px;
+    /deep/ img {
+        width: 40%;
+        padding: 20px;
+    }
+    .content-slide {
+        padding: 10px;
+    }
+}
+.feild-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+
+    .feild {
+    margin: 5px;
+    border: 1px solid gray;
+    background-color: #9E6E4E;
+    padding: 30px;
+    width: 23%;
+    text-align: center;
+    color: #fff;
+    }
+}
+
+
+.tagList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .tagName {
+        padding: 5px;
+        margin: 2px;
+        border: 1px solid gray;
+        background: #fff;
+       // box-shadow: 0 4px 10px #ccc;
+        border-radius: 4px;
+        word-wrap: break-word;
+        cursor: pointer;
+    }
+}
